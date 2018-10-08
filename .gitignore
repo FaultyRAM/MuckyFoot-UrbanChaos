@@ -1,0 +1,7 @@
+.vscode
+Debug
+Release
+*.ncb
+*.opt
+*.plg
+RC*

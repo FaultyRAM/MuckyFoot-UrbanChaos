@@ -1,0 +1,98 @@
+Microsoft Developer Studio Workspace File, Format Version 6.00
+# WARNING: DO NOT EDIT OR DELETE THIS WORKSPACE FILE!
+
+###############################################################################
+
+Project: "ddengine"=".\libs\ddengine\ddengine.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name mfstdlib
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "ddlibrary"=".\libs\ddlibrary\ddlibrary.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name mfstdlib
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "fallen"=".\fallen.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name ddengine
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name ddlibrary
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name mfstdlib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name outro
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "mfstdlib"=".\libs\mfstdlib\mfstdlib.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "outro"=".\libs\outro\outro.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name mfstdlib
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Global:
+
+Package=<5>
+{{{
+}}}
+
+Package=<3>
+{{{
+}}}
+
+###############################################################################
+
