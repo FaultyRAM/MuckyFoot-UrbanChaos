@@ -962,19 +962,18 @@ void	setup_people_anims(void)
 		load_anim_system(&game_chunk[ANIM_TYPE_ROPER2],"roper2.all");
 
 
-	append_anim_system(&game_chunk[ANIM_TYPE_ROPER],"police1.all",200,0);
+	append_anim_system(&game_chunk[ANIM_TYPE_ROPER],"police1.all",COP_START,0);
 	append_anim_system(&game_chunk[ANIM_TYPE_CIV],"newciv.all",CIV_M_START,1);
 	append_anim_system(&game_chunk[ANIM_TYPE_CIV],"newcivf.all",CIV_F_START,1);
 
 extern SLONG	playing_combat_tutorial(void);
 extern	SLONG	playing_level(const CBYTE *name);
-	if(!save_psx)
 	if(playing_combat_tutorial())
 	{
 		game_chunk[ANIM_TYPE_CIV].MultiObject[0]=next_prim_multi_object;
 		game_chunk[ANIM_TYPE_CIV].MultiObject[1]=next_prim_multi_object;
 		game_chunk[ANIM_TYPE_CIV].MultiObject[2]=next_prim_multi_object;
-		append_anim_system(&game_chunk[ANIM_TYPE_ROPER],"trainer.all",240,1);
+		append_anim_system(&game_chunk[ANIM_TYPE_ROPER],"trainer.all",ANIM_END,1);
 	}
 	if(playing_level("semtex.ucm"))
 	{
@@ -989,7 +988,7 @@ extern	SLONG	playing_level(const CBYTE *name);
 	{
 		// bodge bodge bodge
 		game_chunk[ANIM_TYPE_CIV].MultiObject[6]=next_prim_multi_object;
-		append_anim_system(&game_chunk[ANIM_TYPE_ROPER],"banesuit.all",240,1);
+		append_anim_system(&game_chunk[ANIM_TYPE_ROPER],"banesuit.all",ANIM_END,1);
 		estate=1;
 
 
