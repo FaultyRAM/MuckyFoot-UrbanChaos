@@ -749,14 +749,14 @@ void	FRONTEND_scr_img_load_into_screenfull(CBYTE *name, CompressedBackground *sc
 
 
 
-
+#if 0
 	// Save out the DC .BGS version by cheating horribly.
 	LPDIRECTDRAWSURFACE4 lpJunk = NULL;
 extern void FRONTEND_scr_img_load_into_screenfull(CBYTE *name, LPDIRECTDRAWSURFACE4 *screen);
 	FRONTEND_scr_img_load_into_screenfull ( name, &lpJunk );
 
 	lpJunk->Release();
-
+#endif
 #endif
 
 

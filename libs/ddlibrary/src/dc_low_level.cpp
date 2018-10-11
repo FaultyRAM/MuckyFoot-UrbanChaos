@@ -59,7 +59,7 @@ extern volatile HWND hDDLibWindow;
 
 bool m_bSoundHasActuallyStartedPlaying = FALSE;
 
-#define DCLL_OUTPUT_STEREO_WAVS
+// #define DCLL_OUTPUT_STEREO_WAVS
 
 #ifdef DCLL_OUTPUT_STEREO_WAVS
 FILE *DCLL_handle;
