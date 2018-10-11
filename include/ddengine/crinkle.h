@@ -6,9 +6,9 @@
 #define CRINKLE_H
 
 
-#include "aeng.h"
-#include "poly.h"
-#include "fileclump.h"
+#include <ddengine/aeng.h>
+#include <ddengine/poly.h>
+#include <ddlibrary/file_clump.h>
 
 
 typedef UWORD CRINKLE_Handle;

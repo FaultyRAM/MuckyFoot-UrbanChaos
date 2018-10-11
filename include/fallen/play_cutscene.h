@@ -9,8 +9,8 @@
 #define _PLAYCUTS_H_
 
 
-#include "MFStdLib.h"
-#include "Game.h"
+#include <mfstdlib/mfstdlib.h>
+#include <fallen/game.h>
 
 //----------------------------------------------------------------------------
 // DEFINES

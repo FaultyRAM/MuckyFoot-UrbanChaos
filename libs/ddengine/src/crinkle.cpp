@@ -2,9 +2,9 @@
 // Crinkles!
 //
 
-#include "game.h"
-#include "poly.h"
-#include "crinkle.h"
+#include <fallen/game.h>
+#include <ddengine/poly.h>
+#include <ddengine/crinkle.h>
 
 #include <math.h>
 

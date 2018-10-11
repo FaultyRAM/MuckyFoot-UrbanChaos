@@ -2,12 +2,12 @@
 // SUPERCRINKLES!
 //
 
-#include "game.h"
-#include "ddlib.h"
-#include "poly.h"
-#include "polypoint.h"
-#include "polypage.h"
-#include "supercrinkle.h"
+#include <fallen/game.h>
+#include <ddlibrary/dd_lib.h>
+#include <ddengine/poly.h>
+#include <ddengine/poly_point.h>
+#include <ddengine/poly_page.h>
+#include <ddengine/super_crinkle.h>
 #include <math.h>
 
 

@@ -1,9 +1,9 @@
 // Switch.cpp
 // Guy Simmons, 9th March 1998.
 
-#include	"Game.h"
-#include	"statedef.h"
-#include	"Switch.h"
+#include	<fallen/game.h>
+#include	<fallen/state_def.h>
+#include	<fallen/switch.h>
 
 StateFunction	switch_functions[]	=
 {

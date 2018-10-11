@@ -2,12 +2,12 @@
 // Draws buildings.
 //
 
-#include "game.h"
-#include "aeng.h"
-#include "poly.h"
-#include "light.h"
-#include "build.h"
-#include "memory.h"
+#include <fallen/game.h>
+#include <ddengine/aeng.h>
+#include <ddengine/poly.h>
+#include <fallen/light.h>
+#include <ddengine/build.h>
+#include <fallen/memory.h>
 
 void BUILD_draw(Thing *p_thing)
 {

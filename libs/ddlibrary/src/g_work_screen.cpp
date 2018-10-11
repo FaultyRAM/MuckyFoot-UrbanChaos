@@ -7,7 +7,7 @@
 
 
 
-#include	"DDLib.h"
+#include	<ddlibrary/dd_lib.h>
 
 
 UBYTE					CurrentPalette[256*3],

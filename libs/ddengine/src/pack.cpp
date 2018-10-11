@@ -3,10 +3,10 @@
 // onto 256x256s...
 //
 
-#include <ddlib.h>
-#include "game.h"
-#include "tga.h"
-#include "texture.h"
+#include <ddlibrary/dd_lib.h>
+#include <fallen/game.h>
+#include <ddlibrary/tga.h>
+#include <ddengine/texture.h>
 
 
 #ifndef TARGET_DC

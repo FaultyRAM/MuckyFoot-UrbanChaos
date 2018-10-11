@@ -1,8 +1,8 @@
 // Attract.cpp
 // Guy Simmons, 20th November 1997.
 
-#include	"Engine.h"
-#include	"font.h"
+#include	<ddengine/engine.h>
+#include	<ddengine/font.h>
 
 //---------------------------------------------------------------
 

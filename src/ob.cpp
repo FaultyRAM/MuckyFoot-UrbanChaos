@@ -2,22 +2,22 @@
 // Objects (prims) on the map.
 //
 
-#include <MFStdLib.h>
-#include "game.h"
-#include "pap.h"
-#include "ob.h"
-#include "io.h"
-#include "fmatrix.h"
-#include "build2.h"
-#include "dirt.h"
-#include "pow.h"
-#include	"memory.h"
-#include "sound.h"
-#include "mav.h"
+#include <mfstdlib/mfstdlib.h>
+#include <fallen/game.h>
+#include <fallen/pap.h>
+#include <fallen/ob.h>
+#include <fallen/io.h>
+#include <fallen/fmatrix.h>
+#include <fallen/build2.h>
+#include <fallen/dirt.h>
+#include <fallen/pow.h>
+#include	<fallen/memory.h>
+#include <fallen/sound.h>
+#include <fallen/mav.h>
 
 #ifndef PSX
-#include "c:\fallen\ddengine\headers\poly.h"
-#include "c:\fallen\ddengine\headers\texture.h"
+#include <ddengine/poly.h>
+#include <ddengine/texture.h>
 #endif
 
 

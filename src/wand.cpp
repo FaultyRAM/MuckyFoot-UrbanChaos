@@ -2,12 +2,12 @@
 // A system for wandering people.
 //
 
-#include "game.h"
-#include "pap.h"
-#include "road.h"
-#include "wand.h"
-#include "memory.h"
-#include "ob.h"
+#include <fallen/game.h>
+#include <fallen/pap.h>
+#include <fallen/road.h>
+#include <fallen/wand.h>
+#include <fallen/memory.h>
+#include <fallen/ob.h>
 
 #ifndef PSX
 void WAND_init(void)

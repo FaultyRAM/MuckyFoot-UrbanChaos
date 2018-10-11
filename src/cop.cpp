@@ -1,11 +1,11 @@
 // Cop.cpp
 // Guy Simmons, 12th January 1998.
 
-#include	"Game.h"
+#include	<fallen/game.h>
 //#include	"Command.h"
-#include	"Cop.h"
-#include	"statedef.h"
-#include	"animate.h"
+#include	<fallen/cop.h>
+#include	<fallen/state_def.h>
+#include	<fallen/animate.h>
 
 
 

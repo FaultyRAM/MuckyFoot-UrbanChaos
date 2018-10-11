@@ -1,20 +1,20 @@
 //	Sound.cpp
 //	Guy Simmons, 8th May 1998.
 
-#include	"Game.h"
+#include	<fallen/game.h>
 
-#include	"cnet.h"
-#include	"Sound.h"
-#include	"MFStdLib.h"
-#include	"pap.h"
-#include	"ns.h"
-#include	"fc.h"
-#include	"mfx.h"
-#include	"statedef.h"
-#include	"ware.h"
-#include	"frontend.h"
-#include	"eway.h"
-#include	"DCLowLevel.h"
+#include	<fallen/cnet.h>
+#include	<fallen/sound.h>
+#include	<mfstdlib/mfstdlib.h>
+#include	<fallen/pap.h>
+#include	<fallen/ns.h>
+#include	<fallen/fc.h>
+#include	<ddlibrary/mfx.h>
+#include	<fallen/state_def.h>
+#include	<fallen/ware.h>
+#include	<fallen/frontend.h>
+#include	<fallen/eway.h>
+#include	<ddlibrary/dc_low_level.h>
 
 // types of world
 

@@ -6,9 +6,9 @@
 #ifndef TARGET_DC
 
 
-#include "game.h"
-#include "pigeon.h"
-#include "statedef.h"
+#include <fallen/game.h>
+#include <fallen/pigeon.h>
+#include <fallen/state_def.h>
 
 //
 // The functions called when a pigeon is in each state.

@@ -2,21 +2,21 @@
 // A lower memory map: 100k
 //
 
-#include <MFStdLib.h>
-#include "pap.h"
-#include "game.h"
-#include "mav.h"
+#include <mfstdlib/mfstdlib.h>
+#include <fallen/pap.h>
+#include <fallen/game.h>
+#include <fallen/mav.h>
 #ifndef		PSX
-#include "c:\fallen\ddengine\headers\aeng.h"
+#include <ddengine/aeng.h>
 #else
 #include "c:\fallen\psxeng\headers\engine.h"
 
 #endif
-#include "inside2.h"
-#include "ns.h"
-#include "ware.h"
+#include <fallen/inside2.h>
+#include <fallen/ns.h>
+#include <fallen/ware.h>
 
-#include "memory.h"
+#include <fallen/memory.h>
 
 //
 // The maps.

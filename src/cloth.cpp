@@ -1,12 +1,12 @@
 //
 // Draped cloth and flags.
 //
-#include "game.h"
+#include <fallen/game.h>
 #ifndef	PSX
-#include <MFStdLib.h>
+#include <mfstdlib/mfstdlib.h>
 #include <math.h>
-#include "cloth.h"
-#include "pap.h"
+#include <fallen/cloth.h>
+#include <fallen/pap.h>
 
 
 //

@@ -1,37 +1,37 @@
-#include	"game.h"
-#include	"c:\fallen\headers\interfac.h"
-#include	"animate.h"
-#include	"statedef.h"
-#include	"person.h"
-#include	"id.h"
-#include	"enter.h"
-#include	"mav.h"
-#include	"cam.h"
-#include	"hook.h"
-#include	"dirt.h"
+#include	<fallen/game.h>
+#include	<fallen/interface.h>
+#include	<fallen/animate.h>
+#include	<fallen/state_def.h>
+#include	<fallen/person.h>
+#include	<fallen/id.h>
+#include	<fallen/enter.h>
+#include	<fallen/mav.h>
+#include	<fallen/cam.h>
+#include	<fallen/hook.h>
+#include	<fallen/dirt.h>
 #ifdef		PSX
-#include	"c:\fallen\ddengine\headers\console.h"
+#include	<ddengine/console.h>
 #include	"c:\fallen\psxeng\headers\psxeng.h"
 #endif
-#include	"combat.h"
-#include	"eway.h"
-#include	"interfac.h"
-#include	"ware.h"
-#include	"sound.h"
-#include	"pcom.h"
-#include	"ob.h"
-#include	"widget.h"
-#include	"snipe.h"
-#include	"fc.h"
-#include	"cnet.h"
-#include	"memory.h"
-#include	"america.h"
-#include	"wmove.h"
+#include	<fallen/combat.h>
+#include	<fallen/eway.h>
+#include	<fallen/interface.h>
+#include	<fallen/ware.h>
+#include	<fallen/sound.h>
+#include	<fallen/pcom.h>
+#include	<fallen/ob.h>
+#include	<fallen/widget.h>
+#include	<fallen/snipe.h>
+#include	<fallen/fc.h>
+#include	<fallen/cnet.h>
+#include	<fallen/memory.h>
+#include	<fallen/america.h>
+#include	<fallen/wmove.h>
 #ifndef PSX
-#include	"panel.h"
-#include	"env.h"
-#include	"ddlib.h"
-#include	"poly.h"
+#include	<ddengine/panel.h>
+#include	<fallen/env.h>
+#include	<ddlibrary/dd_lib.h>
+#include	<ddengine/poly.h>
 #endif
 
 
@@ -141,7 +141,7 @@ extern	void	set_person_walk_backwards(Thing *p_person);
   button is run
 
 */
-#include	"fc.h"
+#include	<fallen/fc.h>
 void FC_force_camera_behind(SLONG cam);
 
 

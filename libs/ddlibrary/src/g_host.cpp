@@ -1,12 +1,12 @@
 // GHost.cpp
 // Guy Simmons, 20th November 1997.
 
-#include	"DDLib.h"
-#include	"c:\fallen\headers\Sound.h"
-#include	"a3dmanager.h"
-#include	"snd_type.h"
-#include	"mfx.h"
-#include	"mfx_miles.h"
+#include	<ddlibrary/dd_lib.h>
+#include	<fallen/sound.h>
+#include	<ddlibrary/a3d_manager.h>
+#include	<ddlibrary/snd_type.h>
+#include	<ddlibrary/mfx.h>
+#include	<ddlibrary/mfx_miles.h>
 
 #define	PAUSE_TIMEOUT			500
 #define	PAUSE					(1<<0)

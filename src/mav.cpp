@@ -2,17 +2,17 @@
 // Another navigation system.
 //
 
-#include "game.h"
-#include "mav.h"
+#include <fallen/game.h>
+#include <fallen/mav.h>
 #ifndef	PSX
-#include "c:\fallen\ddengine\headers\aeng.h"
+#include <ddengine/aeng.h>
 #endif
-#include "pap.h"
-#include "supermap.h"
-#include "walkable.h"
-#include "memory.h"
-#include "ware.h"
-#include "ob.h"
+#include <fallen/pap.h>
+#include <fallen/super_map.h>
+#include <fallen/walkable.h>
+#include <fallen/memory.h>
+#include <fallen/ware.h>
+#include <fallen/ob.h>
 
 //
 // A prototype here never hurt anyone
@@ -2026,8 +2026,8 @@ SLONG PQ_better(PQ_Type *a, PQ_Type *b)
 	return a->score < b->score;
 }
 
-#include "pq.h"
-#include "pq.cpp"
+#include <fallen/pq.h>
+#include <pq.cpp>
 
 
 //

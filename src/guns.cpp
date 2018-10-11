@@ -1,9 +1,9 @@
-#include	"game.h"
-#include	"statedef.h"
-#include	"pcom.h"
-#include	"memory.h"
-#include	"wmove.h"
-#include	"animate.h"
+#include	<fallen/game.h>
+#include	<fallen/state_def.h>
+#include	<fallen/pcom.h>
+#include	<fallen/memory.h>
+#include	<fallen/wmove.h>
+#include	<fallen/animate.h>
 
 extern	SLONG	is_person_dead(Thing *p_person);
 

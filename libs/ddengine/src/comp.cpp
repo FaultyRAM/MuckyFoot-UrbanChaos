@@ -2,10 +2,10 @@
 // Movie compression.
 //
 
-#include <MFStdlib.h>
-#include "comp.h"
-#include "ic.h"
-#include "tga.h"
+#include <mfstdlib/mfstdlib.h>
+#include <ddengine/comp.h>
+#include <ddengine/ic.h>
+#include <ddlibrary/tga.h>
 
 
 

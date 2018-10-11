@@ -1,7 +1,7 @@
 // Keyboard.cpp
 // Guy Simmons, 11th February 1997.
 
-#include	"DDLib.h"
+#include	<ddlibrary/dd_lib.h>
 
 #ifdef TARGET_DC
 volatile UBYTE	Keys[256],

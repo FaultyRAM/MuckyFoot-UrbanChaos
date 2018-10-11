@@ -2,17 +2,17 @@
 // The final camera?
 //
 
-#include "game.h"
-#include "fmatrix.h"
-#include "animate.h"
-#include "mav.h"
-#include "eway.h"
-#include "statedef.h"
-#include "ware.h"
-#include "fc.h"
-#include "statedef.h"
-#include "memory.h"
-#include "font2d.h"
+#include <fallen/game.h>
+#include <fallen/fmatrix.h>
+#include <fallen/animate.h>
+#include <fallen/mav.h>
+#include <fallen/eway.h>
+#include <fallen/state_def.h>
+#include <fallen/ware.h>
+#include <fallen/fc.h>
+#include <fallen/state_def.h>
+#include <fallen/memory.h>
+#include <ddengine/font_2d.h>
 
 #ifdef TARGET_DC
 #include "DIManager.h"

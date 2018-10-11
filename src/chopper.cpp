@@ -3,17 +3,17 @@
 // Wockawockawockawocka
 //
 
-#include "game.h"
-#include "animate.h"
-#include "chopper.h"
-#include "statedef.h"
-#include "dirt.h"
-#include "pap.h"
-#include "mav.h"
-#include "sound.h"
-#include "mfx.h"
-#include "eway.h"
-#include "memory.h"
+#include <fallen/game.h>
+#include <fallen/animate.h>
+#include <fallen/chopper.h>
+#include <fallen/state_def.h>
+#include <fallen/dirt.h>
+#include <fallen/pap.h>
+#include <fallen/mav.h>
+#include <fallen/sound.h>
+#include <ddlibrary/mfx.h>
+#include <fallen/eway.h>
+#include <fallen/memory.h>
 
 #include <stdio.h>
 

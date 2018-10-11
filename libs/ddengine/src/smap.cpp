@@ -2,13 +2,13 @@
 // Shadow maps!
 //
 
-#include "game.h"
-#include "smap.h"
-#include "aa.h"
-#include "c:\fallen\headers\person.h"
-#include "c:\fallen\headers\fmatrix.h"
-#include "matrix.h"
-#include "memory.h"
+#include <fallen/game.h>
+#include <ddengine/smap.h>
+#include <ddengine/aa.h>
+#include <fallen/person.h>
+#include <fallen/fmatrix.h>
+#include <ddengine/matrix.h>
+#include <fallen/memory.h>
 #include <math.h>
 
 // ========================================================

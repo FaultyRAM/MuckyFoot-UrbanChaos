@@ -1,5 +1,5 @@
-#include "game.h"
-#include <ddlib.h>
+#include <fallen/game.h>
+#include <ddlibrary/dd_lib.h>
 
 
 SLONG mul_y1;

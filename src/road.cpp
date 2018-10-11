@@ -2,16 +2,16 @@
 // Road stuff...
 //
 
-#include "game.h"
-#include "road.h"
-#include "pap.h"
-#include "mav.h"
-#include "elev.h"
+#include <fallen/game.h>
+#include <fallen/road.h>
+#include <fallen/pap.h>
+#include <fallen/mav.h>
+#include <fallen/elev.h>
 #ifndef PSX
-#include "texture.h"
+#include <ddengine/texture.h>
 #endif
 
-#include "memory.h"
+#include <fallen/memory.h>
 
 extern	SLONG	build_psx;
 //

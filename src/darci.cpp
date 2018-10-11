@@ -1,23 +1,23 @@
 // Darci.cpp
 // Guy Simmons, 4th January 1998
 
-#include	"Game.h"
-#include	"Darci.h"
-#include	"animate.h"
-#include	"combat.h"
-#include	"id.h"
+#include	<fallen/game.h>
+#include	<fallen/darci.h>
+#include	<fallen/animate.h>
+#include	<fallen/combat.h>
+#include	<fallen/id.h>
 //#include	"c:\fallen\editor\headers\collide.hpp"
 //#include	"c:\fallen\editor\headers\map.h"
-#include	"statedef.h"
-#include	"enter.h"
-#include	"pap.h"
-#include	"supermap.h"
-#include	"ns.h"
-#include	"pcom.h"
-#include	"walkable.h"
-#include	"memory.h"
-#include	"sound.h"
-#include	"mav.h"
+#include	<fallen/state_def.h>
+#include	<fallen/enter.h>
+#include	<fallen/pap.h>
+#include	<fallen/super_map.h>
+#include	<fallen/ns.h>
+#include	<fallen/pcom.h>
+#include	<fallen/walkable.h>
+#include	<fallen/memory.h>
+#include	<fallen/sound.h>
+#include	<fallen/mav.h>
 
 #ifdef TARGET_DC
 #include "DIManager.h"

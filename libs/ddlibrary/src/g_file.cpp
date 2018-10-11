@@ -1,7 +1,7 @@
 // File.cpp
 // Guy Simmons, 10th February 1997.
 
-#include	"DDLib.h"
+#include	<ddlibrary/dd_lib.h>
 
 
 #define MAX_LENGTH_OF_BASE_PATH 64

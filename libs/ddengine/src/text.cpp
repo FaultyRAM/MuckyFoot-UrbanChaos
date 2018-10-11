@@ -1,13 +1,13 @@
 //	Text.cpp
 //	Guy Simmons, 17th May 1998.
 
-#include	<DDLib.h>
-#include	"poly.h"
-#include	"texture.h"
-#include	"vertexbuffer.h"
-#include	"polypoint.h"
-#include	"renderstate.h"
-#include	"polypage.h"
+#include	<ddlibrary/dd_lib.h>
+#include	<ddengine/poly.h>
+#include	<ddengine/texture.h>
+#include	<ddengine/vertex_buffer.h>
+#include	<ddengine/poly_point.h>
+#include	<ddengine/render_state.h>
+#include	<ddengine/poly_page.h>
 
 //---------------------------------------------------------------
 #define	TEXTURE_STEP	0.00390625f

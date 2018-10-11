@@ -2,9 +2,9 @@
 // Water.
 //
 
-#include "game.h"
-#include <MFStdLib.h>
-#include "water.h"
+#include <fallen/game.h>
+#include <mfstdlib/mfstdlib.h>
+#include <fallen/water.h>
 //#include <math.h>
 
 //

@@ -4,7 +4,7 @@
 #ifndef	CONDTAB_H
 #define	CONDTAB_H
 
-#include	"EdCom.h"
+#include	<editor/ed_com.h>
 
 #define	COND_MODE_NONE			0
 #define	COND_MODE_SELECT_THING	1

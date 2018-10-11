@@ -4,18 +4,19 @@
 // 14 dec 98
 //
 
-#include	"game.h"
+#include	<fallen/game.h>
 
 #ifndef	PSX
-#include "c:\fallen\ddengine\headers\font3d.h"
-#include "c:\fallen\ddengine\headers\poly.h"
-#include "c:\fallen\ddengine\headers\aeng.h"
+#include <ddlibrary/di_manager.h>
+#include <ddengine/font_3d.h>
+#include <ddengine/poly.h>
+#include <ddengine/aeng.h>
 #endif
-#include "briefing.h"
-#include "C:\fallen\DDLibrary\headers\D3DTexture.h"
-#include "C:\fallen\DDLibrary\headers\GDisplay.h"
-#include "sound.h"
-#include "io.h"
+#include <fallen/briefing.h>
+#include <ddlibrary/d3d_texture.h>
+#include <ddlibrary/g_display.h>
+#include <fallen/sound.h>
+#include <fallen/io.h>
 
 //------------------------------------------------------------------------
 // Temporary Blatantly Hackish Stuff

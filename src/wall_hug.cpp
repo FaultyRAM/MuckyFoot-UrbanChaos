@@ -1,9 +1,9 @@
 
-#include "game.h"
+#include <fallen/game.h>
 
 #define WALLHUG_C
 
-#include "wallhug.h"
+#include <fallen/wall_hug.h>
 
 #undef  ERROR
 #define ERROR(err) {TRACE("Wallhug error...\n"); TRACE(err); TRACE("\n"); ASSERT(0);}

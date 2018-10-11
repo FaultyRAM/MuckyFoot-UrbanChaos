@@ -2,16 +2,16 @@
 // Menus from within the game.
 //
 
-#include "game.h"
-#include "gamemenu.h"
-#include "panel.h"
-#include "poly.h"
-#include "menufont.h"
-#include "xlat_str.h"
-#include "mfx.h"
-#include "sound_id.h"
-#include "music.h"
-#include "memory.h"
+#include <fallen/game.h>
+#include <fallen/game_menu.h>
+#include <ddengine/panel.h>
+#include <ddengine/poly.h>
+#include <ddengine/menu_font.h>
+#include <fallen/xlat_str.h>
+#include <ddlibrary/mfx.h>
+#include <fallen/sound_id.h>
+#include <fallen/music.h>
+#include <fallen/memory.h>
 #ifdef TARGET_DC
 #include "interfac.h"
 #include "DIManager.h"

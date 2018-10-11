@@ -5,27 +5,27 @@
 // plays back cutscenes made with cutscene.cpp in gedit
 //
 
-#include "playcuts.h"
-#include "Game.h"
+#include <fallen/play_cutscene.h>
+#include <fallen/game.h>
 
-#include "person.h"
-#include "psystem.h"
-#include "ribbon.h"
-#include "dirt.h"
-#include "wmove.h"
-#include "balloon.h"
-#include "pow.h"
-#include "puddle.h"
-#include "drip.h"
-#include "mfx.h"
-#include "fc.h"
-#include "poly.h"
-#include "sound.h"
-#include "grenade.h"
+#include <fallen/person.h>
+#include <fallen/psystem.h>
+#include <fallen/ribbon.h>
+#include <fallen/dirt.h>
+#include <fallen/wmove.h>
+#include <fallen/balloon.h>
+#include <fallen/pow.h>
+#include <fallen/puddle.h>
+#include <fallen/drip.h>
+#include <ddlibrary/mfx.h>
+#include <fallen/fc.h>
+#include <ddengine/poly.h>
+#include <fallen/sound.h>
+#include <fallen/grenade.h>
 #ifndef PSX
-#include "polypage.h"
-#include "drawxtra.h"
-#include "font2d.h"
+#include <ddengine/poly_page.h>
+#include <ddengine/draw_extra.h>
+#include <ddengine/font_2d.h>
 #endif
 
 //----------------------------------------------------------------------------

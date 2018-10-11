@@ -8,7 +8,7 @@
 #ifndef _XLAT_STR_H_
 #define _XLAT_STR_H_
 
-#include "MFStdLib.h"
+#include <mfstdlib/mfstdlib.h>
 
 //----------------------------------------------------------------------------
 // MISC CONFIG DEFINES

@@ -2,14 +2,14 @@
 // Ingame save functions.
 //
 
-#include "game.h"
-#include "memory.h"
-#include "pcom.h"
-#include "statedef.h"
-#include "eway.h"
-#include "animate.h"
-#include "special.h"
-#include "tracks.h"
+#include <fallen/game.h>
+#include <fallen/memory.h>
+#include <fallen/pcom.h>
+#include <fallen/state_def.h>
+#include <fallen/eway.h>
+#include <fallen/animate.h>
+#include <fallen/special.h>
+#include <fallen/tracks.h>
 
 #ifndef	PSX
 

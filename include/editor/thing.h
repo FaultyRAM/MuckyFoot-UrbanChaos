@@ -4,8 +4,8 @@
 #ifndef	ETHING_H
 #define	ETHING_H
 
-#include	"anim.h"
-#include	"DarkCity.h"
+#include	<editor/anim.h>
+#include	<editor/dark_city.h>
 
 
 //---------------------------------------------------------------

@@ -2,22 +2,22 @@
 // Crappy barrels with kludged physics
 //
 
-#include "game.h"
-#include "barrel.h"
-#include "fmatrix.h"
-#include "mav.h"
-#include "pap.h"
-#include "statedef.h"
-#include "animate.h"
-#include "pcom.h"
-#include "psystem.h"
-#include "poly.h"
-#include "eway.h"
-#include "sound.h"
-#include "pow.h"
-#include "dirt.h"
+#include <fallen/game.h>
+#include <fallen/barrel.h>
+#include <fallen/fmatrix.h>
+#include <fallen/mav.h>
+#include <fallen/pap.h>
+#include <fallen/state_def.h>
+#include <fallen/animate.h>
+#include <fallen/pcom.h>
+#include <fallen/psystem.h>
+#include <ddengine/poly.h>
+#include <fallen/eway.h>
+#include <fallen/sound.h>
+#include <fallen/pow.h>
+#include <fallen/dirt.h>
 #ifndef PSX
-#include "panel.h"
+#include <ddengine/panel.h>
 #else
 #include "c:\fallen\psxeng\headers\panel.h"
 #endif

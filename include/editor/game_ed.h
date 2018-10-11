@@ -4,11 +4,11 @@
 #ifndef	GAMEED_H
 #define	GAMEED_H
 
-#include	"engine.h"
-#include	"ComTab.h"
-#include	"CondTab.h"
-#include	"SaveTab.h"
-#include	"ThingTab.h"
+#include	<editor/engine.h>
+#include	<editor/com_tab.h>
+#include	<editor/cond_tab.h>
+#include	<editor/save_tab.h>
+#include	<editor/thing_tab.h>
 
 //---------------------------------------------------------------
 

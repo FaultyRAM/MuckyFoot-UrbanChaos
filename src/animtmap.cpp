@@ -1,5 +1,5 @@
-#include	"game.h"
-#include	"animtmap.h"
+#include	<fallen/game.h>
+#include	<fallen/animtmap.h>
 
 struct	AnimTmap	anim_tmaps[MAX_ANIM_TMAPS];	//2656 bytes
 

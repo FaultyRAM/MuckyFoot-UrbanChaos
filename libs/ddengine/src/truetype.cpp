@@ -22,8 +22,8 @@
 // 2f. Unlock everything
 // 3. Draw polygons to blit the text to the screen
 
-#include <DDLib.h>
-#include "texture.h"
+#include <ddlibrary/dd_lib.h>
+#include <ddengine/texture.h>
 #ifndef TARGET_DC
 #include <mbctype.h>	// MBCS crap
 #include <mbstring.h>	// more MBCS crap
@@ -33,9 +33,9 @@
 #include "target.h"
 #endif
 
-#include "truetype.h"
-#include "polypoint.h"
-#include "env.h"
+#include <ddengine/truetype.h>
+#include <ddengine/poly_point.h>
+#include <fallen/env.h>
 
 #define ANTIALIAS_BY_HAND		1										// antialias by hand?
 #define	AA_SIZE					(ANTIALIAS_BY_HAND ? 2 : 1)				// multiplier

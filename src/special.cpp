@@ -22,22 +22,22 @@
 // 
 
 
-#include	"Game.h"
-#include	"StateDef.h"
-#include	"Special.h"
-#include	"eway.h"
-#include	"pcom.h"
-#include	"night.h"
-#include	"dirt.h"
-#include	"animate.h"
-#include	"cnet.h"
-#include	"pow.h"
-#include	"memory.h"
-#include	"xlat_str.h"
-#include	"sound.h"
-#include	"grenade.h"
+#include	<fallen/game.h>
+#include	<fallen/state_def.h>
+#include	<fallen/special.h>
+#include	<fallen/eway.h>
+#include	<fallen/pcom.h>
+#include	<fallen/night.h>
+#include	<fallen/dirt.h>
+#include	<fallen/animate.h>
+#include	<fallen/cnet.h>
+#include	<fallen/pow.h>
+#include	<fallen/memory.h>
+#include	<fallen/xlat_str.h>
+#include	<fallen/sound.h>
+#include	<fallen/grenade.h>
 #ifndef		PSX
-#include	"c:\fallen\ddengine\headers\panel.h"
+#include	<ddengine/panel.h>
 #else
 #include	"c:\fallen\psxeng\headers\panel.h"
 #endif

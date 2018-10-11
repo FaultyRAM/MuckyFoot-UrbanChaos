@@ -2,10 +2,10 @@
 // A font! That's all there is to it.
 //
 
-#include "always.h"
-#include "font.h"
-#include "os.h"
-#include "tga.h"
+#include <outro/always.h>
+#include <outro/font.h>
+#include <outro/os.h>
+#include <outro/tga.h>
 
 
 //

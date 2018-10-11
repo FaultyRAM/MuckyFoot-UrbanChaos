@@ -2,19 +2,19 @@
 //
 // grenade code
 
-#include "game.h"
-#include "sound.h"
-#include "fmatrix.h"
-#include "pcom.h"
-#include "psystem.h"
-#include "animate.h"
-#include "dirt.h"
-#include "poly.h"
-#include "mesh.h"
+#include <fallen/game.h>
+#include <fallen/sound.h>
+#include <fallen/fmatrix.h>
+#include <fallen/pcom.h>
+#include <fallen/psystem.h>
+#include <fallen/animate.h>
+#include <fallen/dirt.h>
+#include <ddengine/poly.h>
+#include <ddengine/mesh.h>
 
-#include "grenade.h"
-#include "statedef.h"
-#include "drawxtra.h"
+#include <fallen/grenade.h>
+#include <fallen/state_def.h>
+#include <ddengine/draw_extra.h>
 
 // Grenade
 //

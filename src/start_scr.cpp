@@ -5,51 +5,51 @@
 
 #ifndef EDITOR
 
-#include "MFStdLib.h"
+#include <mfstdlib/mfstdlib.h>
 
 CBYTE STARTSCR_mission[_MAX_PATH] = {0};
 
 
 #else
 
-#include	"Game.h"
-#include	"startscr.h"
+#include	<fallen/game.h>
+#include	<fallen/start_scr.h>
 
 #ifndef		PSX
-#include	"c:\fallen\ddengine\headers\poly.h"
-#include	"c:\fallen\ddengine\headers\text.h"
-#include    "c:\fallen\ddengine\headers\flamengine.h"
-#include    "c:\fallen\ddengine\headers\font3d.h"
-#include    "C:\fallen\DDLibrary\headers\D3DTexture.h"
-#include    "C:\fallen\DDLibrary\headers\GDisplay.h"
-#include	"sound.h"
-#include	"menufont.h"
-#include	"texture.h"
-#include	"drawxtra.h"
-#include	"night.h"
-#include	"io.h"
-#include	"ob.h"
-#include	"C:\fallen\DDEngine\headers\vertexbuffer.h"
-#include	"C:\fallen\DDEngine\headers\polypoint.h"
-#include	"C:\fallen\DDEngine\headers\renderstate.h"
-#include	"C:\fallen\DDEngine\headers\polypage.h"
-#include	"password.h"
-#include	"interfac.h"
-#include	"env.h"
+#include	<ddengine/poly.h>
+#include	<ddengine/text.h>
+#include    <ddengine/flame_engine.h>
+#include    <ddengine/font_3d.h>
+#include    <ddlibrary/d3d_texture.h>
+#include    <ddlibrary/g_display.h>
+#include	<fallen/sound.h>
+#include	<ddengine/menu_font.h>
+#include	<ddengine/texture.h>
+#include	<ddengine/draw_extra.h>
+#include	<fallen/night.h>
+#include	<fallen/io.h>
+#include	<fallen/ob.h>
+#include	<ddengine/vertex_buffer.h>
+#include	<ddengine/poly_point.h>
+#include	<ddengine/render_state.h>
+#include	<ddengine/poly_page.h>
+#include	<fallen/password.h>
+#include	<fallen/interface.h>
+#include	<fallen/env.h>
 //#include	"Shlwapi.h"
 
-#include	"MFx.h"
+#include	<ddlibrary/mfx.h>
 
 #endif
 
-#include	"widget.h"
+#include	<fallen/widget.h>
 
 // editor stuff being roped in for background view
 
-#include	"gi.h"
-#include	"engwind.h"
-#include	"mapview.h"
-#include	"xlat_str.h"
+#include	<ledit/gi.h>
+#include	<gedit/eng_wind.h>
+#include	<gedit/map_view.h>
+#include	<fallen/xlat_str.h>
 
 #define MISSION_SCRIPT "data\\urban.sty"
 

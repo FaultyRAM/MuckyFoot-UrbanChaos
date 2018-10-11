@@ -2,8 +2,8 @@
 // Loads in 32-bit RGBA uncompressed TGAs.
 //
 
-#include "always.h"
-#include "tga.h"
+#include <outro/always.h>
+#include <outro/tga.h>
 
 
 

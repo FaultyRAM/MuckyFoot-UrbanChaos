@@ -2,17 +2,17 @@
 // File I/O for game (M.C.Diskett)
 //
 
-#include "game.h"
-#include "pap.h"
-#include "sound.h"
-#include "ob.h"
-#include "supermap.h"
-#include "c:\fallen\editor\headers\thing.h"
-#include	"io.h"
-#include	"eway.h"
-#include "c:\fallen\headers\inside2.h"
-#include	"memory.h"
-#include "c:\fallen\headers\noserver.h"
+#include <fallen/game.h>
+#include <fallen/pap.h>
+#include <fallen/sound.h>
+#include <fallen/ob.h>
+#include <fallen/super_map.h>
+#include <editor/thing.h>
+#include	<fallen/io.h>
+#include	<fallen/eway.h>
+#include <fallen/inside2.h>
+#include	<fallen/memory.h>
+#include <fallen/no_server.h>
 #ifdef FS_ISO9660
 #include <libcd.h>
 #include <ctype.h>
@@ -22,7 +22,7 @@
 
 #ifndef	PSX
 
-#include	"math.h"
+#include	<math.h>
 void	skip_load_a_multi_prim(MFFileHandle	handle);
 
 #else

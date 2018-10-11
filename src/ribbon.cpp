@@ -5,10 +5,10 @@
 //
 
 
-#include "game.h"
-#include "ribbon.h"
+#include <fallen/game.h>
+#include <fallen/ribbon.h>
 #ifndef	PSX
-#include "DrawXtra.h"
+#include <ddengine/draw_extra.h>
 #endif
 
 static Ribbon	Ribbons[MAX_RIBBONS];

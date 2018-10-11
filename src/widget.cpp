@@ -6,14 +6,14 @@
 // grouped together into 'forms' (palmpilot style)
 //
 
-#include "widget.h"
-#include "menufont.h"
-#include "drawxtra.h"
-#include "sound.h"
-#include "MFx.h"
-#include    "C:\fallen\DDLibrary\headers\D3DTexture.h"
-#include    "C:\fallen\DDLibrary\headers\GDisplay.h"
-#include "interfac.h"
+#include <fallen/widget.h>
+#include <ddengine/menu_font.h>
+#include <ddengine/draw_extra.h>
+#include <fallen/sound.h>
+#include <ddlibrary/mfx.h>
+#include    <ddlibrary/d3d_texture.h>
+#include    <ddlibrary/g_display.h>
+#include <fallen/interface.h>
 
 #define RECT_LEFT	1
 #define RECT_RIGHT	2

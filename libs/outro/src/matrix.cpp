@@ -1,5 +1,5 @@
-#include "always.h"
-#include "matrix.h"
+#include <outro/always.h>
+#include <outro/matrix.h>
 
 
 void MATRIX_scale(float matrix[9], float mulby)

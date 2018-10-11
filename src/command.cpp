@@ -1,9 +1,9 @@
 // Command.cpp
 // Guy Simmons, 8th February 1998.
 
-#include	"Game.h"
-#include	"Command.h"
-#include	"StateDef.h"
+#include	<fallen/game.h>
+#include	<fallen/command.h>
+#include	<fallen/state_def.h>
 
 // All this is temporary, I will try & replace it with a comprehensive
 // command system for all enemies.

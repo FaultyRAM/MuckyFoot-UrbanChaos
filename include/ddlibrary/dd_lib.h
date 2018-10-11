@@ -4,14 +4,7 @@
 #ifndef	DDLIB_H
 #define	DDLIB_H
 
-#include	<MFStdLib.h>
-
-// Link in the MF standard library.
-#ifdef	_DEBUG
-#pragma comment(lib, "MFStdLib_D.lib")
-#else
-#pragma comment(lib, "MFStdLib_R.lib")
-#endif
+#include	<mfstdlib/mfstdlib.h>
 
 // Link in the DX libraries.
 #pragma comment(lib, "ddraw.lib")
@@ -25,20 +18,20 @@
 #endif
 #pragma comment(lib, "dsound.lib")
 
-#include	"D3DTexture.h"
-#include	"DDManager.h"
-#include	"Debug.h"
-#include	"DIManager.h"
-#include	"DSManager.h"
-#include	"GDisplay.h"
-#include	"GWorkScreen.h"
-#include	"QSManager.h"
-#include	"SampleManager.h"
-#include    "Net.h"
+#include	<ddlibrary/d3d_texture.h>
+#include	<ddlibrary/dd_manager.h>
+#include	<ddlibrary/debug.h>
+#include	<ddlibrary/di_manager.h>
+#include	<ddlibrary/ds_manager.h>
+#include	<ddlibrary/g_display.h>
+#include	<ddlibrary/g_work_screen.h>
+#include	<ddlibrary/qs_manager.h>
+#include	<ddlibrary/sample_manager.h>
+#include    <ddlibrary/net.h>
 
-#include	"WindProcs.h"
+#include	<ddlibrary/window_procs.h>
 
-#include	"resource.h"
+#include	<ddlibrary/resource.h>
 
 #ifdef TARGET_DC
 #include "target.h"

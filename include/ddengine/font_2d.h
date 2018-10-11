@@ -8,8 +8,8 @@
 #ifndef _FONT_2D_H_
 #define _FONT_2D_H_
 
-#include "MFStdLib.h"
-#include "poly.h"
+#include <mfstdlib/mfstdlib.h>
+#include <ddengine/poly.h>
 
 
 

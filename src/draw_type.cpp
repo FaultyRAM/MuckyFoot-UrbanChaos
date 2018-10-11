@@ -1,8 +1,8 @@
 // drawtype.cpp
 // Mike Diskett, 15th January 1998.
 
-#include	"Game.h"
-#include "memory.h"
+#include	<fallen/game.h>
+#include <fallen/memory.h>
 
 
 //---------------------------------------------------------------

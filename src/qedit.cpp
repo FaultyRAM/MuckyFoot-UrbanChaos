@@ -5,12 +5,12 @@
 #ifndef TARGET_DC
 
 
-#include "game.h"
-#include <MFStdLib.h>
-#include "qedit.h"
-#include "qmap.h"
-#include "fmatrix.h"
-#include "c:\fallen\ddengine\headers\qeng.h"
+#include <fallen/game.h>
+#include <mfstdlib/mfstdlib.h>
+#include <fallen/qedit.h>
+#include <fallen/qmap.h>
+#include <fallen/fmatrix.h>
+#include <ddengine/qeng.h>
 
 
 

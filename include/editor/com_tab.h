@@ -4,7 +4,7 @@
 #ifndef	COMTAB_H
 #define	COMTAB_H
 
-#include	"EdCom.h"
+#include	<editor/ed_com.h>
 
 #define	COM_MODE_NONE				0
 #define	COM_MODE_SELECT_THING		1

@@ -9,7 +9,7 @@
 //#define JAPANESE
 
 
-#include "xlat_str.h"
+#include <fallen/xlat_str.h>
 #ifdef PSX
 #define _MAX_PATH 256
 #define	FILE_OPEN_ERROR	(-1)

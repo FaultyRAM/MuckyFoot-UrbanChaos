@@ -2,10 +2,10 @@
 // Fog.
 //
 
-#include "game.h"
-#include <MFStdLib.h>
-#include "fog.h"
-#include "pap.h"
+#include <fallen/game.h>
+#include <mfstdlib/mfstdlib.h>
+#include <fallen/fog.h>
+#include <fallen/pap.h>
 
 //
 // Messages drawn straight to the screen.

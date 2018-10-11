@@ -12,10 +12,10 @@
 //
 
 
-#include "game.h"
+#include <fallen/game.h>
 
 #ifndef	PSX
-#include "ddlib.h"
+#include <ddlibrary/dd_lib.h>
 #else
 #define ZeroMemory(a,s) memset((UBYTE*)a,0,s)
 SLONG PSX_eog_timer;
@@ -24,63 +24,63 @@ extern SLONG MFX_OnKey,MFX_OffKey;
 
 
 
-#include "eway.h"
-#include "mission.h"
-#include "night.h"
-#include "ob.h"
-#include "trip.h"
-#include "music.h"
-#include "dirt.h"
-#include "fog.h"
-#include "hook.h"
-#include "mist.h"
-#include "water.h"
-#include "puddle.h"
-#include "az.h"
-#include "drip.h"
-#include "bang.h"
-#include "glitter.h"
-#include "spark.h"
-#include "io.h"
-#include "pow.h"
-#include "build2.h"
+#include <fallen/eway.h>
+#include <gedit/mission.h>
+#include <fallen/night.h>
+#include <fallen/ob.h>
+#include <fallen/trip.h>
+#include <fallen/music.h>
+#include <fallen/dirt.h>
+#include <fallen/fog.h>
+#include <fallen/hook.h>
+#include <fallen/mist.h>
+#include <fallen/water.h>
+#include <fallen/puddle.h>
+#include <fallen/az.h>
+#include <fallen/drip.h>
+#include <fallen/bang.h>
+#include <fallen/glitter.h>
+#include <fallen/spark.h>
+#include <fallen/io.h>
+#include <fallen/pow.h>
+#include <fallen/build2.h>
 #ifndef TARGET_DC
-#include "es.h"
+#include <sedit/es.h>
 #endif
-#include "ns.h"
-#include "road.h"
-#include "mav.h"
-#include "cnet.h"
-#include "interfac.h"
-#include "animtmap.h"
-#include "shadow.h"
-#include "attract.h"
-#include "cam.h"
-#include "psystem.h"
-#include "tracks.h"
-#include "pcom.h"
-#include "wmove.h"
-#include "balloon.h"
-#include "wand.h"
-#include "ribbon.h"
-#include "barrel.h"
-#include "fc.h"
-#include "briefing.h"
-#include "ware.h"
-#include "memory.h"
-#include "playcuts.h"
-#include "grenade.h"
-#include "env.h"
+#include <fallen/ns.h>
+#include <fallen/road.h>
+#include <fallen/mav.h>
+#include <fallen/cnet.h>
+#include <fallen/interface.h>
+#include <fallen/animtmap.h>
+#include <fallen/shadow.h>
+#include <fallen/attract.h>
+#include <fallen/cam.h>
+#include <fallen/psystem.h>
+#include <fallen/tracks.h>
+#include <fallen/pcom.h>
+#include <fallen/wmove.h>
+#include <fallen/balloon.h>
+#include <fallen/wand.h>
+#include <fallen/ribbon.h>
+#include <fallen/barrel.h>
+#include <fallen/fc.h>
+#include <fallen/briefing.h>
+#include <fallen/ware.h>
+#include <fallen/memory.h>
+#include <fallen/play_cutscene.h>
+#include <fallen/grenade.h>
+#include <fallen/env.h>
 #ifndef PSX
-#include "panel.h"
+#include <ddengine/panel.h>
 #endif
 
-#include "sound.h"
+#include <fallen/sound.h>
 #ifdef USE_A3D
-#include "soundenv.h"
+#include <fallen/soundenv.h>
 #endif
 
-#include "DCLowLevel.h"
+#include <ddlibrary/dc_low_level.h>
 
 
 

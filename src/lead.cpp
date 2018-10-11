@@ -1,8 +1,8 @@
-#include "game.h"
-#include "pap.h"
-#include "lead.h"
-#include "animate.h"
-#include "ob.h"
+#include <fallen/game.h>
+#include <fallen/pap.h>
+#include <fallen/lead.h>
+#include <fallen/animate.h>
+#include <fallen/ob.h>
 
 
 //

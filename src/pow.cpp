@@ -2,11 +2,11 @@
 // Yet another explosion system.
 //
 
-#include "game.h"
-#include "pow.h"
-#include "fmatrix.h"
+#include <fallen/game.h>
+#include <fallen/pow.h>
+#include <fallen/fmatrix.h>
 #ifndef PSX
-#include "panel.h"
+#include <ddengine/panel.h>
 #else
 #include "psxeng.h"
 #endif

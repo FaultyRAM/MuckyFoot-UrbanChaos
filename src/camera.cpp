@@ -1,9 +1,9 @@
 // Camera.cpp
 // Guy Simmons, 5th December 1997.
 
-#include	"Game.h"
-#include	"id.h"
-#include	"statedef.h"
+#include	<fallen/game.h>
+#include	<fallen/id.h>
+#include	<fallen/state_def.h>
 
 extern Camera		test_view;
 void	set_camera_angle(Thing *c_thing,SLONG lag);

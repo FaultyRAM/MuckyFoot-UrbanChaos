@@ -25,9 +25,9 @@
 #ifndef _POLYPAGE_
 #define _POLYPAGE_
 
-#include "renderstate.h"
-#include "vertexbuffer.h"
-#include "polypoint.h"
+#include <ddengine/render_state.h>
+#include <ddengine/vertex_buffer.h>
+#include <ddengine/poly_point.h>
 
 class PolyPage;
 

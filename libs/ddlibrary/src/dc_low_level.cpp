@@ -22,7 +22,7 @@ Abstract:
 
 #include <tchar.h>
 #include <windows.h>
-#include "MFStdLib.h"
+#include <mfstdlib/mfstdlib.h>
 #include <dsound.h>
 #include <math.h>
 #ifdef TARGET_DC
@@ -959,7 +959,7 @@ IDirectSoundBuffer *CreateStreamingSoundBuffer(int nSamplesPerSec, WORD wBitsPer
 //
 // ========================================================
 
-#include "dclowlevel.h"
+#include <ddlibrary/dc_low_level.h>
 
 
 typedef struct dcll_sound
@@ -2220,7 +2220,7 @@ void MilesTerm(void)
 
 #ifndef TARGET_DC
 
-#include "sound_id.h"
+#include <fallen/sound_id.h>
 
 //
 // Does the DC conversion of looping samples.

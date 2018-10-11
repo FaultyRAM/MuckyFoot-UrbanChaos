@@ -11,8 +11,8 @@
 #ifndef TARGET_DC
 
 
-#include "A3DManager.h"
-#include "snd_type.h"
+#include <ddlibrary/a3d_manager.h>
+#include <ddlibrary/snd_type.h>
 //#include "A3DPlay.h"
 
 extern volatile HWND	hDDLibWindow;

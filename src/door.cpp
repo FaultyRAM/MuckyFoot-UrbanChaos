@@ -2,11 +2,11 @@
 // Doors
 //
 
-#include "game.h"
-#include "door.h"
-#include "mav.h"
-#include "supermap.h"
-#include "memory.h"
+#include <fallen/game.h>
+#include <fallen/door.h>
+#include <fallen/mav.h>
+#include <fallen/super_map.h>
+#include <fallen/memory.h>
 
 
 

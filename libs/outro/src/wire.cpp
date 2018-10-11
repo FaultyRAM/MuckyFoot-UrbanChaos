@@ -2,13 +2,13 @@
 // The wire-frame spinny objects
 //
 
-#include "always.h"
-#include "key.h"
-#include "imp.h"
-#include "matrix.h"
-#include "mf.h"
-#include "os.h"
-#include "wire.h"
+#include <outro/always.h>
+#include <outro/key.h>
+#include <outro/imp.h>
+#include <outro/matrix.h>
+#include <outro/mf.h>
+#include <outro/os.h>
+#include <outro/wire.h>
 
 
 

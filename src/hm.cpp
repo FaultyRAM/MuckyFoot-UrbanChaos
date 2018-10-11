@@ -5,16 +5,16 @@
 #ifndef TARGET_DC
 
 
-#include "game.h"
-#include <MFStdLib.h>
+#include <fallen/game.h>
+#include <mfstdlib/mfstdlib.h>
 #include <stdlib.h>
-#include <hm.h>
+#include <fallen/hm.h>
 #include <math.h>
-#include "c:\fallen\ddengine\headers\message.h"
-#include "c:\fallen\ddengine\headers\matrix.h"
-#include "maths.h"
-#include "pap.h"
-#include	"memory.h"
+#include <ddengine/message.h>
+#include <ddengine/matrix.h>
+#include <fallen/maths.h>
+#include <fallen/pap.h>
+#include	<fallen/memory.h>
 
 //
 // How to draw a line in the world.

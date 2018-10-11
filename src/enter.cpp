@@ -2,13 +2,13 @@
 // Entering buildings.
 //
 
-#include "game.h"
-#include "pap.h"
-#include "enter.h"
-#include "id.h"
-#include "stair.h"
-#include "supermap.h"
-#include	"memory.h"
+#include <fallen/game.h>
+#include <fallen/pap.h>
+#include <fallen/enter.h>
+#include <fallen/id.h>
+#include <fallen/stair.h>
+#include <fallen/super_map.h>
+#include	<fallen/memory.h>
 
 #ifndef	PSX
 

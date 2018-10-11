@@ -2,17 +2,17 @@
 // Cached lighting.
 //
 
-#include "game.h"
-#include "heap.h"
-#include "night.h"
-#include "ob.h"
-#include "pap.h"
-#include "fmatrix.h"
-#include "heap.h"
-#include "shadow.h"
-#include "supermap.h"
-#include "ware.h"
-#include "c:\fallen\ledit\headers\ed.h"
+#include <fallen/game.h>
+#include <fallen/heap.h>
+#include <fallen/night.h>
+#include <fallen/ob.h>
+#include <fallen/pap.h>
+#include <fallen/fmatrix.h>
+#include <fallen/heap.h>
+#include <fallen/shadow.h>
+#include <fallen/super_map.h>
+#include <fallen/ware.h>
+#include <ledit/ed.h>
 
 #ifdef	PSX
 

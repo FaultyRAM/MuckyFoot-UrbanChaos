@@ -5,11 +5,11 @@
 #ifndef TARGET_DC
 
 
-#include <MFStdLib.h>
-#include "game.h"
-#include "guns.h"
-#include "snipe.h"
-#include "combat.h"
+#include <mfstdlib/mfstdlib.h>
+#include <fallen/game.h>
+#include <fallen/guns.h>
+#include <fallen/snipe.h>
+#include <fallen/combat.h>
 
 SLONG SNIPE_on;
 SLONG SNIPE_yaw;		// 8-bit fixed point

@@ -2,12 +2,12 @@
 // Sofware renderer hacked in!
 //
 
-#include "ddlib.h"
-#include "sw.h"
-#include "poly.h"
-#include "texture.h"
-#include "elev.h"
-#include "game.h"
+#include <ddlibrary/dd_lib.h>
+#include <ddengine/sw.h>
+#include <ddengine/poly.h>
+#include <ddengine/texture.h>
+#include <fallen/elev.h>
+#include <fallen/game.h>
 
 
 #ifndef TARGET_DC

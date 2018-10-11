@@ -2,15 +2,15 @@
 // Draws prims super-fast!
 //
 
-#include "game.h"
-#include "ddlib.h"
-#include "poly.h"
-#include "polypoint.h"
-#include "polypage.h"
-#include "fastprim.h"
-#include "memory.h"
-#include "texture.h"
-#include "matrix.h"
+#include <fallen/game.h>
+#include <ddlibrary/dd_lib.h>
+#include <ddengine/poly.h>
+#include <ddengine/poly_point.h>
+#include <ddengine/poly_page.h>
+#include <ddengine/fast_prim.h>
+#include <fallen/memory.h>
+#include <ddengine/texture.h>
+#include <ddengine/matrix.h>
 
 
 //#define FASTPRIM_PERFORMANCE

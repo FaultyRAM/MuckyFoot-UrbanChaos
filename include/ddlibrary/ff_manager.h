@@ -3,8 +3,8 @@
 // 
 // Limitations: Currently assumes first joystick
 
-#include "MFStdLib.h"
-#include "DIManager.h"
+#include <mfstdlib/mfstdlib.h>
+#include <ddlibrary/di_manager.h>
 
 
 #ifdef TARGET_DC

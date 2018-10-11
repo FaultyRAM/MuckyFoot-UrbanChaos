@@ -1,8 +1,8 @@
 #include	<math.h>
 
-#include	"game.h"
-#include	"Quaternion.h"
-#include	"c:\fallen\headers\fmatrix.h"
+#include	<fallen/game.h>
+#include	<ddengine/quaternion.h>
+#include	<fallen/fmatrix.h>
 
 void	QUATERNION_BuildTweenInteger(struct Matrix33 *dest,struct CMatrix33 *cm1,struct CMatrix33 *cm2,SLONG tween);
 

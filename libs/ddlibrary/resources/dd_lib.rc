@@ -1,6 +1,6 @@
 //Microsoft Developer Studio generated resource script.
 //
-#include "Headers\resource.h"
+#include "ddlibrary/resource.h"
 
 #define APSTUDIO_READONLY_SYMBOLS
 /////////////////////////////////////////////////////////////////////////////
@@ -29,7 +29,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 
 1 TEXTINCLUDE DISCARDABLE 
 BEGIN
-    "Headers\\resource.h\0"
+    "ddlibrary/resource.h\0"
 END
 
 2 TEXTINCLUDE DISCARDABLE 

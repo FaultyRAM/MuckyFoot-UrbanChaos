@@ -3,18 +3,18 @@
 // walkable faces of the prim.
 //
 
-#include "game.h"
-#include "eway.h"
-#include "ob.h"
-#include "plat.h"
-#include "statedef.h"
-#include "wmove.h"
-#include "animate.h"
-#include "psystem.h"
-#include "panel.h"
+#include <fallen/game.h>
+#include <fallen/eway.h>
+#include <fallen/ob.h>
+#include <fallen/plat.h>
+#include <fallen/state_def.h>
+#include <fallen/wmove.h>
+#include <fallen/animate.h>
+#include <fallen/psystem.h>
+#include <ddengine/panel.h>
 #ifndef PSX
-#include "poly.h"
-#include "drawxtra.h"
+#include <ddengine/poly.h>
+#include <ddengine/draw_extra.h>
 #endif
 
 

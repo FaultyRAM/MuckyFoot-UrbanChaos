@@ -1,11 +1,11 @@
 // WindProcs.cpp
 // Guy Simmons, 14th November 1997.
 
-#include	"DDLib.h"
+#include	<ddlibrary/dd_lib.h>
 //#include	"finaleng.h"
-#include	"BinkClient.h"
-#include	"c:\fallen\headers\music.h"
-#include	"c:\fallen\headers\game.h"
+#include	<ddlibrary/bink_client.h>
+#include	<fallen/music.h>
+#include	<fallen/game.h>
 
 extern void MFX_QUICK_stop(void);
 

@@ -1,21 +1,21 @@
 // Display.cpp
 // Guy Simmons, 13th November 1997.
 
-#include	"DDLib.h"
-#include	"c:\fallen\headers\demo.h"
-#include	"c:\fallen\headers\interfac.h"
-#include	"BinkClient.h"
-#include	"c:\fallen\headers\env.h"
-#include	"c:\fallen\headers\xlat_str.h"
+#include	<ddlibrary/dd_lib.h>
+#include	<fallen/demo.h>
+#include	<fallen/interface.h>
+#include	<ddlibrary/bink_client.h>
+#include	<fallen/env.h>
+#include	<fallen/xlat_str.h>
 
-#include "poly.h"
-#include "vertexbuffer.h"
-#include "polypoint.h"
-#include "renderstate.h"
-#include "polypage.h"
-#include "gdisplay.h"
-#include "panel.h"
-#include	"c:\fallen\headers\game.h"
+#include <ddengine/poly.h>
+#include <ddengine/vertex_buffer.h>
+#include <ddengine/poly_point.h>
+#include <ddengine/render_state.h>
+#include <ddengine/poly_page.h>
+#include <ddlibrary/g_display.h>
+#include <ddengine/panel.h>
+#include	<fallen/game.h>
 
 #ifdef TARGET_DC
 #include "target.h"

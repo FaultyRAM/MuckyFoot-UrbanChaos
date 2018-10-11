@@ -2,11 +2,11 @@
 // Functions that act on the imported meshes
 //
 
-#include "always.h"
-#include "imp.h"
-#include "matrix.h"
-#include "mf.h"
-#include "os.h"
+#include <outro/always.h>
+#include <outro/imp.h>
+#include <outro/matrix.h>
+#include <outro/mf.h>
+#include <outro/os.h>
 
 
 void MF_load_textures(IMP_Mesh *im)

@@ -2,9 +2,9 @@
 // Cheapo font stuff...
 //
 
-#include <MFStdLib.h>
-#include <DDLib.h>
-#include "font.h"
+#include <mfstdlib/mfstdlib.h>
+#include <ddlibrary/dd_lib.h>
+#include <ddengine/font.h>
 #include <math.h>
 
 #define _____ 0x00

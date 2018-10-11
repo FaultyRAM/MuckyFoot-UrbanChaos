@@ -1,18 +1,18 @@
-#include "game.h"
-#include "pap.h"
-#include "ns.h"
-#include "supermap.h"
-#include "fmatrix.h"
-#include	"memory.h"
-#include "ware.h"
-#include "mav.h"
+#include <fallen/game.h>
+#include <fallen/pap.h>
+#include <fallen/ns.h>
+#include <fallen/super_map.h>
+#include <fallen/fmatrix.h>
+#include	<fallen/memory.h>
+#include <fallen/ware.h>
+#include <fallen/mav.h>
 
 //#include	"c:\fallen\editor\headers\collide.hpp"
-#include	"c:\fallen\editor\headers\map.h"
-#include	"animate.h"
-#include	"FMatrix.h"
+#include	<editor/map.h>
+#include	<fallen/animate.h>
+#include	<fallen/fmatrix.h>
 #ifndef	PSX
-#include	"c:\fallen\editor\headers\prim_draw.h"
+#include	<editor/prim_draw.h>
 #else
 extern	void rotate_obj(SWORD xangle,SWORD yangle,SWORD zangle, Matrix33 *r3);
 

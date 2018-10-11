@@ -6,7 +6,7 @@
 #define MESH_H
 
 
-#include "night.h"
+#include <fallen/night.h>
 
 
 //

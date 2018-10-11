@@ -2,10 +2,10 @@
 // Draws the credits
 //
 
-#include "always.h"
-#include "key.h"
-#include "font.h"
-#include "os.h"
+#include <outro/always.h>
+#include <outro/key.h>
+#include <outro/font.h>
+#include <outro/os.h>
 
 
 

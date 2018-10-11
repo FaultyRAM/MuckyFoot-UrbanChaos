@@ -14,9 +14,9 @@
 #define PSYSTEM_MAX_PARTICLES	64
 #endif
 
-#include "MFStdLib.h"
-#include "game.h"
-#include "thing.h"
+#include <mfstdlib/mfstdlib.h>
+#include <fallen/game.h>
+#include <fallen/thing.h>
 
 // standard grav physics:
 #define PFLAG_GRAVITY	1

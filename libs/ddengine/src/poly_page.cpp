@@ -2,17 +2,17 @@
 //
 // PolyPage class - main low-level rendering
 
-#include <MFStdLib.h>
-#include <DDLib.h>
+#include <mfstdlib/mfstdlib.h>
+#include <ddlibrary/dd_lib.h>
 #include <math.h>
-#include "poly.h"
-#include "vertexbuffer.h"
-#include "polypoint.h"
-#include "renderstate.h"
-#include "game.h"
-#include "matrix.h"
+#include <ddengine/poly.h>
+#include <ddengine/vertex_buffer.h>
+#include <ddengine/poly_point.h>
+#include <ddengine/render_state.h>
+#include <fallen/game.h>
+#include <ddengine/matrix.h>
 
-#include "polypage.h"
+#include <ddengine/poly_page.h>
 
 #define	VERIFY_SORT		0	// debug - check mergesort gives correct result
 #define WIREFRAME		0	// enable wireframe

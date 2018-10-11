@@ -1,6 +1,6 @@
-#include <MFStdLib.h>
-#include "poly.h"
-#include "sprite.h"
+#include <mfstdlib/mfstdlib.h>
+#include <ddengine/poly.h>
+#include <ddengine/sprite.h>
 
 
 

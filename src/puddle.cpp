@@ -2,13 +2,13 @@
 // Puddles!
 //
 
-#include <MFStdLib.h>
-#include "game.h"	// :-(
-#include "puddle.h"
-#include "mav.h"
-#include "pap.h"
+#include <mfstdlib/mfstdlib.h>
+#include <fallen/game.h>	// :-(
+#include <fallen/puddle.h>
+#include <fallen/mav.h>
+#include <fallen/pap.h>
 
-#include "memory.h"
+#include <fallen/memory.h>
 
 
 

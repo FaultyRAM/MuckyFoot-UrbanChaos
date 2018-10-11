@@ -1,15 +1,15 @@
 
-#include	"game.h"
-#include	"shadow.h"
-#include "c:\fallen\headers\animtmap.h"
-#include	"pap.h"
-#include	"supermap.h"
-#include	"io.h"
-#include	"memory.h"
+#include	<fallen/game.h>
+#include	<fallen/shadow.h>
+#include <fallen/animtmap.h>
+#include	<fallen/pap.h>
+#include	<fallen/super_map.h>
+#include	<fallen/io.h>
+#include	<fallen/memory.h>
 
 #ifndef PSX
 #ifdef	EDITOR
-#include	"c:\fallen\editor\headers\Editor.hpp"
+#include	<editor/editor.hpp>
 #else
 #define PSX
 

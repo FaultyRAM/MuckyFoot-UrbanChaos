@@ -2,13 +2,13 @@
 // Lights...
 //
 
-#include "game.h"
+#include <fallen/game.h>
 
 #ifndef	PSX
 
-#include "light.h"
-#include "fmatrix.h"
-#include	"memory.h"
+#include <fallen/light.h>
+#include <fallen/fmatrix.h>
+#include	<fallen/memory.h>
 
 
 #define IMPLIES(a,b) (!(a) || (b))

@@ -1,20 +1,20 @@
 
 //#include	"Editor.hpp"
 
-#include	"game.h"
+#include	<fallen/game.h>
 //#include	"engine.h"
 //#include	"trig.h"
 //#include	"math.h"
 //#include	"prim.h"
 //#include	"prim_draw.h"
 
-#include	"fmatrix.h"
-#include	"pap.h"
-#include	"walkable.h"
-#include	"supermap.h"
-#include	"memory.h"
+#include	<fallen/fmatrix.h>
+#include	<fallen/pap.h>
+#include	<fallen/walkable.h>
+#include	<fallen/super_map.h>
+#include	<fallen/memory.h>
 #ifndef PSX
-#include	"matrix.h"
+#include	<ddengine/matrix.h>
 #else
 #include	"c:\fallen\psxeng\headers\matrix.h"
 #endif

@@ -4,10 +4,10 @@
 #ifndef	_LIGHTTAB_HPP_
 #define	_LIGHTTAB_HPP_
 
-#include	"ModeTab.hpp"
-#include	"Stealth.h"
-#include	"EditMod.hpp"
-#include	"undo.hpp"
+#include	<editor/mode_tab.hpp>
+#include	<editor/stealth.h>
+#include	<editor/edit_mod.hpp>
+#include	<editor/undo.hpp>
 
 
 #define		LIGHT_TAB_MODE_WAIT			 0

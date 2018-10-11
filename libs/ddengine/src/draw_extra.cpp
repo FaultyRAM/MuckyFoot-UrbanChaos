@@ -7,27 +7,27 @@
 // drawxtra.cpp -- stuff like the van, helicopter, footprints, etc.
 //
 
-#include "DDLib.h"
-#include "drawxtra.h"
-#include "FMatrix.h"
-#include "animate.h"
-#include "mesh.h"
-#include "cone.h"
-#include "poly.h"
-#include "psystem.h"
-#include "sprite.h"
-#include "spark.h"
-#include "dirt.h"
-#include "statedef.h"
-#include "memory.h"
-#include "collide.h"
-#include	"tracks.h"
-#include	"c:\fallen\headers\fc.h"
-#include	"barrel.h"
-#include	"eway.h"
-#include "mfx.h"
-#include "sound.h"
-#include "gamemenu.h"
+#include <ddlibrary/dd_lib.h>
+#include <ddengine/draw_extra.h>
+#include <fallen/fmatrix.h>
+#include <fallen/animate.h>
+#include <ddengine/mesh.h>
+#include <ddengine/cone.h>
+#include <ddengine/poly.h>
+#include <fallen/psystem.h>
+#include <ddengine/sprite.h>
+#include <fallen/spark.h>
+#include <fallen/dirt.h>
+#include <fallen/state_def.h>
+#include <fallen/memory.h>
+#include <fallen/collide.h>
+#include	<fallen/tracks.h>
+#include	<fallen/fc.h>
+#include	<fallen/barrel.h>
+#include	<fallen/eway.h>
+#include <ddlibrary/mfx.h>
+#include <fallen/sound.h>
+#include <fallen/game_menu.h>
 
 
 
@@ -430,14 +430,14 @@ void Pyros_EndOfFrameMarker ( void )
 
 // Not using the limiting stuff - these do nothing exciting.
 
-inline int IWouldLikeSomePyroSpritesHowManyCanIHave ( int iIWantThisMany )
+int IWouldLikeSomePyroSpritesHowManyCanIHave ( int iIWantThisMany )
 {
 	// Sure.
 	return ( iIWantThisMany );
 }
 
 // If the rout can't change how many it uses, at leats call this to warn the phyro system that they will be used.
-inline void IHaveToHaveSomePyroSprites( int iINeedThisMany )
+void IHaveToHaveSomePyroSprites( int iINeedThisMany )
 {
 	// Does nothing in this case.
 }

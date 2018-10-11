@@ -3,28 +3,28 @@
 // Burning (and maybe Exploding) Things
 //
 
-#include "game.h"
-#include "pyro.h"
-#include "statedef.h"
-#include "C:\fallen\DDEngine\Headers\Matrix.h"
-#include "C:\fallen\DDEngine\Headers\Sprite.h"
+#include <fallen/game.h>
+#include <fallen/pyro.h>
+#include <fallen/state_def.h>
+#include <ddengine/matrix.h>
+#include <ddengine/sprite.h>
 #ifndef PSX
-#include "C:\fallen\DDEngine\Headers\poly.h"
+#include <ddengine/poly.h>
 #else
 #include "c:\fallen\psxeng\headers\poly.h"
 #endif
-#include "dirt.h"
-#include "ribbon.h"
-#include "combat.h"
-#include "barrel.h"
-#include "sound.h"
-#include "animate.h"
-#include "interact.h"
-#include "night.h"
-#include "mfx.h"
-#include "psystem.h"
-#include "pcom.h"
-#include "gamemenu.h"
+#include <fallen/dirt.h>
+#include <fallen/ribbon.h>
+#include <fallen/combat.h>
+#include <fallen/barrel.h>
+#include <fallen/sound.h>
+#include <fallen/animate.h>
+#include <fallen/interact.h>
+#include <fallen/night.h>
+#include <ddlibrary/mfx.h>
+#include <fallen/psystem.h>
+#include <fallen/pcom.h>
+#include <fallen/game_menu.h>
 
 RadPoint PYRO_defaultpoints[16];
 

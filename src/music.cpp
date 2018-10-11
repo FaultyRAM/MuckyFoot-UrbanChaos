@@ -4,10 +4,10 @@
 // 14 june 99
 //
 
-#include "music.h"
-#include "sound.h"
-#include "mfx.h"
-#include "ware.h"
+#include <fallen/music.h>
+#include <fallen/sound.h>
+#include <ddlibrary/mfx.h>
+#include <fallen/ware.h>
 
 #ifdef PSX
 #include "psxeng.h"

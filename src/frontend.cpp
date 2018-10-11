@@ -32,29 +32,29 @@
 
 #ifndef PSX
 
-#include	"demo.h"
-#include	"DDLib.h"
-#include "frontend.h"
-#include "xlat_str.h"
-#include "menufont.h"
-#include "font2d.h"
-#include "env.h"
-#include "drive.h"
-#include "snd_type.h"
-#include "sound.h"
-#include "MFX.h"
-#include "MFX_Miles.h"
-#include "music.h"
-#include "poly.h"
-#include "drawxtra.h"
-#include "fmatrix.h"
-#include    "C:\fallen\DDLibrary\headers\D3DTexture.h"
-#include    "C:\fallen\DDLibrary\headers\GDisplay.h"
-#include	"C:\fallen\DDEngine\headers\polypage.h"
-#include "io.h"
-#include "truetype.h"
-#include "c:\fallen\ddlibrary\headers\dclowlevel.h"
-#include "panel.h"
+#include	<fallen/demo.h>
+#include	<ddlibrary/dd_lib.h>
+#include <fallen/frontend.h>
+#include <fallen/xlat_str.h>
+#include <ddengine/menu_font.h>
+#include <ddengine/font_2d.h>
+#include <fallen/env.h>
+#include <ddlibrary/drive.h>
+#include <ddlibrary/snd_type.h>
+#include <fallen/sound.h>
+#include <ddlibrary/mfx.h>
+#include <ddlibrary/mfx_miles.h>
+#include <fallen/music.h>
+#include <ddengine/poly.h>
+#include <ddengine/draw_extra.h>
+#include <fallen/fmatrix.h>
+#include    <ddlibrary/d3d_texture.h>
+#include    <ddlibrary/g_display.h>
+#include	<ddengine/poly_page.h>
+#include <fallen/io.h>
+#include <ddengine/truetype.h>
+#include <ddlibrary/dc_low_level.h>
+#include <ddengine/panel.h>
 
 #ifdef TARGET_DC
 #include <platutil.h>
@@ -62,7 +62,7 @@
 #include <segagdrm.h>
 #endif
 
-#include "interfac.h"
+#include <fallen/interface.h>
 extern	BOOL	allow_debug_keys;
 
 
@@ -123,7 +123,7 @@ void	FRONTEND_display ( void );
 #define	STARTS_EXIT		4	
 #define STARTS_LANGUAGE_CHANGE 10
 #else
-#include "startscr.h"
+#include <fallen/start_scr.h>
 #endif
 
 // just know someone's gonna want me to take it back out again soooo.....

@@ -6,7 +6,7 @@
 #define _QENG_
 
 
-#include "c:\fallen\headers\qmap.h"
+#include <fallen/qmap.h>
 
 
 //

@@ -4,8 +4,8 @@
 #ifndef	_ALERT_HPP_
 #define	_ALERT_HPP_
 
-#include	"CtrlSet.hpp"
-#include	"Primativ.hpp"
+#include	<editor/ctrl_set.hpp>
+#include	<editor/primative.hpp>
 
 
 class	Alert	:	public	EdRect

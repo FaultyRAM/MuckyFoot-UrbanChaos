@@ -2,8 +2,8 @@
 // Imports SEX files.
 //
 
-#include "always.h"
-#include "imp.h"
+#include <outro/always.h>
+#include <outro/imp.h>
 
 
 

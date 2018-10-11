@@ -2,16 +2,16 @@
 // Faster far-facets...
 //
 
-#include "game.h"
-#include "ddlib.h"
-#include "pap.h"
-#include "poly.h"
-#include "polypoint.h"
-#include "polypage.h"
-#include "night.h"
-#include "supermap.h"
-#include "memory.h"
-#include "matrix.h"
+#include <fallen/game.h>
+#include <ddlibrary/dd_lib.h>
+#include <fallen/pap.h>
+#include <ddengine/poly.h>
+#include <ddengine/poly_point.h>
+#include <ddengine/poly_page.h>
+#include <fallen/night.h>
+#include <fallen/super_map.h>
+#include <fallen/memory.h>
+#include <ddengine/matrix.h>
 #include <math.h>
 
 

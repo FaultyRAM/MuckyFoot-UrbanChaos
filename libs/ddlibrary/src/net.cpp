@@ -2,8 +2,8 @@
 // Direct play stuff.
 //
 
-#include "DDLib.h"
-#include "net.h"
+#include <ddlibrary/dd_lib.h>
+#include <ddlibrary/net.h>
 
 
 //

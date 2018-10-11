@@ -36,7 +36,7 @@ void            TraceText(CBYTE *error, ...);
 #include <stdlib.h>
 #include <cguid.h>
 
-#include "C:\fallen\headers\A3D\Ia3dapi.h"
+#include <ia3dapi.h>
 
 
 #define MAX_QUEUE_LENGTH	5

@@ -4,10 +4,10 @@
 #ifndef	_PAINTTAB_HPP_
 #define	_PAINTTAB_HPP_
 
-#include	"undo.hpp"
-#include	"ModeTab.hpp"
-#include	"BuildTab.hpp"
-#include	"Stealth.h"
+#include	<editor/undo.hpp>
+#include	<editor/mode_tab.hpp>
+#include	<editor/build_tab.hpp>
+#include	<editor/stealth.h>
 
 
 #define	PALETTE_PAINT		0

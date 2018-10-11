@@ -2,9 +2,9 @@
 // The checkered way Darci and Roper appear on screen.
 //
 
-#include "always.h"
-#include "checker.h"
-#include "os.h"
+#include <outro/always.h>
+#include <outro/checker.h>
+#include <outro/os.h>
 
 
 //

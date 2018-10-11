@@ -2,12 +2,12 @@
 // Moving walkable faces.
 //
 
-#include "game.h"
-#include "wmove.h"
-#include "build2.h"
-#include "c:\fallen\headers\memory.h"
-#include "fmatrix.h"
-#include "statedef.h"
+#include <fallen/game.h>
+#include <fallen/wmove.h>
+#include <fallen/build2.h>
+#include <fallen/memory.h>
+#include <fallen/fmatrix.h>
+#include <fallen/state_def.h>
 
 //#include "prim.h"
 

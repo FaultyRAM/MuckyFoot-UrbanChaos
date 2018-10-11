@@ -1,91 +1,91 @@
 // Game.cpp
 // Guy Simmons, 17th October 1997
 
-#include	"demo.h"
-#include	"Game.h"
-#include	"pap.h"
-#include	"Attract.h"
-#include	"id.h"
-#include	"io.h"
-#include	"light.h"
-#include	"heap.h"
-#include	"hm.h"
-#include	"dirt.h"
-#include	"fog.h"
-#include	"mist.h"
-#include	"water.h"
-#include	"cnet.h"
-#include	"interfac.h"
-#include	"puddle.h"
-#include	"road.h"
-#include	"az.h"
-#include	"cam.h"
-#include	"door.h"
-#include	"sewer.h"
-#include	"drip.h"
-#include	"Sound.h"
-#include	"gamemenu.h"
+#include	<fallen/demo.h>
+#include	<fallen/game.h>
+#include	<fallen/pap.h>
+#include	<fallen/attract.h>
+#include	<fallen/id.h>
+#include	<fallen/io.h>
+#include	<fallen/light.h>
+#include	<fallen/heap.h>
+#include	<fallen/hm.h>
+#include	<fallen/dirt.h>
+#include	<fallen/fog.h>
+#include	<fallen/mist.h>
+#include	<fallen/water.h>
+#include	<fallen/cnet.h>
+#include	<fallen/interface.h>
+#include	<fallen/puddle.h>
+#include	<fallen/road.h>
+#include	<fallen/az.h>
+#include	<fallen/cam.h>
+#include	<fallen/door.h>
+#include	<fallen/sewer.h>
+#include	<fallen/drip.h>
+#include	<fallen/sound.h>
+#include	<fallen/game_menu.h>
 #ifndef	PSX
-#include	"c:\fallen\ddengine\headers\menufont.h"
-#include	"c:\fallen\ddlibrary\headers\net.h"
+#include	<ddengine/menu_font.h>
+#include	<ddlibrary/net.h>
 #endif
-#include	"bang.h"
-#include	"mav.h"
-#include	"c:\fallen\editor\headers\extra.h"
-#include	"spark.h"
-#include	"statedef.h"
-#include	"glitter.h"
-#include	"ob.h"
-#include	"morph.h"
-#include	"qedit.h"
-#include	"trip.h"
-#include	"pap.h"
-#include	"night.h"
-#include	"shadow.h"
-#include	"cloth.h"
-#include	"ns.h"
-#include	"supermap.h"
-#include	"c:\fallen\sedit\headers\es.h"
-#include	"build2.h"
-#include	"eway.h"
-#include	"elev.h"
-#include	"pause.h"
-#include	"snipe.h"
-#include	"pow.h"
-#include	"Game.h"
-#include	"widget.h"
-#include	"memory.h"
-#include	"fc.h"
-#include "startscr.h"
-#include	"save.h"
+#include	<fallen/bang.h>
+#include	<fallen/mav.h>
+#include	<editor/extra.h>
+#include	<fallen/spark.h>
+#include	<fallen/state_def.h>
+#include	<fallen/glitter.h>
+#include	<fallen/ob.h>
+#include	<fallen/morph.h>
+#include	<fallen/qedit.h>
+#include	<fallen/trip.h>
+#include	<fallen/pap.h>
+#include	<fallen/night.h>
+#include	<fallen/shadow.h>
+#include	<fallen/cloth.h>
+#include	<fallen/ns.h>
+#include	<fallen/super_map.h>
+#include	<sedit/es.h>
+#include	<fallen/build2.h>
+#include	<fallen/eway.h>
+#include	<fallen/elev.h>
+#include	<fallen/pause.h>
+#include	<fallen/snipe.h>
+#include	<fallen/pow.h>
+#include	<fallen/game.h>
+#include	<fallen/widget.h>
+#include	<fallen/memory.h>
+#include	<fallen/fc.h>
+#include <fallen/start_scr.h>
+#include	<fallen/save.h>
 
 #ifndef PSX
-#include	"spark.h"
-#include	"font2d.h"
-#include	"env.h"
+#include	<fallen/spark.h>
+#include	<ddengine/font_2d.h>
+#include	<fallen/env.h>
 #endif
-#include	"wmove.h"
-#include	"balloon.h"
-#include	"memory.h"
+#include	<fallen/wmove.h>
+#include	<fallen/balloon.h>
+#include	<fallen/memory.h>
 #ifndef	PSX
-#include	"C:\fallen\DDEngine\Headers\console.h"
-#include	"C:\fallen\DDEngine\Headers\poly.h"
-#include	"c:\fallen\DDEngine\Headers\map.h"
+#include	<ddengine/console.h>
+#include	<ddengine/poly.h>
+#include	<ddengine/map.h>
 #endif
-#include	"psystem.h"
-#include	"ribbon.h"
-#include	"overlay.H"
-#include	"music.h"
-#include	"grenade.h"
+#include	<fallen/psystem.h>
+#include	<fallen/ribbon.h>
+#include	<fallen/overlay.h>
+#include	<fallen/music.h>
+#include	<fallen/grenade.h>
 #ifndef	PSX
-#include	"drawxtra.h"
-#include	"c:\fallen\ddlibrary\headers\ddlib.h"
-#include	"c:\fallen\ddengine\headers\planmap.h"
+#include	<ddengine/draw_extra.h>
+#include	<ddlibrary/dd_lib.h>
+#include	<ddengine/plan_map.h>
 #include	<math.h>
-#include	"c:\fallen\ddengine\headers\BreakTimer.h"
-#include	"frontend.h"
-#include	"c:\fallen\ddengine\headers\truetype.h"
-#include "panel.h"
+#include	<ddengine/break_timer.h>
+#include	<fallen/frontend.h>
+#include	<ddengine/truetype.h>
+#include <ddengine/panel.h>
 
 #else
 #include	"c:\fallen\psxeng\headers\psxeng.h"
@@ -94,17 +94,17 @@ extern ControllerPacket	PAD_Input1,PAD_Input2;
 
 #endif
 
-#include "xlat_str.h"
-#include "DCLowLevel.h"
+#include <fallen/xlat_str.h>
+#include <ddlibrary/dc_low_level.h>
 
 #define	TIMEOUT_DEMO	0
 #define	VERIFY_PLAYBACK	0	// !$$! set to 1 to verify demo playback
 
-#include "mfx.h"
-#include "c:\fallen\ddengine\headers\superfacet.h"
-#include "c:\fallen\ddengine\headers\farfacet.h"
-#include "c:\fallen\ddengine\headers\fastprim.h"
-#include "c:\fallen\ddengine\headers\supercrinkle.h"
+#include <ddlibrary/mfx.h>
+#include <ddengine/super_facet.h>
+#include <ddengine/far_facet.h>
+#include <ddengine/fast_prim.h>
+#include <ddengine/super_crinkle.h>
 
 
 SLONG CAM_cur_x, CAM_cur_y, CAM_cur_z, 

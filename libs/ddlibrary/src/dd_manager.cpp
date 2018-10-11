@@ -5,9 +5,9 @@
 #define	INITGUID
 #endif
 
-#include	"DDLib.h"
-#include	"c:\fallen\headers\env.h"
-#include	"c:\fallen\headers\game.h"
+#include	<ddlibrary/dd_lib.h>
+#include	<fallen/env.h>
+#include	<fallen/game.h>
 #include	<tchar.h>
 #ifdef	TARGET_DC
 #include "target.h"

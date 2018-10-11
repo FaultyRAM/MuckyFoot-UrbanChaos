@@ -8,10 +8,10 @@
 #ifndef TARGET_DC
 
 
-#include "flamengine.h"
-#include "texture.h"
-#include "poly.h"
-#include	<DDLib.h>
+#include <ddengine/flame_engine.h>
+#include <ddengine/texture.h>
+#include <ddengine/poly.h>
+#include	<ddlibrary/dd_lib.h>
 
 extern D3DTexture TEXTURE_texture[];
 

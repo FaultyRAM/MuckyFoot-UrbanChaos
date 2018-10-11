@@ -1,7 +1,7 @@
 // StdMaths.cpp
 // Guy Simmons, 18th December 1997.
 
-#include	<MFStdLib.h>
+#include	<mfstdlib/mfstdlib.h>
 #ifdef TARGET_DC
 #include <shintr.h>
 #endif

@@ -1,8 +1,8 @@
 #ifndef	EDIT_H
 #define	EDIT_H			1
 
-#include	"primativ.hpp"
-#include	"Anim.h"
+#include	<editor/primative.hpp>
+#include	<editor/anim.h>
 //#include	"Engine.h"
 //DEFINES
 

@@ -7,11 +7,11 @@
 
 #ifndef TARGET_DC
 
-#include "DDLib.h"
-#include "bink.h"
-#include "MFX_Miles.h"
-#include "snd_type.h"
-#include "drive.h"
+#include <ddlibrary/dd_lib.h>
+#include <bink.h>
+#include <ddlibrary/mfx_miles.h>
+#include <ddlibrary/snd_type.h>
+#include <ddlibrary/drive.h>
 
 static s32		focus = 1;		// we have focus
 static HBINK	bink = NULL;	// a bink file is loaded

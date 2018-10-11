@@ -8,12 +8,12 @@
 #ifndef TARGET_DC
 #include <string>
 #endif
-#include "font2d.h"
-#include "c:\fallen\ddlibrary\headers\tga.h"
-#include "noserver.h"
-#include <DDLib.h>
-#include "truetype.h"
-#include "game.h"
+#include <ddengine/font_2d.h>
+#include <ddlibrary/tga.h>
+#include <fallen/no_server.h>
+#include <ddlibrary/dd_lib.h>
+#include <ddengine/truetype.h>
+#include <fallen/game.h>
 
 #ifdef _DEBUG
 #define	PERHAPS		if (!Keys[KB_J])

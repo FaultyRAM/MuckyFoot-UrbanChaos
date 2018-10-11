@@ -4,7 +4,7 @@
 #ifndef	_ICON_HPP_
 #define	_ICON_HPP_
 
-#include	"Primativ.hpp"
+#include	<editor/primative.hpp>
 
 
 struct	AWindowIcon

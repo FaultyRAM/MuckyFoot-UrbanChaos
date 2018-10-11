@@ -5,17 +5,17 @@
 // smoke, dust, mud, sparks, blood...
 //
 
-#include "game.h"
-#include "psystem.h"
-#include "mav.h"
-#include "FMatrix.h"
-#include "C:\fallen\DDEngine\Headers\poly.h"
-#include "animate.h"
-#include "interact.h"
-#include "sound.h"
-#include "pcom.h"
-#include "pow.h"
-#include "fc.h"
+#include <fallen/game.h>
+#include <fallen/psystem.h>
+#include <fallen/mav.h>
+#include <fallen/fmatrix.h>
+#include <ddengine/poly.h>
+#include <fallen/animate.h>
+#include <fallen/interact.h>
+#include <fallen/sound.h>
+#include <fallen/pcom.h>
+#include <fallen/pow.h>
+#include <fallen/fc.h>
 
 // pvt globals...
 

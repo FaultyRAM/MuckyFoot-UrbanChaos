@@ -2,27 +2,27 @@
 // Texture handling.
 //
 
-#include "game.h"
-#include <DDLib.h>
-#include "c:\fallen\ddlibrary\headers\tga.h"
-#include "texture.h"
-#include "c:\fallen\headers\animtmap.h"
-#include "c:\fallen\headers\supermap.h"
-#include "poly.h"
-#include "pap.h"
-#include "ns.h"
-#include "memory.h"
-#include "c:\fallen\headers\io.h"
-#include "c:\fallen\headers\inside2.h"
-#include "sound.h"
-#include "c:\fallen\headers\noserver.h"
-#include "ware.h"
-#include "truetype.h"
-#include "font2d.h"
-#include "env.h"
-#include "drive.h"
-#include "c:\fallen\headers\attract.h"
-#include "crinkle.h"
+#include <fallen/game.h>
+#include <ddlibrary/dd_lib.h>
+#include <ddlibrary/tga.h>
+#include <ddengine/texture.h>
+#include <fallen/animtmap.h>
+#include <fallen/super_map.h>
+#include <ddengine/poly.h>
+#include <fallen/pap.h>
+#include <fallen/ns.h>
+#include <fallen/memory.h>
+#include <fallen/io.h>
+#include <fallen/inside2.h>
+#include <fallen/sound.h>
+#include <fallen/no_server.h>
+#include <fallen/ware.h>
+#include <ddengine/truetype.h>
+#include <ddengine/font_2d.h>
+#include <fallen/env.h>
+#include <ddlibrary/drive.h>
+#include <fallen/attract.h>
+#include <ddengine/crinkle.h>
 #ifdef TARGET_DC
 #include "c:\fallen\ddlibrary\headers\GDisplay.h"
 #endif

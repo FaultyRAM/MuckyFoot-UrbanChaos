@@ -1,7 +1,7 @@
 // Bucket.cpp
 // Guy Simmons, 24th October 1997.
 
-#include	"Engine.h"
+#include	<ddengine/engine.h>
 
 
 UBYTE			e_bucket_pool[BUCKET_POOL_SIZE],

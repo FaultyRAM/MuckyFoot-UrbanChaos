@@ -1,12 +1,12 @@
-#include "game.h"
-#include "drip.h"
-#include "pap.h"
-#include "psystem.h"
-#include "poly.h"
-#include "puddle.h"
-#include "mav.h"
+#include <fallen/game.h>
+#include <fallen/drip.h>
+#include <fallen/pap.h>
+#include <fallen/psystem.h>
+#include <ddengine/poly.h>
+#include <fallen/puddle.h>
+#include <fallen/mav.h>
 
-#include "memory.h"
+#include <fallen/memory.h>
 
 typedef struct
 {

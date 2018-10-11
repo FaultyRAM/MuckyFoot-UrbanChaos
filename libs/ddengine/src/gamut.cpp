@@ -1,7 +1,7 @@
 // Gamut.cpp
 // Guy Simmons, 4th November 1997.
 
-#include	"Engine.h"
+#include	<ddengine/engine.h>
 
 
 GamutElement	gamut_ele_pool[MAX_GAMUT_RADIUS*4*MAX_GAMUT_RADIUS],

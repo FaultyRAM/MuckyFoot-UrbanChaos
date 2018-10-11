@@ -1,9 +1,9 @@
 // DIManager.cpp
 // Guy Simmons, 19th February 1998
 
-#include	"DDLib.h"
+#include	<ddlibrary/dd_lib.h>
 #ifndef TARGET_DC
-#include	"FFManager.h"
+#include	<ddlibrary/ff_manager.h>
 #else
 #include	"maplusag.h"
 #endif
@@ -2488,6 +2488,7 @@ BOOL CALLBACK OS_joy_enum(
 
 void OS_joy_init(void)
 {
+	extern HINSTANCE hGlobalThisInst;
 	HRESULT hr;
 
 	//
@@ -2502,43 +2503,8 @@ void OS_joy_init(void)
 	// Create the direct input object.
 	//
 
-	CoInitialize(NULL);
-
-#ifdef	MAD_AM_I
-
-	CoCreateInstance(
-	    CLSID_DirectInput8,
-		NULL,
-		CLSCTX_INPROC_SERVER,
-	    IID_IDirectInput8W,
-	    (void **) &OS_joy_direct_input);
-
-	extern HINSTANCE hGlobalThisInst;
-	
-	hr = OS_joy_direct_input->Initialize(hGlobalThisInst, DIRECTINPUT_VERSION);
-#else
-			return;
-#endif
-	
-	if (hr != DI_OK)
-	{
-		if (hr == DIERR_BETADIRECTINPUTVERSION)
-		{
-			return;
-		}
-
-		if (hr == DIERR_OLDDIRECTINPUTVERSION)
-		{
-			return;
-		}
-
-		return;
-	}
-
-	/*
-
-    hr = DirectInputCreateEx(
-			OS_this_instance,
+    hr = DirectInputCreate(
+			hGlobalThisInst,
 			DIRECTINPUT_VERSION,
 		   &OS_joy_direct_input,
 			NULL);
@@ -2551,8 +2517,6 @@ void OS_joy_init(void)
 
         return;
 	}
-
-	*/
 
 	//
 	// Find a joystick.

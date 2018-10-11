@@ -12,16 +12,17 @@
 #ifndef TARGET_DC
 
 
-#include	"mfstdlib.h"
-#include	"game.h"
-#include	"xlat_str.h"
+#include	<mfstdlib/mfstdlib.h>
+#include	<fallen/game.h>
+#include	<fallen/xlat_str.h>
 
 #ifndef	PSX
-#include	"c:\fallen\ddengine\headers\poly.h"
-#include    "C:\fallen\DDLibrary\headers\D3DTexture.h"
-#include    "C:\fallen\DDLibrary\headers\GDisplay.h"
-#include    "c:\fallen\ddengine\headers\font3d.h"
-#include    "c:\fallen\ddengine\headers\font2d.h"
+#include	<ddengine/poly.h>
+#include    <ddlibrary/d3d_texture.h>
+#include    <ddlibrary/g_display.h>
+#include    <ddengine/font_3d.h>
+#include    <ddengine/font_2d.h>
+#include	<ddengine/panel.h>
 #endif
 
 #ifdef TARGET_DC

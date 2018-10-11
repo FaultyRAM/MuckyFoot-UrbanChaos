@@ -2,9 +2,9 @@
 // Loads an environment from a file.
 //
 
-#include "game.h"
-#include <MFStdLib.h>
-#include "env.h"
+#include <fallen/game.h>
+#include <mfstdlib/mfstdlib.h>
+#include <fallen/env.h>
 
 #if 0
 

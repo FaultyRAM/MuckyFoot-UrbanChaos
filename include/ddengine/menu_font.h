@@ -8,7 +8,7 @@
 #ifndef _MENUFONT_H_
 #define _MENUFONT_H_
 
-#include "MFStdlib.h"
+#include <mfstdlib/mfstdlib.h>
 
 #define MENUFONT_FUTZING	(1)
 #define MENUFONT_HALOED		(2)

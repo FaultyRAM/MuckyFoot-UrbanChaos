@@ -4,10 +4,10 @@
 #ifndef	_COLTAB_HPP_
 #define	_COLTAB_HPP_
 
-#include	"ModeTab.hpp"
-#include	"Stealth.h"
-#include	"EditMod.hpp"
-#include	"undo.hpp"
+#include	<editor/mode_tab.hpp>
+#include	<editor/stealth.h>
+#include	<editor/edit_mod.hpp>
+#include	<editor/undo.hpp>
 
 #define	COL_TYPE_PLANE	1
 #define	COL_TYPE_BEZIER	2

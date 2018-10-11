@@ -9,7 +9,7 @@
 //
 // If you don't understand what this means, DON'T FUCK WITH THIS CODE
 
-#include <ddlib.h>
+#include <ddlibrary/dd_lib.h>
 //#include <windows.h>
 #ifndef TARGET_DC
 #include <process.h>
@@ -19,7 +19,7 @@
 #include "target.h"
 #endif
 
-#include "asyncfile2.h"
+#include <ddlibrary/async_file.h>
 
 static AsyncFile	File[MAX_ASYNC_FILES];
 

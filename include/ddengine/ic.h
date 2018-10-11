@@ -5,7 +5,7 @@
 #ifndef _IC_
 #define _IC_
 
-#include "tga.h"
+#include <ddlibrary/tga.h>
 
 
 //

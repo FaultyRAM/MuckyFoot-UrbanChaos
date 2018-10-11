@@ -12,20 +12,20 @@
 //
 
 
-#include "game.h"
-#include "bat.h"
-#include "animate.h"
-#include "statedef.h"
-#include "sound.h"
-#include "eway.h"
-#include "psystem.h"
-#include "poly.h"
-#include "mav.h"
-#include "wand.h"
-#include "spark.h"
-#include "pcom.h"
-#include "memory.h"
-#include "night.h"
+#include <fallen/game.h>
+#include <fallen/bat.h>
+#include <fallen/animate.h>
+#include <fallen/state_def.h>
+#include <fallen/sound.h>
+#include <fallen/eway.h>
+#include <fallen/psystem.h>
+#include <ddengine/poly.h>
+#include <fallen/mav.h>
+#include <fallen/wand.h>
+#include <fallen/spark.h>
+#include <fallen/pcom.h>
+#include <fallen/memory.h>
+#include <fallen/night.h>
 
 
 //

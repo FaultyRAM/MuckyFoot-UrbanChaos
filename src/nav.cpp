@@ -2,9 +2,9 @@
 // Navigation.
 //
 
-#include "game.h"
-#include "nav.h"
-#include "wallhug.h"
+#include <fallen/game.h>
+#include <fallen/nav.h>
+#include <fallen/wall_hug.h>
 
 
 

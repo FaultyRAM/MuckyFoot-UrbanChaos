@@ -1,15 +1,15 @@
 // Roper.cpp
 // Guy Simmons, 4th January 1998
 
-#include	"Game.h"
-#include	"Roper.h"
-#include	"statedef.h"
-#include	"animate.h"
+#include	<fallen/game.h>
+#include	<fallen/roper.h>
+#include	<fallen/state_def.h>
+#include	<fallen/animate.h>
 
 //---------------------------------------------------------------
 // All temp stuff, botched in for demo.
 
-#include	"..\Editor\Headers\Thing.h"
+#include	<editor/thing.h>
 
 ULONG	move_thing(SLONG m_dx,SLONG m_dy,SLONG m_dz,struct MapThing *p_thing);
 

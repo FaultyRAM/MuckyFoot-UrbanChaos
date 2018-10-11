@@ -14,16 +14,16 @@
 
 
 
-#include "always.h"
-#include "key.h"
-#include "os.h"
-#include "matrix.h"
-#include "tga.h"
+#include <outro/always.h>
+#include <outro/key.h>
+#include <outro/os.h>
+#include <outro/matrix.h>
+#include <outro/tga.h>
 
-#include "c:\fallen\ddlibrary\headers\ddlib.h"
-#include "c:\fallen\ddlibrary\headers\mfx.h"
-#include "c:\fallen\headers\music.h"
-#include "c:\fallen\headers\sound_id.h"
+#include <ddlibrary/dd_lib.h>
+#include <ddlibrary/mfx.h>
+#include <fallen/music.h>
+#include <fallen/sound_id.h>
 
 //#include "midasdll.h"
 
@@ -110,7 +110,7 @@ SLONG                 OS_midas_ok;
 //MIDASmodule           OS_module;
 //MIDASmodulePlayHandle OS_module_handle;
 
-
+#if 0
 // ========================================================
 //
 // JOYSTICK STUFF
@@ -383,7 +383,7 @@ void OS_joy_poll(void)
 		OS_joy_input_device->Unacquire();
 	}
 }
-
+#endif
 
 // ========================================================
 //
@@ -1923,6 +1923,7 @@ SLONG OS_process_messages()
 	// Poll the joystick.
 	//
 
+	extern SLONG OS_joy_poll(void);
 	OS_joy_poll();
 
 	while(1)

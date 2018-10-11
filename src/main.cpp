@@ -1,19 +1,19 @@
 // Main.cpp
 // Guy Simmons, 17th October 1997.
 
-#include	"Game.h"
+#include	<fallen/game.h>
 #ifndef	PSX
-#include	"DDLib.h"
+#include	<ddlibrary/dd_lib.h>
 #ifndef TARGET_DC
-#include	"sedit.h"
-#include	"ledit.h"
+#include	<sedit/sedit.h>
+#include	<ledit/ledit.h>
 #endif
-#include	"renderstate.h"
-#include	"Drive.h"
+#include	<ddengine/render_state.h>
+#include	<ddlibrary/drive.h>
 #endif
 
 #ifdef GUY
-#include	"GEdit.h"
+#include	<gedit/gedit.h>
 #endif
 
 #ifndef	EXIT_SUCCESS
@@ -23,9 +23,9 @@
 #endif
 
 
-#include	"Sound.h"
-#include	"Memory.h"
-#include	"env.h"
+#include	<fallen/sound.h>
+#include	<fallen/memory.h>
+#include	<fallen/env.h>
 
 
 

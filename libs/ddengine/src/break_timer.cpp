@@ -2,11 +2,11 @@
 //
 // break timer for timing portions of code
 
-#include <MFStdLib.h>
+#include <mfstdlib/mfstdlib.h>
 #if !defined(TARGET_DC)
 #include <cmath>
 #endif
-#include "BreakTimer.h"
+#include <ddengine/break_timer.h>
 
 // Windows timer access functions
 

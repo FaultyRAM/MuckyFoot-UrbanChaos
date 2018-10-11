@@ -2,9 +2,9 @@
 // Tripwires.
 //
 
-#include "game.h"
-#include "trip.h"
-#include "animate.h"
+#include <fallen/game.h>
+#include <fallen/trip.h>
+#include <fallen/animate.h>
 
 
 

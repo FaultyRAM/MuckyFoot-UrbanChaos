@@ -1,9 +1,9 @@
 #ifndef	MEMORY_H
 #define	MEMORY_H
 
-#include	"supermap.h"
-#include	"inside2.h"
-#include	"building.h"
+#include	<fallen/super_map.h>
+#include	<fallen/inside2.h>
+#include	<fallen/building.h>
 
 //
 // The map beacons.

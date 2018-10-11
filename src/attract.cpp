@@ -1,33 +1,33 @@
 // Attract.cpp
 // Guy Simmons, 20th November 1997.
 
-#include "Game.h"
-#include "cam.h"
+#include <fallen/game.h>
+#include <fallen/cam.h>
 #ifndef	PSX
-#include "c:\fallen\ddlibrary\headers\ddlib.h"
-#include "font2d.h"
-#include "poly.h"
-#include "panel.h"
+#include <ddlibrary/dd_lib.h>
+#include <ddengine/font_2d.h>
+#include <ddengine/poly.h>
+#include <ddengine/panel.h>
 #else
 #include "c:\fallen\psxeng\headers\psxeng.h"
 #include "c:\fallen\psxeng\headers\poly.h"
 #include "c:\ps\psx\include\ctrller.h"
 extern ControllerPacket PAD_Input1,PAD_Input2;
 #endif
-#include "startscr.h"
-#include "briefing.h"
+#include <fallen/start_scr.h>
+#include <fallen/briefing.h>
 #define	DEMO
-#include "attract.h"
-#include "env.h"
-#include "overlay.h"
-#include "sound.h"
-#include "mfx.h"
-#include "eway.h"
-#include "interfac.h"
-#include "xlat_str.h"
-#include "frontend.h"
-#include "statedef.h"
-#include "DCLowLevel.h"
+#include <fallen/attract.h>
+#include <fallen/env.h>
+#include <fallen/overlay.h>
+#include <fallen/sound.h>
+#include <ddlibrary/mfx.h>
+#include <fallen/eway.h>
+#include <fallen/interface.h>
+#include <fallen/xlat_str.h>
+#include <fallen/frontend.h>
+#include <fallen/state_def.h>
+#include <ddlibrary/dc_low_level.h>
 //#include "console.h"
 
 // undef this to get the old menus back...
@@ -187,7 +187,7 @@ reinit_because_of_language_change:
 		FRONTEND_init ( bReinitBecauseOfLanguageChange );
 	}
 #else
-	FRONTEND_init ( bReinitBecauseOfLanguageChange )
+	FRONTEND_init ( bReinitBecauseOfLanguageChange );
 #endif
 
 

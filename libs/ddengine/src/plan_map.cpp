@@ -1,11 +1,11 @@
-#include <MFStdLib.h>
-#include <DDLib.h>
+#include <mfstdlib/mfstdlib.h>
+#include <ddlibrary/dd_lib.h>
 #include <math.h>
-#include "aeng.h"
-#include "game.h"
-#include "c:\fallen\headers\pap.h"
-#include "c:\fallen\headers\road.h"
-#include "planmap.h"
+#include <ddengine/aeng.h>
+#include <fallen/game.h>
+#include <fallen/pap.h>
+#include <fallen/road.h>
+#include <ddengine/plan_map.h>
 
 
 

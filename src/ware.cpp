@@ -11,14 +11,14 @@
 // THEODORE ROOSEVELT
 // 
 
-#include "game.h"
-#include "mav.h"
-#include "memory.h"
-#include "supermap.h"
-#include "ware.h"
-#include "night.h"
-#include "ob.h"
-#include "elev.h"
+#include <fallen/game.h>
+#include <fallen/mav.h>
+#include <fallen/memory.h>
+#include <fallen/super_map.h>
+#include <fallen/ware.h>
+#include <fallen/night.h>
+#include <fallen/ob.h>
+#include <fallen/elev.h>
 
 
 WARE_Ware *WARE_ware;//[WARE_MAX_WARES];

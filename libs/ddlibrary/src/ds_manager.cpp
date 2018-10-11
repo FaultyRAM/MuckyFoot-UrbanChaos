@@ -1,7 +1,7 @@
 // DSManager.cpp
 // Guy Simmons, 22nd February 1998
 
-#include	"DDLib.h"
+#include	<ddlibrary/dd_lib.h>
 
 
 DSDriverManager		the_sound_manager;

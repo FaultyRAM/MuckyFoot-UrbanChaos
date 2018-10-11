@@ -1,7 +1,7 @@
 // SampleManager.cpp
 // Guy Simmons, 24th February 1998.
 
-#include	"DDLib.h"
+#include	<ddlibrary/dd_lib.h>
 
 // Windows multimedia stuff, used for WAV's.
 #include	<mmsystem.h>

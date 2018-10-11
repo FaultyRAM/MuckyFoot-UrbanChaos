@@ -1,26 +1,26 @@
-#include "game.h"
-#include "c:\fallen\headers\cam.h"
-#include "c:\fallen\headers\statedef.h"
-#include "c:\fallen\ddengine\headers\panel.h"
-#include "fc.h"
-#include "animate.h"
-#include "memory.h"
-#include "mav.h"
-#include "vehicle.h"
-#include "eway.h"
+#include <fallen/game.h>
+#include <fallen/cam.h>
+#include <fallen/state_def.h>
+#include <ddengine/panel.h>
+#include <fallen/fc.h>
+#include <fallen/animate.h>
+#include <fallen/memory.h>
+#include <fallen/mav.h>
+#include <fallen/vehicle.h>
+#include <fallen/eway.h>
 #ifndef PSX
-#include "ddlib.h"
-#include "c:\fallen\ddengine\headers\planmap.h"
-#include "c:\fallen\ddengine\headers\poly.h"
-#include "font2d.h"
+#include <ddlibrary/dd_lib.h>
+#include <ddengine/plan_map.h>
+#include <ddengine/poly.h>
+#include <ddengine/font_2d.h>
 #else
 #include "c:\fallen\psxeng\headers\psxeng.h"
 #include "c:\fallen\psxeng\headers\panel.h"
 #endif
-#include	"interfac.h"
+#include	<fallen/interface.h>
 
-#include "eway.h"
-#include "xlat_str.h"
+#include <fallen/eway.h>
+#include <fallen/xlat_str.h>
 #ifdef PSX
 #include	"ctrller.h"
 #endif

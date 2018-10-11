@@ -10,10 +10,10 @@
 #ifndef _DRAWXTRA_H_
 #define _DRAWXTRA_H_
 
-#include "MFStdLib.h"
-#include "game.h"
-#include "thing.h"
-#include "ribbon.h"
+#include <mfstdlib/mfstdlib.h>
+#include <fallen/game.h>
+#include <fallen/thing.h>
+#include <fallen/ribbon.h>
 
 #define BLOOM_GLOW_ALWAYS	1
 #define BLOOM_LENSFLARE		2

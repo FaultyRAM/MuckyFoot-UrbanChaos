@@ -2,16 +2,16 @@
 //
 // Vertex buffer stuff (DX6)
 
-#include <MFStdLib.h>
-#include <DDLib.h>
+#include <mfstdlib/mfstdlib.h>
+#include <ddlibrary/dd_lib.h>
 #include <math.h>
-#include "console.h"
-#include "poly.h"
+#include <ddengine/console.h>
+#include <ddengine/poly.h>
 #ifdef	TARGET_DC
 #include "target.h"
 #endif
 
-#include "vertexbuffer.h"
+#include <ddengine/vertex_buffer.h>
 
 VertexBufferPool*	TheVPool = NULL;
 

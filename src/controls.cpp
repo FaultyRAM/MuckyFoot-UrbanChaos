@@ -1,85 +1,85 @@
 // Control.cpp
 // Guy Simmons, 4th November 1997.
 
-#include	"Game.h"
-#include	"enter.h"
-#include	"id.h"
-#include	"dirt.h"
-#include	"fog.h"
-#include	"mist.h"
-#include	"water.h"
-#include	"hm.h"
-#include	"light.h"
-#include	"shadow.h"
-#include	"puddle.h"
-#include	"pow.h"
+#include	<fallen/game.h>
+#include	<fallen/enter.h>
+#include	<fallen/id.h>
+#include	<fallen/dirt.h>
+#include	<fallen/fog.h>
+#include	<fallen/mist.h>
+#include	<fallen/water.h>
+#include	<fallen/hm.h>
+#include	<fallen/light.h>
+#include	<fallen/shadow.h>
+#include	<fallen/puddle.h>
+#include	<fallen/pow.h>
 #ifndef PSX
-#include	"panel.h"
+#include	<ddengine/panel.h>
 #endif
-#include	"drip.h"
-#include	"cam.h"
-#include	"sewer.h"
-#include	"bang.h"  
-#include	"mav.h"
-#include	"animtmap.h"
-#include	"spark.h"
-#include	"animate.h"
-#include	"glitter.h"
-#include	"sound.h"
-#include	"ob.h"
-#include	"trip.h"
-#include	"ob.h"
-#include	"pap.h"
-#include	"pcom.h"
-#include	"night.h"
-#include	"hook.h"
+#include	<fallen/drip.h>
+#include	<fallen/cam.h>
+#include	<fallen/sewer.h>
+#include	<fallen/bang.h>  
+#include	<fallen/mav.h>
+#include	<fallen/animtmap.h>
+#include	<fallen/spark.h>
+#include	<fallen/animate.h>
+#include	<fallen/glitter.h>
+#include	<fallen/sound.h>
+#include	<fallen/ob.h>
+#include	<fallen/trip.h>
+#include	<fallen/ob.h>
+#include	<fallen/pap.h>
+#include	<fallen/pcom.h>
+#include	<fallen/night.h>
+#include	<fallen/hook.h>
 //#include	"sm.h"
-#include	"ns.h"
-#include	"cloth.h"
-#include	"eway.h"
-#include    "animal.h"
-#include    "chopper.h"
-#include	"interfac.h"
-#include	"statedef.h"
-#include	"combat.h"
-#include	"door.h"
+#include	<fallen/ns.h>
+#include	<fallen/cloth.h>
+#include	<fallen/eway.h>
+#include    <fallen/animal.h>
+#include    <fallen/chopper.h>
+#include	<fallen/interface.h>
+#include	<fallen/state_def.h>
+#include	<fallen/combat.h>
+#include	<fallen/door.h>
 #ifndef	PSX
-#include    "C:\fallen\DDEngine\Headers\console.h"
+#include    <ddengine/console.h>
 #endif
-#include	"psystem.h"
-#include	"ribbon.h"
-#include	"C:\fallen\DDEngine\Headers\poly.h"
-#include	"wmove.h"
-#include	"balloon.h"
-#include	"wand.h"
-#include	"snipe.h"
-#include	"barrel.h"
-#include	"road.h"
-#include	"fc.h"
-#include	"memory.h"
-#include	"ware.h"
-#include	"MFx.h"
-#include	"cnet.h"
-#include	"widget.h"
-#include	"save.h"
-#include	"dike.h"
-#include	"music.h"
-#include	"night.h"
-#include	"grenade.h"
-#include	"demo.h"
+#include	<fallen/psystem.h>
+#include	<fallen/ribbon.h>
+#include	<ddengine/poly.h>
+#include	<fallen/wmove.h>
+#include	<fallen/balloon.h>
+#include	<fallen/wand.h>
+#include	<fallen/snipe.h>
+#include	<fallen/barrel.h>
+#include	<fallen/road.h>
+#include	<fallen/fc.h>
+#include	<fallen/memory.h>
+#include	<fallen/ware.h>
+#include	<ddlibrary/mfx.h>
+#include	<fallen/cnet.h>
+#include	<fallen/widget.h>
+#include	<fallen/save.h>
+#include	<fallen/dike.h>
+#include	<fallen/music.h>
+#include	<fallen/night.h>
+#include	<fallen/grenade.h>
+#include	<fallen/demo.h>
 
 #ifndef		PSX
-#include	<DDLib.h>
-#include	"vertexbuffer.h"
-#include	"polypoint.h"
-#include	"renderstate.h"
-#include	"polypage.h"
-#include	"font2d.h"
+#include	<ddlibrary/dd_lib.h>
+#include	<ddengine/vertex_buffer.h>
+#include	<ddengine/poly_point.h>
+#include	<ddengine/render_state.h>
+#include	<ddengine/poly_page.h>
+#include	<ddengine/font_2d.h>
 #ifndef TARGET_DC
-#include	"FFManager.h"
+#include	<ddlibrary/ff_manager.h>
 #endif
-#include	"c:\fallen\ddlibrary\headers\ddlib.h"
-#include	"c:\fallen\ddengine\headers\texture.h"
+#include	<ddlibrary/dd_lib.h>
+#include	<ddengine/texture.h>
 #else
 #include	"LIBETC.h"
 
@@ -482,7 +482,7 @@ extern int AENG_detail_crinkles;
 
 #if !defined(PSX) && !defined(TARGET_DC)
 
-#include "tga.h"
+#include <ddlibrary/tga.h>
 
 TGA_Pixel tga[480 ][640 ];
 

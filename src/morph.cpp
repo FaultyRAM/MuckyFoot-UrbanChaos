@@ -2,9 +2,9 @@
 // Arrays of points for morphing between.
 //
 
-#include "game.h"
-#include <MFStdLib.h>
-#include "morph.h"
+#include <fallen/game.h>
+#include <mfstdlib/mfstdlib.h>
+#include <fallen/morph.h>
 
 //
 // The filenames of the sex files describing each morph.

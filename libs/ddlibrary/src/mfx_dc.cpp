@@ -1,8 +1,8 @@
-#include "game.h"
-#include "dclowlevel.h"
-#include "sound_id.h"
-#include "matrix.h"
-#include "mfx.h"
+#include <fallen/game.h>
+#include <ddlibrary/dc_low_level.h>
+#include <fallen/sound_id.h>
+#include <ddengine/matrix.h>
+#include <ddlibrary/mfx.h>
 
 
 

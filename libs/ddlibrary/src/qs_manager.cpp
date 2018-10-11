@@ -4,8 +4,8 @@
 
 #ifndef TARGET_DC
 
-#include	"DDLib.h"
-#include	"C:\fallen\DDEngine\Headers\Matrix.h"
+#include	<ddlibrary/dd_lib.h>
+#include	<ddengine/matrix.h>
 
 //---------------------------------------------------------------
 //

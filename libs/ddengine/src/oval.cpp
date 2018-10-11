@@ -2,11 +2,11 @@
 // Simple ovals underneath people, barrels etc...
 //
 
-#include "game.h"
-#include "ddlib.h"
-#include "mav.h"
-#include "poly.h"
-#include "oval.h"
+#include <fallen/game.h>
+#include <ddlibrary/dd_lib.h>
+#include <fallen/mav.h>
+#include <ddengine/poly.h>
+#include <ddengine/oval.h>
 
 #include <math.h>
 

@@ -1,56 +1,56 @@
 //
 // Ugh... the whole game is based on waypoints.
 //
-#include	"demo.h"
-#include "game.h"
-#include "cam.h"
-#include "eway.h"
-#include "bang.h"
-#include "ob.h"
-#include "fmatrix.h"
-#include "trip.h"
-#include "dirt.h"
-#include "thing.h"
-#include "pow.h"
-#include "c:\fallen\headers\music.h"
+#include	<fallen/demo.h>
+#include <fallen/game.h>
+#include <fallen/cam.h>
+#include <fallen/eway.h>
+#include <fallen/bang.h>
+#include <fallen/ob.h>
+#include <fallen/fmatrix.h>
+#include <fallen/trip.h>
+#include <fallen/dirt.h>
+#include <fallen/thing.h>
+#include <fallen/pow.h>
+#include <fallen/music.h>
 #ifndef	PSX
-#include "font2d.h"
-#include "C:\fallen\DDEngine\Headers\console.h"
-#include "C:\fallen\DDEngine\Headers\map.h"
+#include <ddengine/font_2d.h>
+#include <ddengine/console.h>
+#include <ddengine/map.h>
 #endif
-#include "chopper.h"
-#include "animal.h"
+#include <fallen/chopper.h>
+#include <fallen/animal.h>
 #ifndef PSX
-#include "drive.h"
+#include <ddlibrary/drive.h>
 #endif
-#include "pcom.h"
-#include "supermap.h"
-#include "sound.h"
-#include "statedef.h"
-#include "wmove.h"
+#include <fallen/pcom.h>
+#include <fallen/super_map.h>
+#include <fallen/sound.h>
+#include <fallen/state_def.h>
+#include <fallen/wmove.h>
 #ifdef		PSX 
 #include "c:\fallen\psxeng\headers\psxeng.h"
 #include "c:\fallen\psxeng\headers\panel.h"
 #else
-#include "aeng.h"
-#include "panel.h"
+#include <ddengine/aeng.h>
+#include <ddengine/panel.h>
 #endif
-#include "memory.h"
-#include "dirt.h"
-#include "cnet.h"
-#include "mfx.h"
-#include "fc.h"
-#include "ware.h"
-#include "statedef.h"
-#include "door.h"
-#include "interfac.h"
-#include "psystem.h"
-#include "poly.h"
-#include "playcuts.h"
-#include "xlat_str.h"
-#include "mist.h"
-#include "gamemenu.h"
-#include	"c:\fallen\headers\env.h"
+#include <fallen/memory.h>
+#include <fallen/dirt.h>
+#include <fallen/cnet.h>
+#include <ddlibrary/mfx.h>
+#include <fallen/fc.h>
+#include <fallen/ware.h>
+#include <fallen/state_def.h>
+#include <fallen/door.h>
+#include <fallen/interface.h>
+#include <fallen/psystem.h>
+#include <ddengine/poly.h>
+#include <fallen/play_cutscene.h>
+#include <fallen/xlat_str.h>
+#include <fallen/mist.h>
+#include <fallen/game_menu.h>
+#include	<fallen/env.h>
 
 
 #ifdef TARGET_DC

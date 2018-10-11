@@ -2,17 +2,17 @@
 // Converts facets to draw indexed primitive calls...
 //
 
-#include "game.h"
-#include "ddlib.h"
-#include "poly.h"
-#include "polypoint.h"
-#include "polypage.h"
-#include "night.h"
-#include "supermap.h"
-#include "memory.h"
-#include "interfac.h"
-#include "supercrinkle.h"
-#include "matrix.h"
+#include <fallen/game.h>
+#include <ddlibrary/dd_lib.h>
+#include <ddengine/poly.h>
+#include <ddengine/poly_point.h>
+#include <ddengine/poly_page.h>
+#include <fallen/night.h>
+#include <fallen/super_map.h>
+#include <fallen/memory.h>
+#include <fallen/interface.h>
+#include <ddengine/super_crinkle.h>
+#include <ddengine/matrix.h>
 
 
 

@@ -4,8 +4,8 @@
 #ifndef	EDITOR_LIB_H
 #define	EDITOR_LIB_H
 
-#include	<MFStdLib.h>
-#include	"c:\fallen\ddlibrary\headers\DDLib.h"
+#include	<mfstdlib/mfstdlib.h>
+#include	<ddlibrary/dd_lib.h>
 
 void	Time(struct MFTime *the_time);
 

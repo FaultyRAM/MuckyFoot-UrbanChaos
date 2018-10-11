@@ -6,12 +6,12 @@
 //  Sound Environment -- basically, creating 3d polys for the 3d sound
 //
 
-#include "MFStdLib.h"
-#include "game.h"
-#include "memory.h"
-#include "soundenv.h"
-#include "pap.h"
-#include "sound.h"
+#include <mfstdlib/mfstdlib.h>
+#include <fallen/game.h>
+#include <fallen/memory.h>
+#include <fallen/soundenv.h>
+#include <fallen/pap.h>
+#include <fallen/sound.h>
 
 typedef void (*SOUNDENV_CB_fn)(SLONG,SLONG,SLONG,SLONG);
 

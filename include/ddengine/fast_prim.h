@@ -5,7 +5,7 @@
 #ifndef _FASTPRIM_
 #define _FASTPRIM_
 
-#include "night.h"
+#include <fallen/night.h>
 
 
 //

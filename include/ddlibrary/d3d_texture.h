@@ -42,8 +42,8 @@ void *FastLoadFileSomewhere ( MFFileHandle handle, DWORD dwSize );
 
 
 
-#include	"tga.h"
-#include	"FileClump.h"
+#include	<ddlibrary/tga.h>
+#include	<ddlibrary/file_clump.h>
 
 //---------------------------------------------------------------
 

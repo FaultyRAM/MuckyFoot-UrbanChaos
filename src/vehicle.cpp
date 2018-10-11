@@ -16,49 +16,49 @@
 #include <math.h>
 #endif
 
-#include "game.h"
+#include <fallen/game.h>
 #ifndef	PSX
-#include "c:\fallen\ddengine\headers\matrix.h"
-#include "c:\fallen\ddengine\headers\poly.h"
-#include "c:\fallen\ddengine\headers\oval.h"
-#include "c:\fallen\ddlibrary\headers\ddlib.h"
+#include <ddengine/matrix.h>
+#include <ddengine/poly.h>
+#include <ddengine/oval.h>
+#include <ddlibrary/dd_lib.h>
 #else
 #include "c:\fallen\psxeng\headers\poly.h"
 #endif
-#include "pap.h"
-#include "fmatrix.h"
-#include "statedef.h"
-#include "pcom.h"
+#include <fallen/pap.h>
+#include <fallen/fmatrix.h>
+#include <fallen/state_def.h>
+#include <fallen/pcom.h>
 
 #ifndef	PSX
-#include "c:\fallen\ddengine\headers\aeng.h"
-#include "c:\fallen\ddengine\headers\mesh.h"
+#include <ddengine/aeng.h>
+#include <ddengine/mesh.h>
 #else
 #include "c:\fallen\psxeng\headers\mesh.h"
 #endif
 
-#include "pow.h"
+#include <fallen/pow.h>
 
-#include "interfac.h"
-#include "dirt.h"
-#include "mist.h"
-#include "c:\fallen\editor\headers\prim.h"
-#include "animate.h"
-#include "sound.h"
-#include "barrel.h"
-#include "interact.h"
-#include "ob.h"
-#include "night.h"
-#include "c:\fallen\ddengine\headers\drawxtra.h"
-#include "psystem.h"
+#include <fallen/interface.h>
+#include <fallen/dirt.h>
+#include <fallen/mist.h>
+#include <editor/prim.h>
+#include <fallen/animate.h>
+#include <fallen/sound.h>
+#include <fallen/barrel.h>
+#include <fallen/interact.h>
+#include <fallen/ob.h>
+#include <fallen/night.h>
+#include <ddengine/draw_extra.h>
+#include <fallen/psystem.h>
 
-#include "mfx.h"
+#include <ddlibrary/mfx.h>
 
-#include "memory.h"
-#include "road.h"
+#include <fallen/memory.h>
+#include <fallen/road.h>
 
 #ifndef PSX
-#include "font2d.h"
+#include <ddengine/font_2d.h>
 #endif
 
 

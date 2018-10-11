@@ -4,10 +4,10 @@
 #ifndef	_MAPEDTAB_HPP_
 #define	_MAPEDTAB_HPP_
 
-#include	"ModeTab.hpp"
-#include	"Stealth.h"
-#include	"EditMod.hpp"
-#include	"undo.hpp"
+#include	<editor/mode_tab.hpp>
+#include	<editor/stealth.h>
+#include	<editor/edit_mod.hpp>
+#include	<editor/undo.hpp>
 
 #define	FLOOR_CUT_BRUSH			1
 #define	FLOOR_PASTE_BRUSH		2

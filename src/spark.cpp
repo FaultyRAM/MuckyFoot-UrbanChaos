@@ -1,11 +1,11 @@
-#include <MFStdLib.h>
-#include "game.h"
-#include "spark.h"
-#include "glitter.h"
-#include "sound.h"
-#include "pap.h"
-#include "mfx.h"
-#include "memory.h"
+#include <mfstdlib/mfstdlib.h>
+#include <fallen/game.h>
+#include <fallen/spark.h>
+#include <fallen/glitter.h>
+#include <fallen/sound.h>
+#include <fallen/pap.h>
+#include <ddlibrary/mfx.h>
+#include <fallen/memory.h>
 
 //
 // The points at the start and end of each spark.

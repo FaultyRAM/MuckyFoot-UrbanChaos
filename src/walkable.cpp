@@ -1,8 +1,8 @@
-#include "game.h"
-#include "pap.h"
-#include "walkable.h"
-#include	"memory.h"
-#include	"mav.h"
+#include <fallen/game.h>
+#include <fallen/pap.h>
+#include <fallen/walkable.h>
+#include	<fallen/memory.h>
+#include	<fallen/mav.h>
 
 extern	void	highlight_rface(SLONG rface);
 //

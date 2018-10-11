@@ -5,10 +5,10 @@
 #ifndef TARGET_DC
 
 
-#include "game.h"
-#include "ns.h"
-#include "heap.h"
-#include "pap.h"
+#include <fallen/game.h>
+#include <fallen/ns.h>
+#include <fallen/heap.h>
+#include <fallen/pap.h>
 
 
 //

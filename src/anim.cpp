@@ -79,14 +79,14 @@ SAVE INGAME
 
 //#include	"Editor.hpp"
 
-#include	"stdio.h"
-#include	"game.h"
+#include	<stdio.h>
+#include	<fallen/game.h>
 //#include	"engine.h"
-#include	"animate.h"
-#include	"cop.h"
-#include	"io.h"
+#include	<fallen/animate.h>
+#include	<fallen/cop.h>
+#include	<fallen/io.h>
 //#include	"prim_draw.h"
-#include	"memory.h"
+#include	<fallen/memory.h>
 
 //poostruct GameKeyFrameElement	gamekeyframeelements[MAX_NUMBER_OF_ELEMENTS];
 #ifdef EDITOR

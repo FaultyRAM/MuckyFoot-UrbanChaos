@@ -2,24 +2,21 @@
 // Drawing polygons with D3D
 //
 
-#include <MFStdLib.h>
-#include <DDLib.h>
+#include <mfstdlib/mfstdlib.h>
+#include <ddlibrary/dd_lib.h>
 #include <math.h>
-#include	"Game.h"		//	Guy	-	4 DEMO
-#include "matrix.h"
-#include "poly.h"
-#include "texture.h"
-#include "message.h"
-#include "night.h"
-#ifndef TARGET_DC
-#include "clip.h"
-#endif
-#include "vertexbuffer.h"
-#include "polypoint.h"
-#include "renderstate.h"
-#include "polypage.h"
-#include "env.h"
-#include "sw.h"
+#include	<fallen/game.h>		//	Guy	-	4 DEMO
+#include <ddengine/matrix.h>
+#include <ddengine/poly.h>
+#include <ddengine/texture.h>
+#include <ddengine/message.h>
+#include <fallen/night.h>
+#include <ddengine/vertex_buffer.h>
+#include <ddengine/poly_point.h>
+#include <ddengine/render_state.h>
+#include <ddengine/poly_page.h>
+#include <fallen/env.h>
+#include <ddengine/sw.h>
 
 extern RenderState	DefRenderState;
 extern PolyPage		POLY_Page[POLY_NUM_PAGES];

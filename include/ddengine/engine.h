@@ -4,12 +4,12 @@
 #ifndef	ENGINE_H
 #define	ENGINE_H
 
-#include	"Game.h"
-#include	"DDLib.h"
+#include	<fallen/game.h>
+#include	<ddlibrary/dd_lib.h>
 
-#include	"Gamut.h"
-#include	"Bucket.h"
-#include	"Message.h"
+#include	<ddengine/gamut.h>
+#include	<ddengine/bucket.h>
+#include	<ddengine/message.h>
 #include	<math.h>
 
 void		DebugText(CBYTE *error, ...);

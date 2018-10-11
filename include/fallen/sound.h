@@ -4,8 +4,8 @@
 #ifndef	SOUND_H
 #define	SOUND_H
 
-#include "Structs.h"
-#include "MFX.h"
+#include <fallen/structs.h>
+#include <ddlibrary/mfx.h>
 
 #define USE_A3D
 

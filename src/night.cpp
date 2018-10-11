@@ -2,18 +2,18 @@
 // Cached lighting.
 //
 
-#include "game.h"
-#include "heap.h"
-#include "night.h"
-#include "ob.h"
-#include "pap.h"
-#include "fmatrix.h"
-#include "heap.h"
-#include "supermap.h"
-#include "c:\fallen\ledit\headers\ed.h"
-#include "memory.h"
-#include "ware.h"
-#include "mav.h"
+#include <fallen/game.h>
+#include <fallen/heap.h>
+#include <fallen/night.h>
+#include <fallen/ob.h>
+#include <fallen/pap.h>
+#include <fallen/fmatrix.h>
+#include <fallen/heap.h>
+#include <fallen/super_map.h>
+#include <ledit/ed.h>
+#include <fallen/memory.h>
+#include <fallen/ware.h>
+#include <fallen/mav.h>
 
 									   
 

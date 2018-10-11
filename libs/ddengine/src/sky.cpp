@@ -2,14 +2,14 @@
 // Sky...
 //
 
-#include <MFStdLib.h>
-#include <DDLib.h>
-#include "game.h"
-#include "matrix.h"
-#include "poly.h"
-#include "aeng.h"
+#include <mfstdlib/mfstdlib.h>
+#include <ddlibrary/dd_lib.h>
+#include <fallen/game.h>
+#include <ddengine/matrix.h>
+#include <ddengine/poly.h>
+#include <ddengine/aeng.h>
 #include <math.h>
-#include "cam.h"
+#include <fallen/cam.h>
 
 
 

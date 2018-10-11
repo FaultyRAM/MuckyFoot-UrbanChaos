@@ -6,14 +6,14 @@
  *
  */
 
-#include "game.h"
-#include "console.h"
-#include "poly.h"
-#include "C:\fallen\DDLibrary\headers\D3DTexture.h"
-#include "C:\fallen\DDLibrary\headers\GDisplay.h"
+#include <fallen/game.h>
+#include <ddengine/console.h>
+#include <ddengine/poly.h>
+#include <ddlibrary/d3d_texture.h>
+#include <ddlibrary/g_display.h>
 //#include "font3d.h"
-#include "font2d.h"
-#include "panel.h"
+#include <ddengine/font_2d.h>
+#include <ddengine/panel.h>
 #include <winsock.h>
 
 #ifdef TARGET_DC

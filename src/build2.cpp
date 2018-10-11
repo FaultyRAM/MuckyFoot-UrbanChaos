@@ -1,8 +1,8 @@
-#include	"game.h"
-#include	"supermap.h"
-#include	"pap.h"
-#include	"ob.h"
-#include	"memory.h"
+#include	<fallen/game.h>
+#include	<fallen/super_map.h>
+#include	<fallen/pap.h>
+#include	<fallen/ob.h>
+#include	<fallen/memory.h>
 
 #ifdef _DEBUG
 #define	FACET_REMOVAL_TEST		// if defined, still put removed facets into the map

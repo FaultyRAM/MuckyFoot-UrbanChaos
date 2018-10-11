@@ -7,9 +7,9 @@
 #ifndef _TRACKS_H_
 #define _TRACKS_H_
 
-#include "MFStdLib.h"
-#include "Structs.h"
-#include "game.h"
+#include <mfstdlib/mfstdlib.h>
+#include <fallen/structs.h>
+#include <fallen/game.h>
 
 // this is how many track slots are available on the given system
 // using BUILD_PSX means that it'll be 50 both on the PSX, *AND* when Mike builds PSX

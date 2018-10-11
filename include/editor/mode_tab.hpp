@@ -4,9 +4,9 @@
 #ifndef	_MODETAB_HPP_
 #define	_MODETAB_HPP_
 
-#include	"Controls.hpp"
-#include	"CtrlSet.hpp"
-#include	"Primativ.hpp"
+#include	<editor/controls.hpp>
+#include	<editor/ctrl_set.hpp>
+#include	<editor/primative.hpp>
 
 #define	TAB_ACTIVE		(1<<0)
 #define	TAB_CLEANUP		(1<<1)

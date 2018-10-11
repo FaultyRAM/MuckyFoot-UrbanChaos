@@ -1,6 +1,6 @@
-#include "game.h"
-#include <MFStdLib.h>
-#include "glitter.h"
+#include <fallen/game.h>
+#include <mfstdlib/mfstdlib.h>
+#include <fallen/glitter.h>
 
 #ifndef	PSX
 

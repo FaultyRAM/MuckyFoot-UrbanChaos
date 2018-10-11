@@ -2,12 +2,12 @@
 // A cache designed for storing light info.
 //
 
-#include "game.h"
-#include <MFStdLib.h>
+#include <fallen/game.h>
+#include <mfstdlib/mfstdlib.h>
 
-#include "cache.h"
-#include "heap.h"
-#include "c:/fallen/ddengine/headers/message.h"
+#include <fallen/cache.h>
+#include <fallen/heap.h>
+#include <ddengine/message.h>
 
 
 

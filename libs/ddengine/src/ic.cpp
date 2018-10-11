@@ -2,9 +2,9 @@
 // Image compression.
 //
 
-#include <MFStdLib.h>
-#include "ic.h"
-#include "tga.h"
+#include <mfstdlib/mfstdlib.h>
+#include <ddengine/ic.h>
+#include <ddlibrary/tga.h>
 
 
 //

@@ -1,8 +1,8 @@
 // D3DTexture.cpp
 // Guy Simmons, 29th November 1997.
 
-#include	"DDLib.h"
-#include	"tga.h"
+#include	<ddlibrary/dd_lib.h>
+#include	<ddlibrary/tga.h>
 
 #ifdef TARGET_DC
 #include	"target.h"

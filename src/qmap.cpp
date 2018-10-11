@@ -2,10 +2,10 @@
 // A whole new world...
 //
 
-#include "game.h"
-#include <MFStdLib.h>
-#include "qmap.h"
-#include "c:\fallen\ddengine\headers\qeng.h"
+#include <fallen/game.h>
+#include <mfstdlib/mfstdlib.h>
+#include <fallen/qmap.h>
+#include <ddengine/qeng.h>
 
 //
 // The actual data declared in the header file...

@@ -5,30 +5,30 @@
 // edge on the focus point.
 //
 
-#include "game.h"
-#include "dirt.h"
-#include "water.h"
-#include "sound.h"
-#include "morph.h"
-#include "ns.h"
-#include "pap.h"
-#include "ob.h"
-#include "drip.h"
-#include "pcom.h"
-#include "animate.h"
-#include "fmatrix.h"
-#include "c:\fallen\headers\night.h"
-#include "pyro.h"
-#include "poly.h"
-#include "psystem.h"
-#include "memory.h"
-#include "mfx.h"
-#include "pow.h"
-#include "mav.h"
+#include <fallen/game.h>
+#include <fallen/dirt.h>
+#include <fallen/water.h>
+#include <fallen/sound.h>
+#include <fallen/morph.h>
+#include <fallen/ns.h>
+#include <fallen/pap.h>
+#include <fallen/ob.h>
+#include <fallen/drip.h>
+#include <fallen/pcom.h>
+#include <fallen/animate.h>
+#include <fallen/fmatrix.h>
+#include <fallen/night.h>
+#include <fallen/pyro.h>
+#include <ddengine/poly.h>
+#include <fallen/psystem.h>
+#include <fallen/memory.h>
+#include <ddlibrary/mfx.h>
+#include <fallen/pow.h>
+#include <fallen/mav.h>
 
 #ifndef PSX
-#include    "C:\fallen\DDLibrary\headers\D3DTexture.h"
-#include    "C:\fallen\DDLibrary\headers\GDisplay.h"
+#include    <ddlibrary/d3d_texture.h>
+#include    <ddlibrary/g_display.h>
 #endif
 
 #define TICK_SHIFT_LOWRES	(TICK_SHIFT-2)

@@ -5,10 +5,10 @@
  *
  */
 
-#include "MenuFont.h"
-#include "tga.h"
-#include "poly.h"
-#include "c:\fallen\headers\noserver.h"
+#include <ddengine/menu_font.h>
+#include <ddlibrary/tga.h>
+#include <ddengine/poly.h>
+#include <fallen/no_server.h>
 
 #ifdef TARGET_DC
 #include "target.h"

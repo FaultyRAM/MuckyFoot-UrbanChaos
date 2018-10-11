@@ -1,13 +1,13 @@
 // Player.cpp
 // Guy Simmons, 5th December 1997.
 
-#include	"Game.h"
-#include	"Darci.h"
-#include	"Roper.h"
-#include	"statedef.h"
-#include	"furn.h"
-#include	"interfac.h"
-#include	"cnet.h"
+#include	<fallen/game.h>
+#include	<fallen/darci.h>
+#include	<fallen/roper.h>
+#include	<fallen/state_def.h>
+#include	<fallen/furn.h>
+#include	<fallen/interface.h>
+#include	<fallen/cnet.h>
 
 
 GenusFunctions	player_functions[]	=	

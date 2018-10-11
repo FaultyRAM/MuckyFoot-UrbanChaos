@@ -1,8 +1,8 @@
-#include <MFStdLib.h>
-#include <ddlib.h>
-#include "poly.h"
-#include "qeng.h"
-#include "vertexbuffer.h"
+#include <mfstdlib/mfstdlib.h>
+#include <ddlibrary/dd_lib.h>
+#include <ddengine/poly.h>
+#include <ddengine/qeng.h>
+#include <ddengine/vertex_buffer.h>
 
 //
 // Once at the start of the whole program.

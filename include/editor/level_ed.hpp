@@ -4,17 +4,17 @@
 #ifndef	_LEVELED_HPP_
 #define	_LEVELED_HPP_
 
-#include	"Edit.h"
-#include	"EditMod.hpp"
-#include	"PaintTab.hpp"
-#include	"PrPiTab.hpp"
-#include	"LightTab.hpp"
-#include	"ColTab.hpp"
-#include	"MapTab.hpp"
-#include	"MapEdTab.hpp"
-#include	"BuildTab.hpp"
-#include	"HmTab.hpp"
-#include	"SewerTab.hpp"
+#include	<editor/edit.h>
+#include	<editor/edit_mod.hpp>
+#include	<editor/paint_tab.hpp>
+#include	<editor/pr_pi_tab.hpp>
+#include	<editor/light_tab.hpp>
+#include	<editor/col_tab.hpp>
+#include	<editor/map_tab.hpp>
+#include	<editor/map_ed_tab.hpp>
+#include	<editor/build_tab.hpp>
+#include	<editor/hm_tab.hpp>
+#include	<editor/sewer_tab.hpp>
 
 #define	TAB_NONE			0
 #define	TAB_PAINT			1

@@ -2,15 +2,15 @@
 // Drawing rotating prims.
 //
 
-#include "game.h"
-#include "aeng.h"
-#include "matrix.h"
-#include "mesh.h"
-#include "c:\fallen\headers\night.h"
-#include "c:\fallen\headers\light.h"
-#include "poly.h"
-#include "c:\fallen\headers\animtmap.h"
-#include "c:\fallen\headers\morph.h"
+#include <fallen/game.h>
+#include <ddengine/aeng.h>
+#include <ddengine/matrix.h>
+#include <ddengine/mesh.h>
+#include <fallen/night.h>
+#include <fallen/light.h>
+#include <ddengine/poly.h>
+#include <fallen/animtmap.h>
+#include <fallen/morph.h>
 #include <math.h>
 
 #define	POLY_FLAG_GOURAD		(1<<0)

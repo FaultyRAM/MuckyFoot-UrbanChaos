@@ -2,13 +2,13 @@
 // Mist.
 //
 
-#include "game.h"
-#include <MFStdLib.h>
+#include <fallen/game.h>
+#include <mfstdlib/mfstdlib.h>
 #ifndef	PSX
 #include <math.h>
 #endif
-#include "mist.h"
-#include "pap.h"
+#include <fallen/mist.h>
+#include <fallen/pap.h>
 
 
 //

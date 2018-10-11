@@ -1,9 +1,9 @@
-#include <MFStdLib.h>
-#include <DDLib.h>
-#include "game.h"
-#include "ray.h"
-#include "poly.h"
-#include "inline.h"
+#include <mfstdlib/mfstdlib.h>
+#include <ddlibrary/dd_lib.h>
+#include <fallen/game.h>
+#include <ddengine/ray.h>
+#include <ddengine/poly.h>
+#include <fallen/inline.h>
 #include <math.h>
 
 #if 0	// Intel C compiler barfs

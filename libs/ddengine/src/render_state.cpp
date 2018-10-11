@@ -2,13 +2,13 @@
 //
 // RenderState class
 
-#include <MFStdLib.h>
-#include <DDLib.h>
+#include <mfstdlib/mfstdlib.h>
+#include <ddlibrary/dd_lib.h>
 #include <math.h>
-#include "poly.h"
-#include "env.h"
+#include <ddengine/poly.h>
+#include <fallen/env.h>
 
-#include "renderstate.h"
+#include <ddengine/render_state.h>
 
 
 

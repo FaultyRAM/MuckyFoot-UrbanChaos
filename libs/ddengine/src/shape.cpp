@@ -1,15 +1,15 @@
-#include <MFStdLib.h>
-#include <DDLib.h>
+#include <mfstdlib/mfstdlib.h>
+#include <ddlibrary/dd_lib.h>
 #include <math.h>
-#include "aeng.h"
-#include "c:\fallen\headers\balloon.h"
-#include "poly.h"
-#include "shape.h"
-#include "night.h"
-#include "matrix.h"
-#include "c:\fallen\editor\headers\prim.h"
-#include "mesh.h"
-#include "game.h"
+#include <ddengine/aeng.h>
+#include <fallen/balloon.h>
+#include <ddengine/poly.h>
+#include <ddengine/shape.h>
+#include <fallen/night.h>
+#include <ddengine/matrix.h>
+#include <editor/prim.h>
+#include <ddengine/mesh.h>
+#include <fallen/game.h>
 
 
 

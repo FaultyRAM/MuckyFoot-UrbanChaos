@@ -4,7 +4,7 @@
 #ifndef	DISPLAY_H
 #define	DISPLAY_H
 
-#include	"DDManager.h"
+#include	<ddlibrary/dd_manager.h>
 
 
 #ifdef TARGET_DC

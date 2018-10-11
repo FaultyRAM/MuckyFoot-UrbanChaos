@@ -1,12 +1,12 @@
 // Thug.cpp
 // Guy Simmons, 8th February 1998.
 
-#include	"Game.h"
+#include	<fallen/game.h>
 //#include	"Command.h"
-#include	"Thug.h"
-#include	"statedef.h"
-#include	"animate.h"
-#include	"pap.h"
+#include	<fallen/thug.h>
+#include	<fallen/state_def.h>
+#include	<fallen/animate.h>
+#include	<fallen/pap.h>
 
 SLONG	calc_height_at(SLONG x,SLONG z);
 SLONG	person_normal_animate(Thing *p_person);

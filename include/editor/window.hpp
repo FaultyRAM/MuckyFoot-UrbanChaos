@@ -4,9 +4,9 @@
 #ifndef	_WINDOW_HPP_
 #define	_WINDOW_HPP_
 
-#include	"ModeTab.hpp"
-#include	"Primativ.hpp"
-#include	"Icon.hpp"
+#include	<editor/mode_tab.hpp>
+#include	<editor/primative.hpp>
+#include	<editor/icon.hpp>
 
 #define	ACTIVE			(1<<0)
 

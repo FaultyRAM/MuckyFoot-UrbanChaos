@@ -2,14 +2,14 @@
 // The mnain outro loop.
 //
 
-#include "always.h"
-#include "back.h"
-#include "cam.h"
-#include "credits.h"
-#include "key.h"
-#include "font.h"
-#include "os.h"
-#include "wire.h"
+#include <outro/always.h>
+#include <outro/back.h>
+#include <outro/cam.h>
+#include <outro/credits.h>
+#include <outro/key.h>
+#include <outro/font.h>
+#include <outro/os.h>
+#include <outro/wire.h>
 
 
 void MAIN_main()

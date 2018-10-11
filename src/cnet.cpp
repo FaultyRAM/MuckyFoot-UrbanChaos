@@ -1,7 +1,7 @@
-#include <MFStdLib.h>
-#include "game.h"
+#include <mfstdlib/mfstdlib.h>
+#include <fallen/game.h>
 #ifndef	PSX
-#include "c:\fallen\ddlibrary\headers\net.h"
+#include <ddlibrary/net.h>
 #else
 #include "c:\fallen\psxlib\headers\net.h"
 #endif

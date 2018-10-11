@@ -1,9 +1,9 @@
 // Level.cpp
 // Guy Simmons, 29th January 1998.
 
-#include	"Game.h"
-#include	"Command.h"
-#include	"statedef.h"
+#include	<fallen/game.h>
+#include	<fallen/command.h>
+#include	<fallen/state_def.h>
 
 #ifdef	PSX
 //

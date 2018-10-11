@@ -2,33 +2,33 @@
 // Person commands and high-level AI
 //
 
-#include "game.h"
-#include "collide.h"
-#include "c:\fallen\headers\pcom.h"
-#include "eway.h"
-#include "mav.h"
-#include "statedef.h"
-#include "combat.h"
-#include "sound.h"
-#include "overlay.h"
-#include "frontend.h"
-#include "interfac.h"
-#include "balloon.h"
-#include "road.h"
-#include "wand.h"
-#include "guns.h"
-#include "animate.h"
-#include "ware.h"
-#include "mfx.h"
-#include "cnet.h"
-#include "fc.h"
-#include "ob.h"
-#include "spark.h"
+#include <fallen/game.h>
+#include <fallen/collide.h>
+#include <fallen/pcom.h>
+#include <fallen/eway.h>
+#include <fallen/mav.h>
+#include <fallen/state_def.h>
+#include <fallen/combat.h>
+#include <fallen/sound.h>
+#include <fallen/overlay.h>
+#include <fallen/frontend.h>
+#include <fallen/interface.h>
+#include <fallen/balloon.h>
+#include <fallen/road.h>
+#include <fallen/wand.h>
+#include <fallen/guns.h>
+#include <fallen/animate.h>
+#include <fallen/ware.h>
+#include <ddlibrary/mfx.h>
+#include <fallen/cnet.h>
+#include <fallen/fc.h>
+#include <fallen/ob.h>
+#include <fallen/spark.h>
 #ifndef PSX
-#include "panel.h"
+#include <ddengine/panel.h>
 #endif
 
-#include "memory.h"
+#include <fallen/memory.h>
 extern UBYTE stealth_debug;
 #ifndef PSX
 extern BOOL allow_debug_keys;

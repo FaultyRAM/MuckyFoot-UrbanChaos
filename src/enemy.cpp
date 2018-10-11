@@ -2,10 +2,10 @@
 // Guy Simmons, 6th December 1997.
 
 
-#include	"Game.h"
-#include	"person.h"
-#include	"animate.h"
-#include	"..\Editor\Headers\Thing.h"
+#include	<fallen/game.h>
+#include	<fallen/person.h>
+#include	<fallen/animate.h>
+#include	<editor/thing.h>
 
 //extern KeyFrame			*darci_array[100],*roper_array[100];
 

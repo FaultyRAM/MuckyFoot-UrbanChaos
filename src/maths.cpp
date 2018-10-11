@@ -2,8 +2,8 @@
 // Maths stuff...
 //
 
-#include "game.h"
-#include "maths.h"
+#include <fallen/game.h>
+#include <fallen/maths.h>
 
 
 //

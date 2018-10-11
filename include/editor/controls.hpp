@@ -4,7 +4,7 @@
 #ifndef	_CONTROLS_HPP_
 #define	_CONTROLS_HPP_
 
-#include	"Primativ.hpp"
+#include	<editor/primative.hpp>
 
 #define	BUTTON				1
 #define	RADIO_BUTTON		2

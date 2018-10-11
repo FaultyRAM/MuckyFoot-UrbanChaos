@@ -9,7 +9,7 @@
 #ifndef _FRONTEND_H_
 #define _FRONTEND_H_
 
-#include "MFStdLib.h"
+#include <mfstdlib/mfstdlib.h>
 
 void	FRONTEND_init ( bool bGoToTitleScreen = FALSE );
 SBYTE	FRONTEND_loop();

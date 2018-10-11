@@ -1,29 +1,29 @@
-#include	"game.h"
+#include	<fallen/game.h>
 
-#include	"aeng.h"
-#include	"mesh.h"
-#include	"math.h"
-#include	"poly.h"
-#include	"c:\fallen\headers\supermap.h"
-#include	"c:\fallen\headers\inside2.h"
-#include	"night.h"
-#include	"c:\fallen\headers\pap.h"
-#include	"math.h"
-#include	"ns.h"
-#include	"c:\fallen\sedit\headers\es.h"
-#include	"memory.h"
-#include "texture.h"
-#include	"polypage.h"
-#include	"ware.h"
-#include	"fc.h"
-#include	"font2d.h"
-#include	"smap.h"
-#include	"superfacet.h"
-#include	"supercrinkle.h"
-#include	"matrix.h"
+#include	<ddengine/aeng.h>
+#include	<ddengine/mesh.h>
+#include	<math.h>
+#include	<ddengine/poly.h>
+#include	<fallen/super_map.h>
+#include	<fallen/inside2.h>
+#include	<fallen/night.h>
+#include	<fallen/pap.h>
+#include	<math.h>
+#include	<fallen/ns.h>
+#include	<sedit/es.h>
+#include	<fallen/memory.h>
+#include <ddengine/texture.h>
+#include	<ddengine/poly_page.h>
+#include	<fallen/ware.h>
+#include	<fallen/fc.h>
+#include	<ddengine/font_2d.h>
+#include	<ddengine/smap.h>
+#include	<ddengine/super_facet.h>
+#include	<ddengine/super_crinkle.h>
+#include	<ddengine/matrix.h>
 
 // temptemptempetc.
-#include "sprite.h"
+#include <ddengine/sprite.h>
 
 
 #ifdef TARGET_DC

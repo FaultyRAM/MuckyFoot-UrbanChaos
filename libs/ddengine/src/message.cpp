@@ -3,9 +3,9 @@
 //
 
 
-#include <MFStdLib.h>
-#include "font.h"
-#include "message.h"
+#include <mfstdlib/mfstdlib.h>
+#include <ddengine/font.h>
+#include <ddengine/message.h>
 
 
 #ifdef TARGET_DC

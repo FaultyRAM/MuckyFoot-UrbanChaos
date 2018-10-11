@@ -2,9 +2,9 @@
 // A memory heap with defragmentation.
 //
 
-#include "game.h"
-#include <MFStdLib.h>
-#include "heap.h"
+#include <fallen/game.h>
+#include <mfstdlib/mfstdlib.h>
+#include <fallen/heap.h>
 
 //
 // The scratch pad.

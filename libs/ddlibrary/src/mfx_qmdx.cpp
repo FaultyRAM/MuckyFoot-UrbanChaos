@@ -1,4 +1,4 @@
-#include "snd_type.h"
+#include <ddlibrary/snd_type.h>
 #if defined(Q_SOUND)
 //
 // MFx.cpp
@@ -8,9 +8,9 @@
 // QMDX Version
 //
 
-#include "MFx.h"
-#include "QSManager.h"
-#include "c:\fallen\headers\fc.h"
+#include <ddlibrary/mfx.h>
+#include <ddlibrary/qs_manager.h>
+#include <fallen/fc.h>
 
 
 //#define DISABLE_MFX

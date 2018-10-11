@@ -4,19 +4,19 @@
 
 
 
-#include <MFStdLib.h>
-#include <DDLib.h>
+#include <mfstdlib/mfstdlib.h>
+#include <ddlibrary/dd_lib.h>
 #include <math.h>
-#include "game.h"
-#include "poly.h"
-#include "text.h"
-#include "texture.h"
-#include "mav.h"
-#include "menufont.h"
-#include "matrix.h"
-#include "memory.h"
-#include "fc.h"
-#include "font2d.h"
+#include <fallen/game.h>
+#include <ddengine/poly.h>
+#include <ddengine/text.h>
+#include <ddengine/texture.h>
+#include <fallen/mav.h>
+#include <ddengine/menu_font.h>
+#include <ddengine/matrix.h>
+#include <fallen/memory.h>
+#include <fallen/fc.h>
+#include <ddengine/font_2d.h>
 
 
 #ifdef TARGET_DC

@@ -2,11 +2,11 @@
 // An A-Z of the current city.
 //
 
-#include "game.h"
-#include "az.h"
-#include "pap.h"
-#include "supermap.h"
-#include	"memory.h"
+#include <fallen/game.h>
+#include <fallen/az.h>
+#include <fallen/pap.h>
+#include <fallen/super_map.h>
+#include	<fallen/memory.h>
 
 
 //

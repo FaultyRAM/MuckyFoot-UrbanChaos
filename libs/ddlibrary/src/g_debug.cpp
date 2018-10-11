@@ -1,7 +1,7 @@
 // Debug.cpp
 // Guy Simmons, 15th November 1997.
 
-#include	"DDLib.h"
+#include	<ddlibrary/dd_lib.h>
 
 #ifndef NDEBUG
 

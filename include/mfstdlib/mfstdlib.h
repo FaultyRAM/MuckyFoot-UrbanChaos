@@ -82,11 +82,11 @@ typedef struct
 //---------------------------------------------------------------
 // MF Standard includes.
 
-#include	"StdFile.h"
-#include	"StdKeybd.h"
-#include	"StdMaths.h"
-#include	"StdMem.h"
-#include	"StdMouse.h"
+#include	<mfstdlib/std_file.h>
+#include	<mfstdlib/std_keybd.h>
+#include	<mfstdlib/std_maths.h>
+#include	<mfstdlib/std_mem.h>
+#include	<mfstdlib/std_mouse.h>
 
 //---------------------------------------------------------------
 // Display

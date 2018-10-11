@@ -1,20 +1,20 @@
 // Thing.cpp
 // Guy Simmons, 14th October 1997.
 
-#include	"Game.h"
-#include	"statedef.h"
-#include	"cnet.h"
+#include	<fallen/game.h>
+#include	<fallen/state_def.h>
+#include	<fallen/cnet.h>
 #ifndef	PSX
-#include	"c:\fallen\ddlibrary\headers\net.h"
+#include	<ddlibrary/net.h>
 #endif
-#include	"pap.h"
-#include	"pcom.h"
-#include	"eway.h"
-#include	"interfac.h"
-#include	"mfx.h"
-#include	"gamemenu.h"
+#include	<fallen/pap.h>
+#include	<fallen/pcom.h>
+#include	<fallen/eway.h>
+#include	<fallen/interface.h>
+#include	<ddlibrary/mfx.h>
+#include	<fallen/game_menu.h>
 
-#include "memory.h"
+#include <fallen/memory.h>
 //extern	ULONG	get_hardware_input(UWORD type);
 
 UWORD	*thing_class_head;

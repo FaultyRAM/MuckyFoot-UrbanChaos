@@ -4,7 +4,7 @@
 #ifndef	WINDPROCS_H
 #define	WINDPROCS_H
 
-#include	"DDManager.h"
+#include	<ddlibrary/dd_manager.h>
 
 
 //---------------------------------------------------------------

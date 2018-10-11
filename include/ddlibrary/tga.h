@@ -5,7 +5,7 @@
 #ifndef _TGA_
 #define _TGA_
 
-#include "FileClump.h"
+#include <ddlibrary/file_clump.h>
 
 //
 // The format of a TGA pixel.

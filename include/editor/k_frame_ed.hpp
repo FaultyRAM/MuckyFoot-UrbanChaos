@@ -4,10 +4,10 @@
 #ifndef	_KFRAMEED_HPP_
 #define	_KFRAMEED_HPP_
 
-#include	"EditMod.hpp"
-#include	"Anim.h"
-#include	"Prim.h"
-#include	"LevelEd.hpp"
+#include	<editor/edit_mod.hpp>
+#include	<editor/anim.h>
+#include	<editor/prim.h>
+#include	<editor/level_ed.hpp>
 
 
 #define	GOT_ANIM_COPY				(1<<0)

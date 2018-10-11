@@ -3,8 +3,8 @@
 // Credit to Eddie Edwards for the outline rendering idea.
 //
 
-#include "always.h"
-#include "slap.h"
+#include <outro/always.h>
+#include <outro/slap.h>
 
 
 

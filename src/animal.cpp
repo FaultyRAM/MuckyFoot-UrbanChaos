@@ -5,16 +5,16 @@
 #ifndef TARGET_DC
 
 
-#include "game.h"
-#include "animal.h"
-#include "canid.h"
-#include "statedef.h"
-#include "C:\fallen\DDEngine\Headers\Matrix.h"
-#include "C:\fallen\Editor\Headers\prim.h"
-#include "C:\fallen\DDEngine\Headers\figure.h"
-#include "C:\fallen\DDEngine\Headers\poly.h"
-#include "night.h"
-#include	"memory.h"
+#include <fallen/game.h>
+#include <fallen/animal.h>
+#include <fallen/canid.h>
+#include <fallen/state_def.h>
+#include <ddengine/matrix.h>
+#include <editor/prim.h>
+#include <ddengine/figure.h>
+#include <ddengine/poly.h>
+#include <fallen/night.h>
+#include	<fallen/memory.h>
 
 //
 // Custom types

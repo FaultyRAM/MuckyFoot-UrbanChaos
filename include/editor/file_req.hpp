@@ -4,7 +4,7 @@
 #ifndef	_FILEREQ_HPP_
 #define	_FILEREQ_HPP_
 
-#include	"ModeTab.hpp"
+#include	<editor/mode_tab.hpp>
 
 
 class	FileRequester : public	EdRect 

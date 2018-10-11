@@ -48,7 +48,7 @@
 */
 //---------------------------------------------------------------
 
-#include	<MFStdLib.h>
+#include	<mfstdlib/mfstdlib.h>
 #ifndef		PSX
 #undef      LogText
 #define		LogText
@@ -85,37 +85,37 @@ extern	struct MemTable save_table[];
 #define	SAVE_TABLE_FACE4	16
 #define	SAVE_TABLE_PLATS	45	
 
-#include	"Structs.h"
-#include	"State.h"
+#include	<fallen/structs.h>
+#include	<fallen/state.h>
 //#include	"Level.h"
 
-#include	"drawtype.h"
+#include	<fallen/draw_type.h>
 
-#include	"building.h"
-#include    "bike.h"
-#include	"Furn.h"
-#include	"Vehicle.h"
-#include	"inline.h"
-#include	"Person.h"
-#include	"Animal.h"
-#include	"barrel.h"
-#include	"Chopper.h"
-#include	"Pyro.h"
-#include	"Player.h"
-#include	"Plat.h"
-#include	"Pjectile.h"
-#include	"Special.h"
-#include	"bat.h"
-#include	"Switch.h"
-#include	"tracks.h"
-#include	"Thing.h"
-#include	"Controls.h"
-#include	"Map.h"
-#include	"collide.h"
-#include	"interact.h"
+#include	<fallen/building.h>
+#include    <fallen/bike.h>
+#include	<fallen/furn.h>
+#include	<fallen/vehicle.h>
+#include	<fallen/inline.h>
+#include	<fallen/person.h>
+#include	<fallen/animal.h>
+#include	<fallen/barrel.h>
+#include	<fallen/chopper.h>
+#include	<fallen/pyro.h>
+#include	<fallen/player.h>
+#include	<fallen/plat.h>
+#include	<fallen/pjectile.h>
+#include	<fallen/special.h>
+#include	<fallen/bat.h>
+#include	<fallen/switch.h>
+#include	<fallen/tracks.h>
+#include	<fallen/thing.h>
+#include	<fallen/controls.h>
+#include	<fallen/map.h>
+#include	<fallen/collide.h>
+#include	<fallen/interact.h>
 
 #ifdef VERSION_D3D
-#include	"c:\fallen\ddengine\headers\aeng.h"
+#include	<ddengine/aeng.h>
 #endif
 
 #ifdef	PSX

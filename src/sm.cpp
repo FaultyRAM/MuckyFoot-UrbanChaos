@@ -2,13 +2,13 @@
 // Sphere-matter.
 //
 
-#include "game.h"
-#include <MFStdLib.h>
-#include "pap.h"
-#include "sm.h"
-#include "inline.h"
+#include <fallen/game.h>
+#include <mfstdlib/mfstdlib.h>
+#include <fallen/pap.h>
+#include <fallen/sm.h>
+#include <fallen/inline.h>
 #ifndef PSX
-#include "c:\fallen\ddengine\headers\aeng.h"
+#include <ddengine/aeng.h>
 #else
 #include "c:\fallen\psxeng\headers\psxeng.h"
 #endif

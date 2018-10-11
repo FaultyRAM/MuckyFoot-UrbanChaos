@@ -4,8 +4,8 @@
 #ifndef	_CTRLSET_HPP_
 #define	_CTRLSET_HPP_
 
-#include	"Controls.hpp"
-#include	"Primativ.hpp"
+#include	<editor/controls.hpp>
+#include	<editor/primative.hpp>
 
 #define	CS_ACTIVE		(1<<0)
 #define	CS_CLEANUP		(1<<1)

@@ -2,9 +2,9 @@
 // Explosions!
 //
 
-#include "game.h"
-#include <MFStdLib.h>
-#include "bang.h"
+#include <fallen/game.h>
+#include <mfstdlib/mfstdlib.h>
+#include <fallen/bang.h>
 
 //
 // Parameters for each phwoar type.

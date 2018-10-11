@@ -8,7 +8,7 @@
 #ifndef _FLAMENGINE_
 #define _FLAMENGINE_
 
-#include <MFStdLib.h>
+#include <mfstdlib/mfstdlib.h>
 
 struct FlameXY2 {
 	UBYTE         x,y;

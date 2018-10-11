@@ -2,8 +2,8 @@
 // Fire!
 //
 
-#include "game.h"
-#include "fire.h"
+#include <fallen/game.h>
+#include <fallen/fire.h>
 
 
 //

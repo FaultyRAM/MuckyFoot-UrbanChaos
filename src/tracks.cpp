@@ -4,24 +4,24 @@
 // 22 sept 98
 //
 
-#include "game.h"
-#include "tracks.h"
-#include "structs.h"
+#include <fallen/game.h>
+#include <fallen/tracks.h>
+#include <fallen/structs.h>
 #ifndef PSX
-#include "C:\fallen\DDEngine\Headers\poly.h"
+#include <ddengine/poly.h>
 #else
 #include "c:\fallen\psxeng\headers\poly.h"
 #endif
-#include "person.h"
-#include "puddle.h"
-#include "pap.h"
-#include "interact.h"
-#include "animate.h"
-#include "sound.h"
+#include <fallen/person.h>
+#include <fallen/puddle.h>
+#include <fallen/pap.h>
+#include <fallen/interact.h>
+#include <fallen/animate.h>
+#include <fallen/sound.h>
 
-#include "memory.h"
+#include <fallen/memory.h>
 //...debug...
-#include "dirt.h"
+#include <fallen/dirt.h>
 
 #define TRACK_WATER_COLOUR  0x203D60
 #define TRACK_MUDDY_COLOUR  0x482000

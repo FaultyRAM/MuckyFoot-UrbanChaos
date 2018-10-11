@@ -2,11 +2,11 @@
 // The camera.
 //
 
-#include "always.h"
-#include "cam.h"
-#include "key.h"
-#include "matrix.h"
-#include "os.h"
+#include <outro/always.h>
+#include <outro/cam.h>
+#include <outro/key.h>
+#include <outro/matrix.h>
+#include <outro/os.h>
 
 
 

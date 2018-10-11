@@ -1,8 +1,8 @@
-#include "game.h"
-#include "id.h"
-#include "maths.h"
-#include "thing.h"
-#include "ob.h"
+#include <fallen/game.h>
+#include <fallen/id.h>
+#include <fallen/maths.h>
+#include <fallen/thing.h>
+#include <fallen/ob.h>
 
 #ifndef		PSX
 

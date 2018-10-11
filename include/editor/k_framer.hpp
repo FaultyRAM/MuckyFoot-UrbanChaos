@@ -5,7 +5,7 @@
 #ifndef	_KFRAMER_HPP_
 #define	_KFRAMER_HPP_
 
-#include	"EditMod.hpp"
+#include	<editor/edit_mod.hpp>
 
 
 #define	CTRL_KF_LOAD_BUTTON			1

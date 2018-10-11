@@ -2,13 +2,13 @@
 // Cones clipped by planar polygons.
 //
 
-#include "game.h"
-#include "poly.h"
-#include "cone.h"
-#include "pap.h"
-#include "supermap.h"
+#include <fallen/game.h>
+#include <ddengine/poly.h>
+#include <ddengine/cone.h>
+#include <fallen/pap.h>
+#include <fallen/super_map.h>
 #include <math.h>
-#include "memory.h"
+#include <fallen/memory.h>
 
 
 #ifdef TARGET_DC

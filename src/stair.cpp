@@ -2,9 +2,9 @@
 // Stairs.
 //
 
-#include "game.h"
-#include "id.h"
-#include "stair.h"
+#include <fallen/game.h>
+#include <fallen/id.h>
+#include <fallen/stair.h>
 
 
 

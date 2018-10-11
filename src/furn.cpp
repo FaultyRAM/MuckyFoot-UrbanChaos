@@ -2,19 +2,19 @@
 // Furniture.
 //
 
-#include "game.h"
-#include "fmatrix.h"
-#include "furn.h"
-#include "statedef.h"
-#include "dirt.h"
-#include "mist.h"
-#include "hm.h"
-#include "interfac.h"
+#include <fallen/game.h>
+#include <fallen/fmatrix.h>
+#include <fallen/furn.h>
+#include <fallen/state_def.h>
+#include <fallen/dirt.h>
+#include <fallen/mist.h>
+#include <fallen/hm.h>
+#include <fallen/interface.h>
 //#include "command.h"
-#include "bang.h"
-#include	"Sound.h"
-#include "pap.h"
-#include	"memory.h"
+#include <fallen/bang.h>
+#include	<fallen/sound.h>
+#include <fallen/pap.h>
+#include	<fallen/memory.h>
 
 //
 // The state functions and the state function table.

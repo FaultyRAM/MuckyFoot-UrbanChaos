@@ -7,8 +7,8 @@
 #ifndef _RIBBON_H_
 #define _RIBBON_H_
 
-#include "MFStdLib.h"
-#include "Structs.h"
+#include <mfstdlib/mfstdlib.h>
+#include <fallen/structs.h>
 
 #define MAX_RIBBONS			64
 #define MAX_RIBBON_SIZE		32

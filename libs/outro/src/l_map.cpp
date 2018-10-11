@@ -2,11 +2,11 @@
 // Creates light maps.
 //
 
-#include "always.h"
-#include "lmap.h"
-#include "matrix.h"
-#include "os.h"
-#include "slap.h"
+#include <outro/always.h>
+#include <outro/l_map.h>
+#include <outro/matrix.h>
+#include <outro/os.h>
+#include <outro/slap.h>
 
 
 

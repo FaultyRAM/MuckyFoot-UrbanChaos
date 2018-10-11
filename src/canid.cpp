@@ -9,14 +9,14 @@
 #ifndef TARGET_DC
 
 
-#include "game.h"
-#include "canid.h"
-#include "statedef.h"
-#include "mav.h"
-#include "pap.h"
+#include <fallen/game.h>
+#include <fallen/canid.h>
+#include <fallen/state_def.h>
+#include <fallen/mav.h>
+#include <fallen/pap.h>
 
 // just for debug
-#include	"dirt.h"
+#include	<fallen/dirt.h>
 
 //--------------------------------------------------------------------------
 // Defines

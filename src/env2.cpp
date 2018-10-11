@@ -2,11 +2,11 @@
 //
 // ENV stuff #2
 
-#include "game.h"
-#include <MFStdLib.h>
-#include "env.h"
-#include "Interfac.h"
-#include "menufont.h"
+#include <fallen/game.h>
+#include <mfstdlib/mfstdlib.h>
+#include <fallen/env.h>
+#include <fallen/interface.h>
+#include <ddengine/menu_font.h>
 
 #ifdef TARGET_DC
 #include "platutil.h"

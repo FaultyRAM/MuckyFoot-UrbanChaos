@@ -2,43 +2,43 @@
 // Draw a person.
 // 
 
-#include "game.h"
-#include "aeng.h"
-#include "poly.h"
-#include "figure.h"
-#include "sprite.h"
-#include "c:\fallen\headers\fmatrix.h"
-#include "c:\fallen\headers\mav.h"
-#include "c:\fallen\headers\interact.h"
-#include "night.h"
-#include "shadow.h"
-#include "matrix.h"
-#include "animate.h"
-#include "mesh.h"
-#include "dirt.h"
-#include "texture.h"
+#include <fallen/game.h>
+#include <ddengine/aeng.h>
+#include <ddengine/poly.h>
+#include <ddengine/figure.h>
+#include <ddengine/sprite.h>
+#include <fallen/fmatrix.h>
+#include <fallen/mav.h>
+#include <fallen/interact.h>
+#include <fallen/night.h>
+#include <fallen/shadow.h>
+#include <ddengine/matrix.h>
+#include <fallen/animate.h>
+#include <ddengine/mesh.h>
+#include <fallen/dirt.h>
+#include <ddengine/texture.h>
 
-#include "math.h"
-#include "interfac.h"
+#include <math.h>
+#include <fallen/interface.h>
 
 
 
-#include "Hierarchy.h"  // JCL is gay // MA wears girly shorts // JCL
-#include "Quaternion.h"
-#include "memory.h"
+#include <fallen/hierarchy.h>  // JCL is gay // MA wears girly shorts // JCL
+#include <ddengine/quaternion.h>
+#include <fallen/memory.h>
 
-#include "c:\fallen\headers\person.h"
-#include "c:\fallen\headers\pcom.h"
-#include "c:\fallen\headers\eway.h"
-#include "c:\fallen\headers\dirt.h"
-#include	"ddlib.h"
-#include	"panel.h"
+#include <fallen/person.h>
+#include <fallen/pcom.h>
+#include <fallen/eway.h>
+#include <fallen/dirt.h>
+#include	<ddlibrary/dd_lib.h>
+#include	<ddengine/panel.h>
 
-#include "renderstate.h"
-#include "poly.h"
-#include "polypage.h"
+#include <ddengine/render_state.h>
+#include <ddengine/poly.h>
+#include <ddengine/poly_page.h>
 
-#include "psystem.h"
+#include <fallen/psystem.h>
 
 
 
