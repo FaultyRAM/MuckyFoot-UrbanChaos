@@ -1102,7 +1102,7 @@ void	game(void)
 			}
 		}
 
-		ShowBackImage(FALSE);
+		ShowBackImage();
 		the_display.Flip(NULL, DDFLIP_WAIT);
 	}
 
@@ -1218,7 +1218,7 @@ void	game(void)
 			}
 		}
 
-		ShowBackImage(FALSE);
+		ShowBackImage();
 		the_display.Flip(NULL, DDFLIP_WAIT);
 	}
 

@@ -6845,7 +6845,7 @@ extern BOOL AreAnyDevicesConnected ( void );
 //--- externally accessible ---
 
 
-void	FRONTEND_init ( bool bGoToTitleScreen )
+void	FRONTEND_init()
 {
 
 	static bool bFirstTime = TRUE;

@@ -11,7 +11,7 @@
 
 #include <mfstdlib/mfstdlib.h>
 
-void	FRONTEND_init ( bool bGoToTitleScreen = FALSE );
+void	FRONTEND_init();
 SBYTE	FRONTEND_loop();
 void	FRONTEND_level_won();
 void	FRONTEND_level_lost();

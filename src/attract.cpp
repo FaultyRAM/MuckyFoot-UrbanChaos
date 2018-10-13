@@ -117,7 +117,6 @@ void	game_attract_mode(void)
 	float			y;
 	UBYTE			*image_mem	=	NULL,
 					*image		=	NULL;
-#ifndef PSX
 	SLONG			height,
 					image_size;
 	MFFileHandle	image_file;
@@ -127,10 +126,8 @@ void	game_attract_mode(void)
 	//
 	// make sure lighting is ok
 	//
-#ifndef TARGET_DC
 extern	void NIGHT_init();
 	NIGHT_init();
-#endif
 
 
 
@@ -140,138 +137,14 @@ extern	void NIGHT_init();
 		GAME_STATE &= ~GS_ATTRACT_MODE;
 		GAME_STATE |=  GS_PLAY_GAME;
 	} else go_into_game = FALSE;
-/*
-	image_size	=	640*480*3;
-	image_mem	=	(UBYTE*)MemAlloc(image_size);
-	if(image_mem)
-	{
-		image_file	=	FileOpen("Data\\gamelogo.tga");
-		if(image_file>0)
-		{
-			FileSeek(image_file,SEEK_MODE_BEGINNING,18);
-			image	=	image_mem+(640*479*3);
-			for(height=480;height;height--,image-=(640*3))
-			{
-				FileRead(image_file,image,640*3);
-			}
-			FileClose(image_file);
-		}
-	}
-*/
-//	InitBackImage("e3title.tga");
 
-	// load our sound fx; for the menu sound's benefit
-	// (later, do a cut down version w/ only the menu sounds for speed)
-/*	#ifndef USE_A3D
-		LoadWaveList("Data\\SFX\\1622\\","Data\\SFX\\Samples.txt");
-	#else
-		A3DLoadWaveList("Data\\SFX\\1622\\","Data\\SFX\\Samples.txt");
-	#endif
-*/
 	MFX_load_wave_list();
 
-
-	bool bReinitBecauseOfLanguageChange = FALSE;
-reinit_because_of_language_change:
-
-
-#ifdef TARGET_DC
-	// If the softreset combo was pressed, go straight to the title screen.
-	if ( g_bDreamcastABXYStartComboPressed )
-	{
-		g_bDreamcastABXYStartComboPressed = FALSE;
-		FRONTEND_init ( TRUE );
-	}
-	else
-	{
-		FRONTEND_init ( bReinitBecauseOfLanguageChange );
-	}
-#else
-	FRONTEND_init ( bReinitBecauseOfLanguageChange );
-#endif
-
-
-	bReinitBecauseOfLanguageChange = FALSE;
-
-	//
-	// Create a surface from this image.
-	//
-
-//	the_display.create_background_surface(image_mem);
-
-
-
-
-#if 1
-	LPDIRECT3DDEVICE3 dev = the_display.lp_D3D_Device;
-	HRESULT hres;
-
-
-	D3DVIEWPORT2 vp;
-	vp.dwSize = sizeof ( vp );
-	vp.dwX = the_display.ViewportRect.x1;
-	vp.dwY = the_display.ViewportRect.y1;
-	vp.dwWidth = the_display.ViewportRect.x2 - the_display.ViewportRect.x1;
-	vp.dwHeight = the_display.ViewportRect.y2 - the_display.ViewportRect.y1;
-	vp.dvClipX = (float)vp.dwX;
-	vp.dvClipY = (float)vp.dwY;
-	vp.dvClipWidth = (float)vp.dwWidth;
-	vp.dvClipHeight = (float)vp.dwHeight;
-	vp.dvMinZ = 0.0f;
-	vp.dvMaxZ = 1.0f;
-	hres = the_display.lp_D3D_Viewport->SetViewport2 ( &vp );
-
-
-	dev->SetRenderState(D3DRENDERSTATE_FILLMODE,			D3DFILL_SOLID);
-	dev->SetRenderState(D3DRENDERSTATE_STIPPLEDALPHA,		FALSE);
-	dev->SetRenderState(D3DRENDERSTATE_SHADEMODE,			D3DSHADE_GOURAUD);
-	dev->SetRenderState(D3DRENDERSTATE_TEXTUREPERSPECTIVE,	TRUE);
-	dev->SetRenderState(D3DRENDERSTATE_DITHERENABLE,		TRUE);
-	dev->SetRenderState(D3DRENDERSTATE_SPECULARENABLE,		FALSE);
-	dev->SetRenderState(D3DRENDERSTATE_SUBPIXEL,			TRUE);
-	dev->SetRenderState(D3DRENDERSTATE_ZENABLE,				TRUE);
-	dev->SetRenderState(D3DRENDERSTATE_ZFUNC,				D3DCMP_LESSEQUAL);
-	dev->SetRenderState(D3DRENDERSTATE_ZWRITEENABLE,		TRUE);
-	dev->SetRenderState(D3DRENDERSTATE_CULLMODE,			D3DCULL_NONE);
-	dev->SetRenderState(D3DRENDERSTATE_FOGENABLE,			FALSE);
-	dev->SetRenderState(D3DRENDERSTATE_ALPHATESTENABLE,		FALSE);
-	dev->SetRenderState(D3DRENDERSTATE_ALPHAFUNC,			D3DCMP_ALWAYS);
-	dev->SetRenderState(D3DRENDERSTATE_ANTIALIAS,			D3DANTIALIAS_NONE);
-	dev->SetTextureStageState(0, D3DTSS_COLOROP,		D3DTOP_MODULATE);
-	dev->SetTextureStageState(0, D3DTSS_COLORARG1,		D3DTA_TEXTURE);
-	dev->SetTextureStageState(0, D3DTSS_COLORARG2,		D3DTA_DIFFUSE);
-	dev->SetTextureStageState(0, D3DTSS_ALPHAOP,		D3DTOP_MODULATE);
-	dev->SetTextureStageState(0, D3DTSS_ALPHAARG1,		D3DTA_TEXTURE);
-	dev->SetTextureStageState(0, D3DTSS_ALPHAARG2,		D3DTA_DIFFUSE);
-    dev->SetTextureStageState(0, D3DTSS_TEXCOORDINDEX, 0);
-	dev->SetTextureStageState(0, D3DTSS_MINFILTER,		D3DTFN_LINEAR);
-	dev->SetTextureStageState(0, D3DTSS_MAGFILTER,		D3DTFG_LINEAR);
-	dev->SetTextureStageState(0, D3DTSS_MIPFILTER,		D3DTFP_NONE);
-	dev->SetTextureStageState(0, D3DTSS_ADDRESS,		D3DTADDRESS_WRAP);
-	//dev->SetTexture ( 0, NULL );
-extern LPDIRECT3DTEXTURE2	TEXTURE_get_handle(SLONG page);
-extern SLONG TEXTURE_page_water;
-	dev->SetTexture ( 0, TEXTURE_get_handle(TEXTURE_page_water) );
-	
-	dev->SetTextureStageState(1, D3DTSS_COLOROP, D3DTOP_DISABLE);
-	dev->SetTextureStageState(1, D3DTSS_ALPHAOP, D3DTOP_DISABLE);
-
-	dev->SetRenderState(D3DRENDERSTATE_ALPHABLENDENABLE,	FALSE);
-	dev->SetRenderState(D3DRENDERSTATE_SRCBLEND,			D3DBLEND_ONE);
-	dev->SetRenderState(D3DRENDERSTATE_DESTBLEND,			D3DBLEND_ZERO);
-#endif
-
-
-
-
-
+	FRONTEND_init();
 
 	y	=	500;
 	while(SHELL_ACTIVE&&(GAME_STATE&GS_ATTRACT_MODE))
 	{
-#ifdef TARGET_DC
-		Sleep(1);
-#endif
 		if (dont_leave_for_a_while > 0)
 		{
 			dont_leave_for_a_while -= 1;
@@ -362,27 +235,14 @@ extern	BOOL	allow_debug_keys;
 			}
 		}
 
-#ifdef TARGET_DC
-		// Always clear the screen. Not a real clear, it just triggers a render.
-		AENG_clear_screen();
-#else
 		if (y < 57.0F)
 		{
 			AENG_clear_screen();
 		}
-#endif
-
- 		//LoadBackImage(image_mem);
-//		the_display.blit_background_surface();
 
 		text_fudge	=	TRUE;
-//		y	-=	0.25f;
-//		y--;
 		if(Keys[KB_LEFT]||Keys[KB_RIGHT]||Keys[KB_UP]||Keys[KB_DOWN]||Keys[KB_SPACE]||Keys[KB_ENTER]) y=500;
 
-
-
-//		AENG_demo_attract(0,y,demo_text);
 		{
 			SLONG	res;
 
@@ -392,33 +252,10 @@ extern	BOOL	allow_debug_keys;
 			res=do_start_menu();
 #endif
 
-//			res=STARTS_PLAYBACK;
-
 			if(res)
 			{
 				switch(res)
 				{
-/*
-				case	1:
-				case	2:
-				case	3:
-				case	4:
-				case	5:
-				case	6:
-				case	7:
-				case	8:
-						GAME_STATE	&= ~GS_ATTRACT_MODE;
-						GAME_STATE	|=	GS_PLAY_GAME;
-						go_into_game =  -res;
-						break;
-				case	9:
-						GAME_STATE	=	0;
-						LastKey	=	0;
-						break;
-*/
-
-
-
 					case	STARTS_PSX:
 #ifdef EDITOR
 void	make_all_wads(void);
@@ -434,22 +271,7 @@ void	make_all_wads(void);
 						GAME_STATE	|=	GS_PLAY_GAME;
 						go_into_game =  TRUE;
 
-#ifdef TARGET_DC
-						// Unload all the frontend gubbins.
-						FRONTEND_unload();
-#endif
-
-
 						ATTRACT_loadscreen_init();
-
-						// Stop everything.
-						stop_all_fx_and_music(TRUE);
-
-						// but play the loading music, coz it's all in memory.
-						// (No, should already be played, and stopping then starting it
-						// makes it huccup.)
-						//DCLL_memstream_play();
-
 
 extern void	init_joypad_config(void);
 						init_joypad_config(); // incase it's been changed in front end
@@ -478,31 +300,6 @@ extern void	init_joypad_config(void);
 						break;
 					case	STARTS_JOIN:
 						break;
-					case	STARTS_LANGUAGE_CHANGE:
-						// A language change has been made -
-						// reload all the language stuff and go to the main menu.
-
-
-#ifdef TARGET_DC
-						// The only place this can happen is at the title screen.
-						// And after the title screen, we play the intro movie.
-
-						// Free up as much memory as we can - the movie needs it!
-extern void FRONTEND_scr_unload_theme ( void );
-						FRONTEND_scr_unload_theme();
-						stop_all_fx_and_music();
-						the_display.RunCutscene( 0, ENV_get_value_number("lang_num", 0, "" ) );
-#endif
-
-						// Loading screen for a second.
-						ATTRACT_loadscreen_init();
-
-
-						// This goto makes the compiler very unhappy - it seems to get very confused.
-						//goto reinit_because_of_language_change;
-						bReinitBecauseOfLanguageChange = TRUE;
-						break;
-
 				}
 			}
 			
@@ -513,104 +310,30 @@ extern void FRONTEND_scr_unload_theme ( void );
 			AENG_fade_out((57 - SLONG(y)) * 15);
 		}
 
-
-		/*
-		if(y<40.0f)
-		{
-			text_fudge	=	FALSE;
-			GAME_STATE	|=	(GS_PLAYBACK|GS_PLAY_GAME);
-			playback_name	=	playbacks[current_playback];
-
-			go_into_game = FALSE;	// Go into game could be set by game_loop()!!!
-			game_loop();
-			GAME_STATE	=	GS_ATTRACT_MODE;
-			y	=	490.0f;
-			current_playback++;
-			if(current_playback>=MAX_PLAYBACKS)
-				current_playback	=	0;
-			dont_leave_for_a_while = 25;
-		}
-		*/
-
-
-#ifndef TARGET_DC
 		extern void lock_frame_rate(SLONG fps);
 
 		lock_frame_rate(60); // because 30 is so slow i want to gnaw my own liver out rather than go through the menus
-#endif
 
-		if ( ( GAME_STATE & GS_PLAY_GAME ) == 0 )
-		{
-	 		AENG_flip();
-		}
-
-		if ( bReinitBecauseOfLanguageChange )
-		{
-			// Crappy compiler workaround.
-			break;
-		}
+		AENG_flip();
 	}
-
-
-	if ( bReinitBecauseOfLanguageChange )
-	{
-		// Crappy compiler workaround.
-		goto reinit_because_of_language_change;
-	}
-
-
 
 	//	Fade to logo.
 	if(GAME_STATE&GS_PLAY_GAME)
 	{
 		if (go_into_game)
 		{
-#ifdef TARGET_DC
-			// Unload all the frontend gubbins.
-			FRONTEND_unload();
-#endif
-
-/*			AENG_clear_screen();
-			AENG_fade_out(255);*/
-			ShowBackImage(FALSE);
+			ShowBackImage();
 			AENG_flip();
-
 		}
 		else
 		{
 			SLONG c0;
-
-//			ASSERT(0);
-/*
-			c0 = (57 - SLONG(y)) * 17;
-
-			SATURATE(c0, 0, 255);
-
-			c0 -= c0 % 15;
-
-			for(;c0<256;c0+=15)
-			{
-				AENG_clear_screen();
- 				LoadBackImage(image_mem); //image_mem not valid
-				AENG_demo_attract(0,(SLONG)y,demo_text);
-				AENG_fade_out((UBYTE)c0);
-				AENG_flip();
-			}
-*/
 		}
 	}
 
 	text_fudge	=	FALSE;
-/*
-	the_display.destroy_background_surface();
 
-	if(image_mem)
-	{
-		MemFree(image_mem);
-	}
-*/
 	ResetBackImage();
-#endif
 }
 
 //---------------------------------------------------------------
@@ -683,8 +406,6 @@ extern	SLONG	stat_start_time,stat_game_time;
 
 void ScoresDraw(void) 
 {
-#ifndef PSX
-
 	SLONG y=35;
 	SLONG count=0,count_bonus=0,count_bonus_left=0,c0;
 	SLONG	ticks,h,m,s;
@@ -823,7 +544,6 @@ extern	SLONG	playing_real_mission(void);
 			 
 			} Mime;	// A mucky time!
 
-#if 0
 // Times that shipped with the PC. Or was it the PSX?
 			static Mime mucky_times[] =
 			{
@@ -863,48 +583,6 @@ extern	SLONG	playing_real_mission(void);
 				{"\\FreeCD1.ucm"	,"Demo map",					1,	35, "Justin mucky(hands) Amore"},
 				{NULL}
 			};
-#else
-// DC times, starting from scratch.
-			static Mime mucky_times[] =
-			{
-				{"\\FTutor1.ucm"	,"Combat Tutorial",				 0,	 0				},
-				{"\\Assault1.ucm"	,"Physical Training",			 0,	 0				},
-				{"\\testdrive1a.ucm","Driving Bronze",				 0,	 0				},
-				{"\\fight1.ucm"		,"Combat Bronze",				 0,	 0				},
-				{"\\police1.ucm"	,"RTA",							 1,  5,	"Alex Hood" },
-				{"\\testdrive2.ucm"	,"Driving Silver",				 0,	 0				},
-				{"\\fight2.ucm"		,"Combat Silver",				 0,	 0				},
-				{"\\police2.ucm"	,"The Jump",					 1,	32,	"Joe Neate"	},
-				{"\\testdrive3.ucm"	,"Driving Gold",				 0,	 0				},
-				{"\\Bankbomb1.ucm"	,"Nitro Car",					 5,	 0, "Kenny Tang"	},
-				{"\\police3.ucm"	,"Gun Hunt",					 1,	37,	"Alex Hood"	},
-				{"\\Gangorder2.ucm"	,"Rat Catch",					 3,	14, "David Babajee"	},
-				{"\\police4.ucm"	,"Trouble in the Park",			 1,	24,	"Kaoski"	},
-				{"\\bball2.ucm"		,"Gatecrasher",					 0,	45,	"Tom Forsyth"	},
-				{"\\wstores1.ucm"	,"Arms Breaker",				 4,	 3,	"Joe Neate"		},
-				{"\\e3.ucm"			,"Media Trouble",				 5,	54, "Kwesi Moodie"	},
-				{"\\westcrime1.ucm"	,"Urban Shakedown",				 6,	 4,	"Alex Hood"	},
-				{"\\carbomb1.ucm"	,"Auto-Destruct",				 4,	18, "David Babajee"	},
-				{"\\botanicc.ucm"	,"Grim Gardens",				 6,	29,	"Kwesi Moodie"		},
-				{"\\Semtex.ucm"		,"Semtex",						16,	 3,	"Kaoski"	},
-				{"\\AWOL1.ucm"		,"Cop Killers",					10,	30,	"Kenny Tang"	},
-				{"\\mission2.ucm"	,"Southside Offensive",			 7,	49,	"Alex Hood"	},
-				{"\\park2.ucm"		,"Psycho Park",					 6,	45, "Tom Forsyth"		},
-				{"\\MIB.ucm"		,"The Fallen",					26,	53,	"Phil Maskell"		},
-				{"\\skymiss2.ucm"	,"Stern Revenge",				 9,	28, "David Babajee"	},
-				{"\\factory1.ucm"	,"Transmission Terminated",		 8,	35,	"Kwesi Moodie"		},
-				{"\\estate2.ucm"	,"Estate of Emergency",			 8,	14,	"Phil Maskell"		},
-				{"\\Stealtst1.ucm"	,"Seek, Sneak and Seize",		 5,	28, "Kaoski"	},
-				{"\\snow2.ucm"		,"Target UC",					 2, 26,	"Kaoski"	},
-				{"\\Gordout1.ucm"	,"Headline Hostage",			 5,	42,	"Kenny Tang"	},
-				{"\\Baalrog3.ucm"	,"Insane Assault",				 2,	38,	"Mike Diskett"		},
-				{"\\Finale1.ucm"	,"Day Of Reckoning",			40,	00,	"Beat me"		},
-				{"\\Gangorder1.ucm"	,"Assassin",					 5,	21,	"Joe Neate"		},
-				{"\\FreeCD1.ucm"	,"Demo map",					40,	00, "Beat me"},
-				{"\\Album1.ucm"		,"Breakout!",					15,	38, "Tom Forsyth"},
-				{NULL}
-			};
-#endif
 
 			CBYTE par[128];
 
@@ -933,8 +611,7 @@ extern	SLONG	playing_real_mission(void);
 
 					extern BOOL dkeys_have_been_used;
 
-extern bool g_bPunishMePleaseICheatedOnThisLevel;
-					if (their_time >= mucky_time || dkeys_have_been_used || g_bPunishMePleaseICheatedOnThisLevel)
+					if (their_time >= mucky_time || dkeys_have_been_used)
 					{
 						// No code for you!
 						code[0] = '\000';
@@ -946,12 +623,6 @@ extern bool g_bPunishMePleaseICheatedOnThisLevel;
 						hash  = (i + 1) * (m + 1) * (s + 1) * 3141;
 						hash  = hash % 12345;
 						hash += 0x9a2f;
-
-#ifdef TARGET_DC
-						// Invert the code for the DC to stop cheating scum
-						// sending in the PC times.
-						hash ^= 0xffff;
-#endif
 
 						sprintf(code, ": CODE <%X> ", hash);
 					}
@@ -975,12 +646,6 @@ extern bool g_bPunishMePleaseICheatedOnThisLevel;
 	//	sprintf(str,": %d",stat_arrested_innocent);
 	//	FONT2D_DrawString(str	,300,300,0xffffff,256,POLY_PAGE_FONT2D);
 	}
-
-
-//	POLY_frame_draw(FALSE, FALSE);
-
-#endif
-
 }
 
 #if 0
@@ -1220,62 +885,13 @@ void	level_lost(void)
 
 void ATTRACT_loadscreen_init(void)
 {
-
-	PANEL_disable_screensaver ( TRUE );
-
-#ifdef TARGET_DC
-
-extern void POLY_ClearAllPages ( void );
-	POLY_ClearAllPages();
-
-	// Flip once to flush the rendering (e.g. leaves will be left in).
-	the_display.lp_D3D_Viewport->Clear2 ( 0, NULL, D3DCLEAR_TARGET, 0x0, 0.0f, 0 );
-	the_display.lp_D3D_Device->EndScene();
-	the_display.lp_DD_FrontSurface->Flip ( NULL, DDFLIP_WAIT );
-
-	// Clear both buffers.
-	the_display.lp_D3D_Device->BeginScene();
-	the_display.lp_D3D_Viewport->Clear2 ( 0, NULL, D3DCLEAR_TARGET, 0x0, 0.0f, 0 );
-	the_display.lp_D3D_Device->EndScene();
-	the_display.lp_DD_FrontSurface->Flip ( NULL, DDFLIP_WAIT );
-
-	the_display.lp_D3D_Device->BeginScene();
-	the_display.lp_D3D_Viewport->Clear2 ( 0, NULL, D3DCLEAR_TARGET, 0x0, 0.0f, 0 );
-	the_display.lp_D3D_Device->EndScene();
-	the_display.lp_DD_FrontSurface->Flip ( NULL, DDFLIP_WAIT );
-
-	// Really horrible hack.
-void	FRONTEND_scr_img_load_into_screenfull(CBYTE *name, CompressedBackground *screen);
-	FRONTEND_scr_img_load_into_screenfull ( "e3load.tga", &(the_display.lp_DD_Background) );
-	UnpackBackground ( (BYTE*)( the_display.lp_DD_Background ), the_display.lp_DD_BackSurface );
-	//AENG_flip();
-	the_display.lp_DD_FrontSurface->Flip ( NULL, DDFLIP_WAIT );
-
-	the_display.lp_DD_BackSurface->Blt ( NULL, the_display.lp_DD_FrontSurface, NULL, DDBLT_WAIT, NULL );
-
-	the_display.lp_DD_FrontSurface->Flip ( NULL, DDFLIP_WAIT );
-
-	//InitBackImage("e3load.tga");
-	//ShowBackImage(FALSE);
-	//AENG_flip();
-
-	// Then free up the compressed image data again.
-	ResetBackImage();
-
-
-#else
-
-#ifndef PSX
 	InitBackImage("e3load.tga");
-	ShowBackImage(FALSE);
+	ShowBackImage();
 	AENG_flip();
 	// Er... why do this again????
 	InitBackImage("e3load.tga");
-	ShowBackImage(FALSE);
+	ShowBackImage();
 	AENG_flip();
-#endif
-
-#endif
 }
 
 
@@ -1410,7 +1026,7 @@ void ATTRACT_loadscreen_draw(SLONG completion)	// completion is in 8-bit fixed p
 void ATTRACT_loadscreen_draw(SLONG completion)	// completion is in 8-bit fixed point from 0 to 256.
 {
 #ifndef	PSX
-	ShowBackImage(FALSE);
+	ShowBackImage();
 	PANEL_draw_completion_bar(completion);
 	AENG_flip();
 #endif

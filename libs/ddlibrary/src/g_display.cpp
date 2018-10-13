@@ -805,9 +805,9 @@ void	ResetBackImage(void)
 }
 
 
-void	ShowBackImage(bool b3DInFrame)
+void	ShowBackImage()
 {
-    the_display.blit_background_surface(b3DInFrame);
+    the_display.blit_background_surface();
 }
 
 
@@ -5793,13 +5793,9 @@ void Display::create_background_surface(UBYTE *image_data)
 
 
 
-void Display::blit_background_surface(bool b3DInFrame)
+void Display::blit_background_surface()
 {
-#if USE_COMPRESSED_BACKGROUNDS
-	CompressedBackground lpBG = NULL;
-#else
 	LPDIRECTDRAWSURFACE4 lpBG = NULL;
-#endif
 
 	if ( lp_DD_Background_use_instead != NULL )
 	{
@@ -5817,98 +5813,12 @@ void Display::blit_background_surface(bool b3DInFrame)
 
 	HRESULT result;
 
-#ifdef TARGET_DC
+	result = lp_DD_BackSurface->Blt(NULL,lpBG,NULL,DDBLT_WAIT,0);
+
+	if (FAILED(result))
 	{
-
-		if ( !b3DInFrame )
-		{
-			// Won't have been done yet.
-			//POLY_frame_init(FALSE,FALSE);
-		}
-
-
-		// Use a poly draw.
-		ASSERT ( lpBackgroundCache != NULL );
-
-		if ( lpBG != m_lpLastBackground )
-		{
-			// Get the texture handle.
-			m_lpLastBackground = lpBG;
-
-
-			static iCount = 0;
-
-
-#if USE_COMPRESSED_BACKGROUNDS
-
-			if ( lpBG != NULL )
-			{
-				UnpackBackground ( (UCHAR *)lpBG, lpBackgroundCache );
-			}
-			else
-			{
-				// Bum - black screen time :-(
-				ASSERT ( FALSE );
-			}
-#else
-			{
-				// Copy the data to the texture cache thingie.
-				RECT rect;
-				rect.top = 0;
-				rect.left = 0;
-				rect.right = 640;
-				rect.bottom = 480;
-				HRESULT hres = lpBackgroundCache->Blt ( &rect, lpBG, &rect, DDBLT_WAIT, NULL );
-				VERIFY(SUCCEEDED(hres));
-			}
-#endif
-		}
-
-		// ARGH! Got to use a poly draw instead. Useless machine.
-
-		POLY_Point  pp[4];
-		POLY_Point *quad[4] = { &pp[0], &pp[1], &pp[2], &pp[3] };
-
-		pp[0].colour=0xffffffff; pp[0].specular=0;
-		pp[1].colour=0xffffffff; pp[1].specular=0;
-		pp[2].colour=0xffffffff; pp[2].specular=0;
-		pp[3].colour=0xffffffff; pp[3].specular=0;
-
-		pp[0].X=0.0f; pp[0].Y=0.0f; pp[0].Z=0.0001f;
-		pp[0].u=0.0f; pp[0].v=0.0f;
-
-		pp[1].X=0.0f; pp[1].Y=480.0f; pp[1].Z=0.0001f;
-		pp[1].u=0.0f; pp[1].v=480.0f / 512.0f;
-
-		pp[2].X=640.0f; pp[2].Y=0.0f; pp[2].Z=0.0001f;
-		pp[2].u=640.0f / 1024.0f; pp[2].v=0.0f;
-
-		pp[3].X=640.0f; pp[3].Y=480.0f; pp[3].Z=0.0001f;
-		pp[3].u=640.0f / 1024.0f; pp[3].v=480.0f / 512.0f;
-
-		POLY_add_quad ( quad, POLY_PAGE_BACKGROUND_IMAGE, FALSE, TRUE );
-
-
-		if ( !b3DInFrame )
-		{
-			// Draw the stuff now.
-			//POLY_frame_draw(TRUE,TRUE);
-		}
-
+		dd_error(result);
 	}
-
-
-
-#else
-	{
-		result = lp_DD_BackSurface->Blt(NULL,lpBG,NULL,DDBLT_WAIT,0);
-
-		if (FAILED(result))
-		{
-			dd_error(result);
-		}
-	}
-#endif
 }
 
 void Display::destroy_background_surface()

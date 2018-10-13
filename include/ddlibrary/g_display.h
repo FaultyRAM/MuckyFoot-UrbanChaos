@@ -53,7 +53,7 @@ extern	void UseBackSurface(LPDIRECTDRAWSURFACE4 use);
 extern	void	ResetBackImage(void);
 // Set b3DInFrame to FALSE if there is no 3D going on, i.e. blits will work on the DC.
 // Ignored for the PC.
-extern	void	ShowBackImage(bool b3DInFrame = TRUE);
+extern	void	ShowBackImage();
 
 SLONG			OpenDisplay(ULONG width, ULONG height, ULONG depth, ULONG flags);
 SLONG			CloseDisplay(void);
@@ -427,7 +427,7 @@ class	Display
 #else
 		void use_this_background_surface(LPDIRECTDRAWSURFACE4 this_one);
 #endif
-		void blit_background_surface(bool b3DInFrame = TRUE);
+		void blit_background_surface();
 		void destroy_background_surface(void);
 };
 
