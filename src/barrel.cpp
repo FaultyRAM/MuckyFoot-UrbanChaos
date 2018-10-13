@@ -212,7 +212,6 @@ void BARREL_convert_stationary_to_moving(Thing *p_barrel)
 
 	if (p_barrel->Genus.Barrel->type == BARREL_TYPE_CONE)
 	{
-/*
 		if (!(p_barrel->Genus.Barrel->flag & BARREL_FLAG_HIT))
 		{
 			p_barrel->Genus.Barrel->flag |= BARREL_FLAG_HIT;
@@ -240,7 +239,6 @@ void BARREL_convert_stationary_to_moving(Thing *p_barrel)
 				EWAY_deduct_time_penalty(50);
 			}
 		}
-*/
 
 		MFX_play_thing(THING_NUMBER(p_barrel),S_TRAFFIC_CONE,0,p_barrel);
 	} else MFX_play_thing(THING_NUMBER(p_barrel),S_CAR_BUMP,0,p_barrel);
