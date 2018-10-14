@@ -684,7 +684,6 @@ void remove_walkable_from_map(SLONG face)
 
 	SWORD *prev;
 	SWORD  next;
-	SWORD count=50;
 
 	for(c0=0;c0<4;c0++)
 	{
@@ -704,7 +703,7 @@ void remove_walkable_from_map(SLONG face)
 	prev = &PAP_2LO(x,z).Walkable;
 	next =  PAP_2LO(x,z).Walkable;
 
-	while(count--)
+	while(1)
 	{
 //		ASSERT(WITHIN(next, 1, next_prim_face4 - 1));
 
