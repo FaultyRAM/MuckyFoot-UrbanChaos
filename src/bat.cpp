@@ -879,13 +879,19 @@ void BAT_change_state(Thing *p_thing)
 	// Initialise the new state.
 	//
 
+	void add_damage_text(SWORD x, SWORD y, SWORD z, CBYTE *text);
+
+	add_damage_text(
+		p_thing->WorldPos.X >> 8,
+		p_thing->WorldPos.Y + 0x6000 >> 8,
+		p_thing->WorldPos.Z >> 8,
+		BAT_state_name[new_state]);
 
 	p_bat->state =  new_state;
 	p_bat->flag &= ~BAT_FLAG_ATTACKED;
 
 	switch(new_state)
 	{
-#ifndef PSX
 		case BAT_STATE_IDLE:
 
 			p_bat->timer = BAT_TICKS_PER_SECOND * (1 + (Random() & 0x1));
@@ -941,7 +947,7 @@ void BAT_change_state(Thing *p_thing)
 			BAT_set_anim(p_thing, BAT_ANIM_GARGOYLE_ATTACK);
 
 			break;
-#endif
+
 		case BAT_STATE_BALROG_WANDER:
 
 			{
@@ -1144,34 +1150,6 @@ void BAT_balrog_slide_along(
 	if (!(mo.opt[MAV_DIR_XL] & (MAV_CAPS_GOTO))) {collide |= BAT_COLLIDE_XL;}
 	if (!(mo.opt[MAV_DIR_ZS] & (MAV_CAPS_GOTO))) {collide |= BAT_COLLIDE_ZS;}
 	if (!(mo.opt[MAV_DIR_ZL] & (MAV_CAPS_GOTO))) {collide |= BAT_COLLIDE_ZL;}
-
-	if (PAP_2HI(mx,mz).Flags & PAP_FLAG_HIDDEN)
-	{
-		//
-		// The Balrog is on a building! :( Turn off MAPSQUARE collision.
-		//
-	}
-	else
-	{	
-		if (PAP_2HI(mx + 1, mz + 0).Flags & PAP_FLAG_HIDDEN) {collide |= BAT_COLLIDE_XL;}
-		if (PAP_2HI(mx - 1, mz + 0).Flags & PAP_FLAG_HIDDEN) {collide |= BAT_COLLIDE_XS;}
-		if (PAP_2HI(mx + 0, mz + 1).Flags & PAP_FLAG_HIDDEN) {collide |= BAT_COLLIDE_ZL;}
-		if (PAP_2HI(mx + 0, mz - 1).Flags & PAP_FLAG_HIDDEN) {collide |= BAT_COLLIDE_ZS;}
-	}
-
-	/*
-
-	if (abs(MAVHEIGHT(mx,mz) - MAVHEIGHT(mx - 1, mz)) > 1) {collide |= BAT_COLLIDE_XS;}
-	if (abs(MAVHEIGHT(mx,mz) - MAVHEIGHT(mx + 1, mz)) > 1) {collide |= BAT_COLLIDE_XL;}
-	if (abs(MAVHEIGHT(mx,mz) - MAVHEIGHT(mx, mz - 1)) > 1) {collide |= BAT_COLLIDE_ZS;}
-	if (abs(MAVHEIGHT(mx,mz) - MAVHEIGHT(mx, mz + 1)) > 1) {collide |= BAT_COLLIDE_ZL;}
-
-	if (!(collide & (BAT_COLLIDE_XS | BAT_COLLIDE_ZS))) {if (abs(MAVHEIGHT(mx,mz) - MAVHEIGHT(mx - 1, mz - 1)) > 1) {collide |= BAT_COLLIDE_SS;}}
-	if (!(collide & (BAT_COLLIDE_XL | BAT_COLLIDE_ZS))) {if (abs(MAVHEIGHT(mx,mz) - MAVHEIGHT(mx + 1, mz - 1)) > 1) {collide |= BAT_COLLIDE_LS;}}
-	if (!(collide & (BAT_COLLIDE_XS | BAT_COLLIDE_ZL))) {if (abs(MAVHEIGHT(mx,mz) - MAVHEIGHT(mx - 1, mz + 1)) > 1) {collide |= BAT_COLLIDE_SL;}}
-	if (!(collide & (BAT_COLLIDE_XL | BAT_COLLIDE_ZL))) {if (abs(MAVHEIGHT(mx,mz) - MAVHEIGHT(mx + 1, mz + 1)) > 1) {collide |= BAT_COLLIDE_LL;}}
-
-	*/
 
 	//
 	// Edges...
@@ -1386,17 +1364,14 @@ void BAT_normal(Thing *p_thing)
 											;;						;;
 	Thing *p_target;												 ;;
 
-#ifndef PSX
 	// make some batty sounds. if we're not a gargoyle. or a balrog. or bane.
 	if (p_bat->type==BAT_TYPE_BAT)
 	{
 		if (!(Random()&0xff)) MFX_play_thing(THING_NUMBER(p_thing),SOUND_Range(S_BAT_SQUEEK_START,S_BAT_SQUEEK_END),MFX_NEVER_OVERLAP,p_thing);
 	}
-#endif
 
 	switch(p_bat->state)
 	{
-#ifndef PSX
 		case BAT_STATE_IDLE:
 
 			p_bat->dx -= p_bat->dx / 16;
@@ -1649,12 +1624,11 @@ void BAT_normal(Thing *p_thing)
 			p_bat->timer = 0;
 
 			break;
-#endif
+
 		case BAT_STATE_DYING:
 
 			switch(p_bat->substate)
 			{
-#ifndef	PSX
 				case BAT_SUBSTATE_DEAD_INITIAL:
 
 					//
@@ -1727,7 +1701,7 @@ void BAT_normal(Thing *p_thing)
 					}
 
 					break;
-#endif
+
 				case BAT_SUBSTATE_DEAD_FINAL:
 
 					//

@@ -10845,7 +10845,7 @@ void create_shockwave(
 		SLONG  z,
 		SLONG  radius,
 		SLONG  maxdamage,
-		Thing *p_aggressor,ULONG just_people)
+		Thing *p_aggressor)
 {
 	SLONG i;
 	SLONG dx;
@@ -10873,14 +10873,7 @@ void create_shockwave(
 	//
 
 
-	if(just_people)
-	{
-		classes=1<<CLASS_PERSON;
-	}
-	else
-	{
-		classes=(1 << CLASS_PERSON) | (1 << CLASS_SPECIAL) | (1 << CLASS_VEHICLE) | (1 << CLASS_BAT);
-	}
+	classes=(1 << CLASS_PERSON) | (1 << CLASS_SPECIAL) | (1 << CLASS_VEHICLE) | (1 << CLASS_BAT);
 	num = THING_find_sphere(x, y, z, radius, found, SHOCKWAVE_FIND, classes);
 
 	for (i = 0; i < num; i++)
@@ -11034,80 +11027,6 @@ void create_shockwave(
 							hitpoints);
 					}
 				}
-			}
-		}
-	}
-
-	//
-	// Find obs within the shockwave.
-	//
-	if(!just_people)
-	{
-		UBYTE mx;
-		UBYTE mz;
-
-		SWORD mx1;
-		SWORD mz1;
-		SWORD mx2;
-		SWORD mz2;
-
-		SLONG dx;
-		SLONG dy;
-		SLONG dz;
-		SLONG dist;
-
-		OB_Info *oi;
-
-		mx1 = x - radius >> PAP_SHIFT_LO;
-		mz1 = z - radius >> PAP_SHIFT_LO;
-		mx2 = x + radius >> PAP_SHIFT_LO;
-		mz2 = z + radius >> PAP_SHIFT_LO;
-
-		SATURATE(mx1, 0, PAP_SIZE_LO - 1);
-		SATURATE(mz1, 0, PAP_SIZE_LO - 1);
-		SATURATE(mx2, 0, PAP_SIZE_LO - 1);
-		SATURATE(mz2, 0, PAP_SIZE_LO - 1);
-
-		for (mx = mx1; mx <= mx2; mx++)
-		for (mz = mz1; mz <= mz2; mz++)
-		{
-			for (oi = OB_find(mx,mz); oi->prim; oi++)
-			{
-				if (prim_objects[oi->prim].damage & PRIM_DAMAGE_DAMAGABLE)
-				{
-					dx = oi->x - x;
-					dy = oi->y - y;
-					dz = oi->z - z;
-
-					dist = abs(dx) + abs(dy) + abs(dz);
-
-					if (dist < radius)
-					{
-						//
-						// What damage does this object recieve?
-						//
-
-						hitpoints = maxdamage * (radius - dist) / radius;
-
-						if (hitpoints > 50)
-						{
-							//
-							// Damage the object.
-							//
-
-							OB_damage(
-								oi->index,
-								x,
-								z,
-								oi->x,
-								oi->z,
-								p_aggressor);
-						}
-					}
-				}
-
-				oi += 1;
-
 			}
 		}
 	}

@@ -5615,7 +5615,7 @@ extern	UBYTE	hit_player;
 								p_vehicle->WorldPos.Z >> 8,
 								0x300,
 								350,
-								NULL,1);
+								NULL);
 							hit_player=0;
 
 

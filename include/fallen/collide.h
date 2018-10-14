@@ -422,7 +422,7 @@ void create_shockwave(
 		SLONG  z,
 		SLONG  radius,
 		SLONG  maxdamage,		// Remember- a person's maximum health is 200
-		Thing *p_aggressor,ULONG just_people=0);	// Who caused the shockwave or NULL if you don't know
+		Thing *p_aggressor);	// Who caused the shockwave or NULL if you don't know
 
 
 //
