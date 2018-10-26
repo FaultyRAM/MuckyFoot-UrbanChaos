@@ -2741,8 +2741,6 @@ SLONG	height_above_anything(Thing *p_person,SLONG body_part,SWORD *onface)
 
 //	SLONG ignore_building;
 	
-	*onface = 0;
-
 	if(p_person->Genus.Person->InsideIndex)
 		return(0);  //floor height of inside
 	//
@@ -2762,7 +2760,7 @@ SLONG	height_above_anything(Thing *p_person,SLONG body_part,SWORD *onface)
 	//
 	// got body part position in world space
 	//
-	if(1||p_person->Genus.Person->Ware)
+	if(p_person->Genus.Person->Ware)
 		on_face = find_face_for_this_pos(fx,fy,fz,&new_y,0,FIND_FACE_NEAR_BELOW);
 	else
 		on_face = find_face_for_this_pos(fx,fy,fz,&new_y,0,FIND_ANYFACE);
@@ -4485,7 +4483,7 @@ SLONG slide_along(
 						}
 						else
 						{
-							if (df->FacetType == STOREY_TYPE_DOOR && !(flags&SLIDE_ALONG_FLAG_JUMPING))
+							if (df->FacetType == STOREY_TYPE_DOOR)
 							{
 								//
 								// Let the person go through the door. But only set slide_door if the
@@ -4634,7 +4632,7 @@ SLONG slide_along(
 						}
 						else
 						{
-							if (df->FacetType == STOREY_TYPE_DOOR && !(flags&SLIDE_ALONG_FLAG_JUMPING))
+							if (df->FacetType == STOREY_TYPE_DOOR)
 							{
 								//
 								// Let the person go through the door. But only set slide_door if the
@@ -7607,10 +7605,7 @@ SLONG check_vector_against_mapsquare(
 // Returns TRUE if the given ray intersects any object on the mapsquare.
 //
 
-SLONG check_vector_against_mapsquare_objects(
-			SLONG map_x,
-			SLONG map_z,
-			SLONG include_cars)
+SLONG check_vector_against_mapsquare_objects(SLONG map_x, SLONG map_z)
 {
 	SLONG y;
 	SLONG dx;
@@ -7683,8 +7678,7 @@ SLONG check_vector_against_mapsquare_objects(
 
 			if (p_thing->Class == CLASS_VEHICLE)
 			{
-				if (include_cars ||
-					p_thing->Genus.Vehicle->Type == VEH_TYPE_VAN       ||
+				if (p_thing->Genus.Vehicle->Type == VEH_TYPE_VAN       ||
 					p_thing->Genus.Vehicle->Type == VEH_TYPE_AMBULANCE ||
 					p_thing->Genus.Vehicle->Type == VEH_TYPE_WILDCATVAN)
 				{
@@ -7886,9 +7880,7 @@ SLONG there_is_a_los(
 
 				if (!(los_flags & LOS_FLAG_IGNORE_PRIMS))
 				{
-					if (check_vector_against_mapsquare_objects(
-							los_v_mx, los_v_mz,
-							los_flags & LOS_FLAG_INCLUDE_CARS))
+					if (check_vector_against_mapsquare_objects(los_v_mx, los_v_mz))
 					{
 						return FALSE;
 					}
@@ -7934,9 +7926,7 @@ SLONG there_is_a_los(
 
 					if (!(los_flags & LOS_FLAG_IGNORE_PRIMS))
 					{
-						if (check_vector_against_mapsquare_objects(
-								los_v_mx, los_v_mz,
-								los_flags & LOS_FLAG_INCLUDE_CARS))
+						if (check_vector_against_mapsquare_objects(los_v_mx, los_v_mz))
 						{
 							return FALSE;
 						}
@@ -8001,9 +7991,7 @@ SLONG there_is_a_los(
 
 				if (!(los_flags & LOS_FLAG_IGNORE_PRIMS))
 				{
-					if (check_vector_against_mapsquare_objects(
-							los_v_mx, los_v_mz,
-							los_flags & LOS_FLAG_INCLUDE_CARS))
+					if (check_vector_against_mapsquare_objects(los_v_mx, los_v_mz))
 					{
 						return FALSE;
 					}
@@ -8049,9 +8037,7 @@ SLONG there_is_a_los(
 
 					if (!(los_flags & LOS_FLAG_IGNORE_PRIMS))
 					{
-						if (check_vector_against_mapsquare_objects(
-								los_v_mx, los_v_mz,
-								los_flags & LOS_FLAG_INCLUDE_CARS))
+						if (check_vector_against_mapsquare_objects(los_v_mx, los_v_mz))
 						{
 							return FALSE;
 						}
@@ -10288,13 +10274,6 @@ void insert_collision_facets()
 #endif
 #endif
 
-//
-// should be locals but stack overflow
-//
-SLONG	tried;
-SLONG	used_this_go;
-SLONG	failed;
-
 SLONG slide_around_box(
 		SLONG box_mid_x,
 		SLONG box_mid_z,
@@ -10335,11 +10314,6 @@ SLONG slide_around_box(
 	SLONG best_x;
 	SLONG best_z;
 
-	tried=0;
-	used_this_go=0;
-	failed=1;
-
-#ifndef PSX
 	SLONG matrix[4];
 	SLONG useangle;
 
@@ -10372,24 +10346,7 @@ SLONG slide_around_box(
 
 	rx2 = MUL64(tx2, matrix[0]) + MUL64(tz2, matrix[1]);
 	rz2 = MUL64(tx2, matrix[2]) + MUL64(tz2, matrix[3]);
-#else
-	SLONG useangle;
 
-	useangle  = -box_yaw;
-	useangle &=  2047;
-
-	tx1 =  x1 - box_mid_x;
-	tz1 =  z1 - box_mid_z;
-
-	tx2 = *x2 - box_mid_x;
-	tz2 = *z2 - box_mid_z;
-
-	rx1 = MUL64(tx1, COS(useangle)) + MUL64(tz1, SIN(useangle));
-	rz1 = MUL64(tx1, -SIN(useangle)) + MUL64(tz1, COS(useangle));
-
-	rx2 = MUL64(tx2, COS(useangle)) + MUL64(tz2, SIN(useangle));
-	rz2 = MUL64(tx2, -SIN(useangle)) + MUL64(tz2, COS(useangle));
-#endif
 	//
 	// The bounding box.
 	//
@@ -10426,84 +10383,43 @@ SLONG slide_around_box(
 	dminz = rz2 - minz;
 	dmaxz = maxz - rz2;
 
-#ifndef	PSX
-	SWAP(matrix[1], matrix[2]);
-#endif
+	best   = dminx;
+	best_x = minx - 1;
+	best_z = rz2;
 
-	while(failed)
+	if (dmaxx < best)
 	{
-		if(tried&2)
-		{
-			best=0x7fffffff;
-		}
-		else
-		{
-			best   = dminx;
-			best_x = minx - 1;
-			best_z = rz2;
-			used_this_go=1;
-		}
-		
-		if(!(tried&4))
-		if (dmaxx < best)
-		{
-			{
-				best   = dmaxx;
-				best_x = maxx - 1;
-				best_z = rz2;
-				used_this_go=2;
-			}
-		}
-
-		if(!(tried&8))
-		if (dminz < best)
-		{
-			{
-				best   = dminz;
-				best_x = rx2;
-				best_z = minz - 1;
-				used_this_go=3;
-			}
-		}
-
-		if(!(tried&16))
-		if (dmaxz < best)
-		{
-			{
-				best   = dmaxz;
-				best_x = rx2;
-				best_z = maxz + 1;
-				used_this_go=4;
-			}
-		}
-
-		//
-		// We have to un-rotate the points. The inverse of the
-		// matrix is its transpose.
-		//
-
-	#ifndef PSX
-
-		*x2 = MUL64(best_x, matrix[0]) + MUL64(best_z, matrix[1]);
-		*z2 = MUL64(best_x, matrix[2]) + MUL64(best_z, matrix[3]);
-	#else
-		*x2 = MUL64(best_x, COS(useangle)) + MUL64(best_z, -SIN(useangle));
-		*z2 = MUL64(best_x, SIN(useangle)) + MUL64(best_z, COS(useangle));
-	#endif
-
-		*x2 += box_mid_x;
-		*z2 += box_mid_z;
-
-		if(PAP_2HI((*x2)>>8,(*z2)>>8).Flags&PAP_FLAG_NOGO)
-		{
-			tried|=1<<used_this_go;
-			failed=1;
-		}
-		else
-		{
-			failed=0;
-		}
+		best   = dmaxx;
+		best_x = maxx - 1;
+		best_z = rz2;
 	}
+
+	if (dminz < best)
+	{
+		best   = dminz;
+		best_x = rx2;
+		best_z = minz - 1;
+	}
+
+	if (dmaxz < best)
+	{
+		best   = dmaxz;
+		best_x = rx2;
+		best_z = maxz + 1;
+	}
+
+	//
+	// We have to un-rotate the points. The inverse of the
+	// matrix is its transpose.
+	//
+
+	SWAP(matrix[1], matrix[2]);
+
+	*x2 = MUL64(best_x, matrix[0]) + MUL64(best_z, matrix[1]);
+	*z2 = MUL64(best_x, matrix[2]) + MUL64(best_z, matrix[3]);
+
+	*x2 += box_mid_x;
+	*z2 += box_mid_z;
 
 	return TRUE;
 }
@@ -10854,6 +10770,15 @@ void create_shockwave(
 	SLONG dist;
 	SLONG hitpoints;
 
+	SWORD xmin;
+	SWORD zmin;
+	SWORD xmax;
+	SWORD zmax;
+	UBYTE mx;
+	UBYTE mz;
+	SLONG mid;
+	OB_Info *oi;
+
 	#define SHOCKWAVE_FIND 16
 
 	UWORD found[SHOCKWAVE_FIND];
@@ -11026,6 +10951,34 @@ void create_shockwave(
 							p_aggressor,
 							hitpoints);
 					}
+				}
+			}
+		}
+	}
+
+	// Find damagable objects within the shockwave radius, and...damage them.
+
+	xmin = (x - radius) >> PAP_SHIFT_LO;
+	zmin = (z - radius) >> PAP_SHIFT_LO;
+	xmax = (x + radius) >> PAP_SHIFT_LO;
+	zmax = (z + radius) >> PAP_SHIFT_LO;
+
+	SATURATE(xmin, 0, PAP_SIZE_LO - 1);
+	SATURATE(xmax, 0, PAP_SIZE_LO - 1);
+	SATURATE(zmin, 0, PAP_SIZE_LO - 1);
+	SATURATE(zmax, 0, PAP_SIZE_LO - 1);
+
+	for (mx = xmin; mx <= xmax; mx++)
+	for (mz = zmin; mz <= zmax; mz++)
+	{
+		for (oi = OB_find(mx, mz); oi->prim; oi += 2)
+		{
+			if (prim_objects[oi->prim].damage & PRIM_DAMAGE_DAMAGABLE)
+			{
+				mid = abs(oi->x - x) + abs(oi->y - y) + abs(oi->z - z);
+				if (mid < radius && maxdamage * (radius - mid) / radius > 50)
+				{
+					OB_damage(oi->index, x, z, oi->x, oi->z, p_aggressor);
 				}
 			}
 		}
