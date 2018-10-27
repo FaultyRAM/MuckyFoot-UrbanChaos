@@ -1009,7 +1009,7 @@ SLONG	projectile_move_thing(Thing *p_thing,SLONG flag)
 
 	if (GAME_FLAGS & GF_NO_FLOOR)
 	{
-		if (p_thing->WorldPos.Y < 0x0 && p_thing->DY < -6000)
+		if (p_thing->WorldPos.Y < 0x10000 && p_thing->DY < -6000)
 		{
 			//
 			// Stop Roper popping back onto buildings by falling underneath them.
@@ -1021,7 +1021,7 @@ SLONG	projectile_move_thing(Thing *p_thing,SLONG flag)
 
 	if (p_thing->DY < death_check)
 	{
-		if ((GAME_TURN & 0x3)==THING_NUMBER(p_thing))
+		if (GAME_TURN & 0x3)
 		{
 			if (p_thing->Draw.Tweened->CurrentAnim == ANIM_PLUNGE_START ||
 				p_thing->Draw.Tweened->CurrentAnim == ANIM_PLUNGE_FORWARDS)
