@@ -3071,17 +3071,6 @@ SWORD AENG_dirt_uvlookup_world_type;
 
 void AENG_draw_dirt()
 {
-	if (GAME_FLAGS & GF_NO_FLOOR)
-	{
-		//
-		// No dirt if there is no floor!
-		//
-
-		return;
-	}
-
-	SLONG i;
-
 	#define LEAF_PAGE		(POLY_PAGE_LEAF)
 	#define LEAF_CENTRE_U	(0.5F)
 	#define LEAF_CENTRE_V	(0.5F)
@@ -3089,51 +3078,31 @@ void AENG_draw_dirt()
 	#define LEAF_U(a)		(LEAF_CENTRE_U + LEAF_RADIUS * (float)sin(a))
 	#define LEAF_V(a)		(LEAF_CENTRE_V + LEAF_RADIUS * (float)cos(a))
 
-
 	#define SNOW_CENTRE_U	(0.5F)
 	#define SNOW_CENTRE_V	(0.5F)
 	#define SNOW_RADIUS		(1.0F)
 
-//#ifdef TARGET_DC
-	// Slightly more for the DC - not sure why.
-	//#define LEAF_UP			12
-//#else
 	#define LEAF_UP			8
-//#endif
 	#define LEAF_SIZE       (20.0F+(float)(i&15))
 
+	SLONG i;
 	SLONG j;
+
+	SLONG falling;
+
+	DIRT_Info di;
 
 	float fyaw;
 	float fpitch;
 	float froll;
-	float ubase;
-	float vbase;
 
 	float       matrix[9];
 	float       angle;
 	SVector_F   temp[4];
-	PolyPage   *pp;
-	D3DLVERTEX *lv;
-	ULONG       rubbish_colour;
+	POLY_Point  pp[4];
+	POLY_Point *quad[4];
+	POLY_Point *tri[3];
 
-	#ifdef TARGET_DC
-	ULONG leaf_colour_choice_rgb[4] =
-	{
-		0xff332d1d,
-		0xff243224,
-		0xff123320,
-		0xff332f07
-	};
-
-	ULONG leaf_colour_choice_grey[4] =
-	{
-		0xff333333,
-		0xff444444,
-		0xff222222,
-		0xff383838
-	};
-	#else
 	ULONG leaf_colour_choice_rgb[4] =
 	{
 		0x332d1d,
@@ -3149,246 +3118,113 @@ void AENG_draw_dirt()
 		0x222222,
 		0x383838
 	};
-	#endif
 
-	if (AENG_dirt_uvlookup_valid && AENG_dirt_uvlookup_world_type == world_type)
-	{
-		//
-		// Valid lookup table.
-		//
-	}
-	else
-	{
-		//
-		// Calclate the uvlookup table.
-		//
-
-		for (i = 0; i < AENG_MAX_DIRT_UVLOOKUP; i++)
-		{
-			float angle = float(i) * (2.0F * PI / AENG_MAX_DIRT_UVLOOKUP);
-
-			float cangle;
-			float sangle;
-
-			#ifdef TARGET_DC
-
-			_SinCosA(&sangle, &cangle, angle);
-
-			#else
-
-			sangle = sinf(angle);
-			cangle = cosf(angle);
-
-			#endif
-
-			//
-			// Fix the uv's for texture paging.
-			//
-
-			#ifdef TEX_EMBED
-
-			if (world_type == WORLD_TYPE_SNOW)
-			{
-				pp = &POLY_Page[POLY_PAGE_SNOWFLAKE];
-				// And the snowflake texture is bigger and needs a bit of squishing.
-				AENG_dirt_uvlookup[i].u = SNOW_CENTRE_U + sangle * SNOW_RADIUS;
-				AENG_dirt_uvlookup[i].v = SNOW_CENTRE_V + cangle * SNOW_RADIUS;
-			}
-			else
-			{
-				pp = &POLY_Page[POLY_PAGE_LEAF];
-				AENG_dirt_uvlookup[i].u = LEAF_CENTRE_U + sangle * LEAF_RADIUS;
-				AENG_dirt_uvlookup[i].v = LEAF_CENTRE_V + cangle * LEAF_RADIUS;
-			}
-
-			AENG_dirt_uvlookup[i].u = AENG_dirt_uvlookup[i].u * pp->m_UScale + pp->m_UOffset;
-			AENG_dirt_uvlookup[i].v = AENG_dirt_uvlookup[i].v * pp->m_VScale + pp->m_VOffset;
-
-			#endif
-		}
-
-		AENG_dirt_uvlookup_valid      = TRUE;
-		AENG_dirt_uvlookup_world_type = world_type;
-	}
-
-
-	for (i = 0; i < 4; i++)
-	{
-		leaf_colour_choice_rgb[i] = AENG_colour_mult(leaf_colour_choice_rgb[i], NIGHT_amb_d3d_colour);
-	}
-
-	ULONG flag[4];
 	ULONG leaf_colour;
-	ULONG leaf_specular;
 
-	// Cope with some wacky internals.
-	POLY_set_local_rotation_none();
-	POLY_flush_local_rot();
+	quad[0] = &pp[0];
+	quad[1] = &pp[1];
+	quad[2] = &pp[2];
+	quad[3] = &pp[3];
 
-	//
-	// Initialise the leaf page and MM stuff...
-	//
+	tri[0] = &pp[0];
+	tri[1] = &pp[1];
+	tri[2] = &pp[2];
 
-	AENG_dirt_lvert_upto = 0;
-	AENG_dirt_index_upto = 0;
-
-	AENG_dirt_lvert  = (D3DLVERTEX *) ((SLONG(AENG_dirt_lvert_buffer) + 31) & ~0x1f);
-	AENG_dirt_matrix = (D3DMATRIX  *) ((SLONG(AENG_dirt_matrix_buffer) + 31) & ~0x1f);
-
-	//
-	// Draw the dirt.
-	//
-
-	DIRT_Dirt *dd;
-
-#ifdef DEBUG
-	int iDrawnDirtCount = 0;
-#endif
 	for (i = 0; i < DIRT_MAX_DIRT; i++)
 	{
-		dd = &DIRT_dirt[i];
-
-		if (dd->type == DIRT_TYPE_UNUSED)
+		if (DIRT_get_info(i, &di))
 		{
-			continue;
-		}
-
-		dd->flag &= ~DIRT_FLAG_DELETE_OK;
-
-		//
-		// Is this bit of dirt behind the camera?
-		//
-
-		{
-			float dx;
-			float dy;
-			float dz;
-
-			dx = float(dd->x) - AENG_cam_x;
-			dy = float(dd->y) - AENG_cam_y;
-			dz = float(dd->z) - AENG_cam_z;
-
-			float dprod;
-			
-			dprod =
-				dx * AENG_cam_matrix[6] + 
-				dy * AENG_cam_matrix[7] + 
-				dz * AENG_cam_matrix[8];
-
-			if (dprod < 64.0F)
+			switch(di.type)
 			{
-				//
-				// Offscreen...
-				//
+				case DIRT_INFO_TYPE_WATER:
 
-				DIRT_MARK_AS_OFFSCREEN_QUICK(i);
+					SHAPE_droplet(
+						di.x,
+						di.y,
+						di.z,
+						di.dx * 4,
+						di.dy * 4,
+						di.dz * 4,
+						0x00224455,
+						POLY_PAGE_DROPLET);
 
-				goto do_next_dirt;
-			}
-		}
+					break;
 
-#ifdef DEBUG
-		iDrawnDirtCount++;
-#endif
+				case DIRT_INFO_TYPE_URINE:
 
-		switch(dd->type)
-		{
-			case DIRT_TYPE_LEAF:
-			case DIRT_TYPE_SNOW:
-				
-				{
+					SHAPE_droplet(
+						di.x,
+						di.y,
+						di.z,
+						di.dx * 4,
+						di.dy * 4,
+						di.dz * 4,
+						0x00775533,
+						POLY_PAGE_DROPLET);
+
+					break;
+
+				case DIRT_INFO_TYPE_SPARKS:
+
+					SHAPE_droplet(
+						di.x,
+						di.y,
+						di.z,
+						di.dx * 4,
+						di.dy * 4,
+						di.dz * 4,
+						0x7f997744,
+						POLY_PAGE_BLOOM1);
+
+					break;
+
+				case DIRT_INFO_TYPE_BLOOD:
+
+					SHAPE_droplet(
+						di.x,
+						di.y,
+						di.z,
+						di.dx * 4,
+						di.dy * 4,
+						di.dz * 4,
+						0x9fFFFFFF,
+						POLY_PAGE_BLOODSPLAT);
+
+					break;
+
+				case DIRT_INFO_TYPE_SNOW:
+					leaf_colour=di.morph1;
+					leaf_colour<<=23;
+					leaf_colour|=0xffFFff;
+					SPRITE_draw_tex(di.x,di.y,di.z,20,leaf_colour,0xFF000000,POLY_PAGE_SNOWFLAKE,0.0,0.0,1.0,1.0,SPRITE_SORT_NORMAL);
+					break;
+
+				case DIRT_INFO_TYPE_LEAF:
+
 					//
-					// Get four vertices from the leaf page.
+					// Create the rotation matrix for this bit of dirt...
 					//
 
-					if (AENG_dirt_lvert_upto + 4 > AENG_MAX_DIRT_LVERTS)
+					if ((di.pitch | di.roll) == 0)
 					{
-						//
-						// Draw what we have so far...
-						//
-
-						// Cope with some wacky internals.
-						POLY_set_local_rotation_none();
-
-						if (world_type == WORLD_TYPE_SNOW)
-						{
-							POLY_Page[POLY_PAGE_SNOWFLAKE].RS.SetChanged();
-						}
-						else
-						{
-							POLY_Page[POLY_PAGE_LEAF].RS.SetChanged();
-						}
-
-
-						the_display.lp_D3D_Device->DrawIndexedPrimitive(
-														D3DPT_TRIANGLELIST,
-														D3DFVF_LVERTEX,
-														AENG_dirt_lvert,
-														AENG_dirt_lvert_upto,
-														AENG_dirt_index,
-														AENG_dirt_index_upto,
-														0);
-
-						AENG_dirt_lvert_upto = 0;
-						AENG_dirt_index_upto = 0;
 						
-						lv = AENG_dirt_lvert;
-					}
-					else
-					{
-						lv = &AENG_dirt_lvert[AENG_dirt_lvert_upto];
 					}
 
-					if ((i & 0xf) == 0 && !estate && world_type != WORLD_TYPE_SNOW)
+					//
+					// There is a chance we are going to draw some rubbish instead of a leaf.
+					//
+
+					if ((i & 0xf) == 0 && estate==0)
 					{
 						//
-						// This is some rubbish...
+						// The rotation matrix of this bit of dirt.
 						//
 
-						fpitch = float(dd->pitch) * (PI / 1024.0F);
-						froll  = float(dd->roll)  * (PI / 1024.0F);
+						fpitch = float(di.pitch) * (PI / 1024.0F);
+						froll  = float(di.roll)  * (PI / 1024.0F);
+						fyaw   = float(i);
 
-						//
-						// Copied from MATRIX_calc then fucked with...
-						//
-
-						float cy, cp, cr;
-						float sy, sp, sr;
-
-						#ifdef TARGET_DC
-
-						// Use the fast intrinsics.
-						// Error is 2e-21 at most.
-
-						sy = 0.0F; // sin(0)
-						cy = 1.0F; // cos(0)
-
-						_SinCosA ( &sr, &cr, froll );
-						_SinCosA ( &sp, &cp, fpitch );
-
-						#else
-
-						sy = 0.0F; // sin(0)
-						cy = 1.0F; // cos(0)
-
-						sp = sin(fpitch);
-						sr = sin(froll);
-
-						cp = cos(fpitch);
-						cr = cos(froll);
-
-						#endif
-
-						//
-						// (matrix[3],matrix[4],matrix[5]) remains undefined...
-						//
-
-						matrix[0] =  cy * cr + sy * sp * sr;
-						matrix[6] =  sy * cp;
-						matrix[1] = -cp * sr;
-						matrix[7] =  sp;
-						matrix[2] = -sy * cr + cy * sp * sr;
-						matrix[8] =  cy * cp;
+						MATRIX_calc(matrix, fyaw, fpitch, froll);
 
 						matrix[0] *= 24.0F;
 						matrix[1] *= 24.0F;
@@ -3397,148 +3233,139 @@ void AENG_draw_dirt()
 						matrix[6] *= 24.0F;
 						matrix[7] *= 24.0F;
 						matrix[8] *= 24.0F;
-
-						//
-						// Work out the position of the points.
-						//
-
-						float base_x = float(dd->x);
-						float base_y = float(dd->y + LEAF_UP); 
-						float base_z = float(dd->z);
-
-						lv[0].x = base_x + matrix[6] + matrix[0];
-						lv[0].y = base_y + matrix[7] + matrix[1];
-						lv[0].z = base_z + matrix[8] + matrix[2];
 						
-						lv[1].x = base_x + matrix[6] - matrix[0];
-						lv[1].y = base_y + matrix[7] - matrix[1];
-						lv[1].z = base_z + matrix[8] - matrix[2];
+						temp[0].X = float(di.x) + matrix[6] + matrix[0];
+						temp[0].Y = float(di.y) + matrix[7] + matrix[1];
+						temp[0].Z = float(di.z) + matrix[8] + matrix[2];
 						
-						lv[2].x = base_x - matrix[6] + matrix[0];
-						lv[2].y = base_y - matrix[7] + matrix[1];
-						lv[2].z = base_z - matrix[8] + matrix[2];
+						temp[1].X = float(di.x) + matrix[6] - matrix[0];
+						temp[1].Y = float(di.y) + matrix[7] - matrix[1];
+						temp[1].Z = float(di.z) + matrix[8] - matrix[2];
 						
-						lv[3].x = base_x - matrix[6] - matrix[0];
-						lv[3].y = base_y - matrix[7] - matrix[1];
-						lv[3].z = base_z - matrix[8] - matrix[2];
+						temp[2].X = float(di.x) - matrix[6] + matrix[0];
+						temp[2].Y = float(di.y) - matrix[7] + matrix[1];
+						temp[2].Z = float(di.z) - matrix[8] + matrix[2];
+						
+						temp[3].X = float(di.x) - matrix[6] - matrix[0];
+						temp[3].Y = float(di.y) - matrix[7] - matrix[1];
+						temp[3].Z = float(di.z) - matrix[8] - matrix[2];
 
 						//
-						// What are the uv's and colour of this quad?
+						// Transform the points.
 						//
 
-						rubbish_colour = NIGHT_amb_d3d_colour;
+						for (j = 0; j < 4; j++)
+						{
+							POLY_transform(
+								temp[j].X,
+								temp[j].Y + 4.0F,
+								temp[j].Z,
+							&pp[j]);
 
-						if (i & 32)
-						{
-							ubase = 0.0F;
-							vbase = 0.0F;
-						}
-						else
-						{
-							ubase = 0.5F;
-							vbase = 0.0F;
-						}
-
-						if (i == 64)
-						{
-							//
-							// Only one bit of money!
-							//
-
-							ubase = 0.0F;
-							vbase = 0.5F;
-						}
-						else
-						{
-							if (!(i & 32))
+							if (!pp[j].IsValid())
 							{
-								if (i & 64)
-								{
-									rubbish_colour &= 0xffffff00;
-								}
+								//
+								// Tell the DIRT module that the leaf is off-screen.
+								//
+
+								DIRT_mark_as_offscreen(i);
+
+								//
+								// Don't bother transforming the other points.
+								//
+
+								goto do_next_dirt;
 							}
 						}
 
-						lv[0].tu       = ubase;
-						lv[0].tv       = vbase;
-						lv[0].color    = rubbish_colour;
-						lv[0].specular = 0xff000000;
+						if (POLY_valid_quad(quad))
+						{
+							float ubase;
+							float vbase;
 
-						lv[1].tu       = ubase + 0.5F;
-						lv[1].tv       = vbase;
-						lv[1].color    = rubbish_colour;
-						lv[1].specular = 0xff000000;
+							SLONG colour_and = 0xffffffff;
 
-						lv[2].tu       = ubase;
-						lv[2].tv       = vbase + 0.5F;
-						lv[2].color    = rubbish_colour;
-						lv[2].specular = 0xff000000;
+							if (i & 32)
+							{
+								ubase = 0.0F;
+								vbase = 0.0F;
+							}
+							else
+							{
+								ubase = 0.5F;
+								vbase = 0.0F;
+							}
 
-						lv[3].tu       = ubase + 0.5F;
-						lv[3].tv       = vbase + 0.5F;
-						lv[3].color    = rubbish_colour;
-						lv[3].specular = 0xff000000;
+							if (i == 64)
+							{
+								//
+								// Only one bit of money!
+								//
 
-						#ifdef TEX_EMBED
+								ubase = 0.0F;
+								vbase = 0.5F;
+							}
+							else
+							{
+								if (!(i & 32))
+								{
+									if (i & 64)
+									{
+										colour_and = 0xffffff00;
+									}
+								}
+							}
 
-						pp = &POLY_Page[POLY_PAGE_RUBBISH];
+							//
+							// Set the uvs.
+							//
 
-						lv[0].tu = lv[0].tu * pp->m_UScale + pp->m_UOffset;
-						lv[0].tv = lv[0].tv * pp->m_VScale + pp->m_VOffset;
+							for (j = 0; j < 4; j++)
+							{
+								pp[j].u = ubase;
+								pp[j].v = vbase;
 
-						lv[1].tu = lv[1].tu * pp->m_UScale + pp->m_UOffset;
-						lv[1].tv = lv[1].tv * pp->m_VScale + pp->m_VOffset;
+								if (j & 1) {pp[j].u += 0.5F;}
+								if (j & 2) {pp[j].v += 0.5F;}
 
-						lv[2].tu = lv[2].tu * pp->m_UScale + pp->m_UOffset;
-						lv[2].tv = lv[2].tv * pp->m_VScale + pp->m_VOffset;
+								pp[j].colour   = NIGHT_amb_d3d_colour & colour_and;
+								pp[j].specular = 0xff000000;
+							}
 
-						lv[3].tu = lv[3].tu * pp->m_UScale + pp->m_UOffset;
-						lv[3].tv = lv[3].tv * pp->m_VScale + pp->m_VOffset;
+							//
+							// Draw the quad.
+							//
 
-						#endif
+							POLY_add_quad(quad, POLY_PAGE_RUBBISH, FALSE);
+						}
+						else
+						{
+							//
+							// Tell the DIRT module that the leaf is off-screen.
+							//
 
-						//
-						// Build the indices.
-						//
-
-						ASSERT(AENG_dirt_index_upto + 6 <= AENG_MAX_DIRT_INDICES);
-
-						AENG_dirt_index[AENG_dirt_index_upto + 0] =  AENG_dirt_lvert_upto + 0;
-						AENG_dirt_index[AENG_dirt_index_upto + 1] =  AENG_dirt_lvert_upto + 1;
-						AENG_dirt_index[AENG_dirt_index_upto + 2] =  AENG_dirt_lvert_upto + 2;
-
-						AENG_dirt_index[AENG_dirt_index_upto + 3] =  AENG_dirt_lvert_upto + 3;
-						AENG_dirt_index[AENG_dirt_index_upto + 4] =  AENG_dirt_lvert_upto + 2;
-						AENG_dirt_index[AENG_dirt_index_upto + 5] =  AENG_dirt_lvert_upto + 1;
-
-						AENG_dirt_index_upto += 6;
-						AENG_dirt_lvert_upto += 4;
+							DIRT_mark_as_offscreen(i);
+						}
 					}
 					else
 					{
-						//
-						// This is a leaf or snowflake
-						//
-
-						float leaf_size = LEAF_SIZE;
-
-						if ((dd->pitch | dd->roll) == 0)
+						if ((di.yaw | di.pitch | di.roll) == 0)
 						{
 							//
 							// This happens often... so we optimise it out.
 							//
 
-							lv[0].x = float(dd->x);
-							lv[0].y = float(dd->y + LEAF_UP);
-							lv[0].z = float(dd->z + leaf_size);
+							temp[0].X = float(di.x);
+							temp[0].Y = float(di.y + LEAF_UP);
+							temp[0].Z = float(di.z + LEAF_SIZE);
 
-							lv[1].x = float(dd->x + leaf_size);
-							lv[1].y = float(dd->y + LEAF_UP);
-							lv[1].z = float(dd->z - leaf_size);
+							temp[1].X = float(di.x + LEAF_SIZE);
+							temp[1].Y = float(di.y + LEAF_UP);
+							temp[1].Z = float(di.z - LEAF_SIZE);
 
-							lv[2].x = float(dd->x - leaf_size);
-							lv[2].y = float(dd->y + LEAF_UP);
-							lv[2].z = float(dd->z - leaf_size);
+							temp[2].X = float(di.x - LEAF_SIZE);
+							temp[2].Y = float(di.y + LEAF_UP);
+							temp[2].Z = float(di.z - LEAF_SIZE);
 						}
 						else
 						{
@@ -3546,727 +3373,172 @@ void AENG_draw_dirt()
 							// The rotation matrix of this bit of dirt.
 							//
 
-							fpitch = float(dd->pitch) * (PI / 1024.0F);
-							froll  = float(dd->roll)  * (PI / 1024.0F);
+							fyaw   = float(di.yaw)   * (PI / 1024.0F);
+							fpitch = float(di.pitch) * (PI / 1024.0F);
+							froll  = float(di.roll)  * (PI / 1024.0F);
 
-							//
-							// Copied from MATRIX_calc then fucked with...
-							//
-
-							float cy, cp, cr;
-							float sy, sp, sr;
-
-							#ifdef TARGET_DC
-
-							// Use the fast intrinsics.
-							// Error is 2e-21 at most.
-
-							sy = 0.0F; // sin(0)
-							cy = 1.0F; // cos(0)
-
-							_SinCosA ( &sr, &cr, froll );
-							_SinCosA ( &sp, &cp, fpitch );
-
-							#else
-
-							sy = 0.0F; // sin(0)
-							cy = 1.0F; // cos(0)
-
-							sp = sin(fpitch);
-							sr = sin(froll);
-
-							cp = cos(fpitch);
-							cr = cos(froll);
-
-							#endif
-
-							//
-							// (matrix[3],matrix[4],matrix[5]) remains undefined...
-							//
-
-							matrix[0] =  cy * cr + sy * sp * sr;
-							matrix[6] =  sy * cp;
-							matrix[1] = -cp * sr;
-							matrix[7] =  sp;
-							matrix[2] = -sy * cr + cy * sp * sr;
-							matrix[8] =  cy * cp;
-
-							matrix[0] *= leaf_size;
-							matrix[1] *= leaf_size;
-							matrix[2] *= leaf_size;
-
-							matrix[6] *= leaf_size;
-							matrix[7] *= leaf_size;
-							matrix[8] *= leaf_size;
+							MATRIX_calc(matrix, fyaw, fpitch, froll);
 
 							//
 							// Work out the position of the points.
 							//
 
-							lv[0].x  = float(dd->x);
-							lv[0].y  = float(dd->y + LEAF_UP);
-							lv[0].z  = float(dd->z);
-
-							lv[1].x = lv[0].x - matrix[6] + matrix[0];
-							lv[1].y = lv[0].y - matrix[7] + matrix[1];
-							lv[1].z = lv[0].z - matrix[8] + matrix[2];
-									  
-							lv[2].x = lv[0].x - matrix[6] - matrix[0];
-							lv[2].y = lv[0].y - matrix[7] - matrix[1];
-							lv[2].z = lv[0].z - matrix[8] - matrix[2];
-
-							lv[0].x += matrix[6];
-							lv[0].y += matrix[7];
-							lv[0].z += matrix[8];
-						}
-
-						if (world_type == WORLD_TYPE_SNOW)
-						{
-							// A snowflake - just subtle shades of grey
-							DWORD dwColour = ( ( i & 0x0f ) << 2 ) + 0xc0;
-							dwColour *= 0x010101;
-							dwColour |= 0xff000000;
-
-							lv[0].color    = dwColour;
-							lv[0].specular = 0xff000000;
-
-							lv[1].color    = dwColour;
-							lv[1].specular = 0xff000000;
-
-							lv[2].color    = dwColour;
-							lv[2].specular = 0xff000000;
-						}
-						else
-						{
-							//
-							// The colour of this leaf.
-							//
-
-							leaf_colour = leaf_colour_choice_rgb[i & 0x3];
-
-							lv[0].color    = (leaf_colour * 3) | 0xff000000;
-							lv[0].specular = 0xff000000;
-
-							lv[1].color    = (leaf_colour * 4) | 0xff000000;
-							lv[1].specular = 0xff000000;
-
-							lv[2].color    = (leaf_colour * 5) | 0xff000000;
-							lv[2].specular = 0xff000000;
-						}
-
-						//
-						// The rotation angle of the leaf.
-						//
-
-						lv[0].tu = AENG_dirt_uvlookup[(i + (AENG_MAX_DIRT_UVLOOKUP * 0 / 3)) & (AENG_MAX_DIRT_UVLOOKUP - 1)].u;
-						lv[0].tv = AENG_dirt_uvlookup[(i + (AENG_MAX_DIRT_UVLOOKUP * 0 / 3)) & (AENG_MAX_DIRT_UVLOOKUP - 1)].v;
-
-						lv[1].tu = AENG_dirt_uvlookup[(i + (AENG_MAX_DIRT_UVLOOKUP * 1 / 3)) & (AENG_MAX_DIRT_UVLOOKUP - 1)].u;
-						lv[1].tv = AENG_dirt_uvlookup[(i + (AENG_MAX_DIRT_UVLOOKUP * 1 / 3)) & (AENG_MAX_DIRT_UVLOOKUP - 1)].v;
-
-						lv[2].tu = AENG_dirt_uvlookup[(i + (AENG_MAX_DIRT_UVLOOKUP * 2 / 3)) & (AENG_MAX_DIRT_UVLOOKUP - 1)].u;
-						lv[2].tv = AENG_dirt_uvlookup[(i + (AENG_MAX_DIRT_UVLOOKUP * 2 / 3)) & (AENG_MAX_DIRT_UVLOOKUP - 1)].v;
-
-						//
-						// Build the indices.
-						//
-
-						ASSERT(AENG_dirt_index_upto + 3 <= AENG_MAX_DIRT_INDICES);
-
-						AENG_dirt_index[AENG_dirt_index_upto + 0] =  AENG_dirt_lvert_upto + 0;
-						AENG_dirt_index[AENG_dirt_index_upto + 1] =  AENG_dirt_lvert_upto + 1;
-						AENG_dirt_index[AENG_dirt_index_upto + 2] =  AENG_dirt_lvert_upto + 2;
-
-						AENG_dirt_index_upto += 3;
-						AENG_dirt_lvert_upto += 3;
-					}
-				}
-
-				break;
-
-			case DIRT_TYPE_HELDCAN:
-				
-				//
-				// Don't draw inside the car?!
-				//
-
-				{
-					Thing *p_person = TO_THING(dd->droll);	// droll => owner
-
-					if (p_person->Genus.Person->InCar)
-					{
-						continue;
-					}
-				}
-
-				//
-				// FALLTHROUGH!
-				//
-
-			case DIRT_TYPE_CAN:
-			case DIRT_TYPE_THROWCAN:
-
-				MESH_draw_poly(
-					PRIM_OBJ_CAN,
-					dd->x,
-					dd->y,
-					dd->z,
-					dd->yaw,
-					dd->pitch,
-					dd->roll,
-					#ifdef TARGET_DC
-					NULL,0xff,0);
-					#else
-					NULL,0,0);
-					#endif
-
-				break;
-
-			case DIRT_TYPE_BRASS:
-
-				extern UBYTE kludge_shrink;
-
-				kludge_shrink = TRUE;
-
-				MESH_draw_poly(
-					PRIM_OBJ_ITEM_AMMO_SHOTGUN,
-					dd->x,
-					dd->y,
-					dd->z,
-					dd->yaw,
-					dd->pitch,
-					dd->roll,
-					#ifdef TARGET_DC
-					NULL,0xff,0);
-					#else
-					NULL,0,0);
-					#endif
-
-				kludge_shrink = FALSE;
-
-				break;
-
-			case DIRT_TYPE_WATER:
-
-				SHAPE_droplet(
-					dd->x,
-					dd->y,
-					dd->z,
-					dd->dx >> 2,
-					dd->dy >> TICK_SHIFT,
-					dd->dz >> 2,
-					#ifdef TARGET
-					0xff224455,
-					#else
-					0x00224455,
-					#endif
-					POLY_PAGE_DROPLET);
-				break;
-
-			case DIRT_TYPE_SPARKS:
-
-				SHAPE_droplet(
-					dd->x,
-					dd->y,
-					dd->z,
-					dd->dx >> 2,
-					dd->dy >> TICK_SHIFT,
-					dd->dz >> 2,
-					0x7f997744,
-					POLY_PAGE_BLOOM1);
-				break;
-
-			case DIRT_TYPE_URINE:
-				SHAPE_droplet(
-					dd->x,
-					dd->y,
-					dd->z,
-					dd->dx >> 2,
-					dd->dy >> TICK_SHIFT,
-					dd->dz >> 2,
-					#ifdef TARGET
-					0xff775533,
-					#else
-					0x00775533,
-					#endif
-					POLY_PAGE_DROPLET);
-				break;
-
-			case DIRT_TYPE_BLOOD:
-				SHAPE_droplet(
-					dd->x,
-					dd->y,
-					dd->z,
-					dd->dx >> 2,
-					dd->dy >> TICK_SHIFT,
-					dd->dz >> 2,
-					0x9fFFFFFF,
-					POLY_PAGE_BLOODSPLAT);
-				break;
-
-			default:
-				ASSERT(0);
-				break;
-		}
-
-
-
-#if 0
-/*
-		switch(di.type)
-		{
-			case DIRT_INFO_TYPE_WATER:
-
-				SHAPE_droplet(
-					di.x,
-					di.y,
-					di.z,
-					di.dx * 4,
-					di.dy * 4,
-					di.dz * 4,
-#ifdef TARGET
-					0xff224455,
-#else
-					0x00224455,
-#endif
-					POLY_PAGE_DROPLET);
-
-				break;
-
-			case DIRT_INFO_TYPE_URINE:
-
-				SHAPE_droplet(
-					di.x,
-					di.y,
-					di.z,
-					di.dx * 4,
-					di.dy * 4,
-					di.dz * 4,
-#ifdef TARGET
-					0xff775533,
-#else
-					0x00775533,
-#endif
-					POLY_PAGE_DROPLET);
-
-				break;
-
-			case DIRT_INFO_TYPE_SPARKS:
-
-				SHAPE_droplet(
-					di.x,
-					di.y,
-					di.z,
-					di.dx * 4,
-					di.dy * 4,
-					di.dz * 4,
-					0x7f997744,
-					POLY_PAGE_BLOOM1);
-
-				break;
-
-			case DIRT_INFO_TYPE_BLOOD:
-
-				SHAPE_droplet(
-					di.x,
-					di.y,
-					di.z,
-					di.dx * 4,
-					di.dy * 4,
-					di.dz * 4,
-					0x9fFFFFFF,
-					POLY_PAGE_BLOODSPLAT);
-
-				break;
-
-			case DIRT_INFO_TYPE_SNOW:
-				leaf_colour=di.morph1;
-				leaf_colour<<=23;
-				leaf_colour|=0xffFFff;
-				SPRITE_draw_tex(di.x,di.y,di.z,20,leaf_colour,0xFF000000,POLY_PAGE_SNOWFLAKE,0.0,0.0,1.0,1.0,SPRITE_SORT_NORMAL);
-				break;
-
-			case DIRT_INFO_TYPE_LEAF:
-
-				//
-				// Create the rotation matrix for this bit of dirt...
-				//
-
-				if ((di.pitch | di.roll) == 0)
-				{
-					
-				}
-
-				//
-				// There is a chance we are going to draw some rubbish instead of a leaf.
-				//
-
-				if ((i & 0xf) == 0 && estate==0)
-				{
-					//
-					// The rotation matrix of this bit of dirt.
-					//
-
-					fpitch = float(di.pitch) * (PI / 1024.0F);
-					froll  = float(di.roll)  * (PI / 1024.0F);
-					fyaw   = float(i);
-
-					MATRIX_calc(matrix, fyaw, fpitch, froll);
-
-					matrix[0] *= 24.0F;
-					matrix[1] *= 24.0F;
-					matrix[2] *= 24.0F;
-
-					matrix[6] *= 24.0F;
-					matrix[7] *= 24.0F;
-					matrix[8] *= 24.0F;
-					
-					temp[0].X = float(di.x) + matrix[6] + matrix[0];
-					temp[0].Y = float(di.y) + matrix[7] + matrix[1];
-					temp[0].Z = float(di.z) + matrix[8] + matrix[2];
-					
-					temp[1].X = float(di.x) + matrix[6] - matrix[0];
-					temp[1].Y = float(di.y) + matrix[7] - matrix[1];
-					temp[1].Z = float(di.z) + matrix[8] - matrix[2];
-					
-					temp[2].X = float(di.x) - matrix[6] + matrix[0];
-					temp[2].Y = float(di.y) - matrix[7] + matrix[1];
-					temp[2].Z = float(di.z) - matrix[8] + matrix[2];
-					
-					temp[3].X = float(di.x) - matrix[6] - matrix[0];
-					temp[3].Y = float(di.y) - matrix[7] - matrix[1];
-					temp[3].Z = float(di.z) - matrix[8] - matrix[2];
-
-					//
-					// Transform the points.
-					//
-
-					for (j = 0; j < 4; j++)
-					{
-						POLY_transform(
-							temp[j].X,
-							temp[j].Y + 4.0F,
-							temp[j].Z,
-						   &pp[j]);
-
-						if (!pp[j].IsValid())
-						{
-							//
-							// Tell the DIRT module that the leaf is off-screen.
-							//
-
-							DIRT_mark_as_offscreen(i);
-
-							//
-							// Don't bother transforming the other points.
-							//
-
-							goto do_next_dirt;
-						}
-					}
-
-					if (POLY_valid_quad(quad))
-					{
-						float ubase;
-						float vbase;
-
-						SLONG colour_and = 0xffffffff;
-
-						if (i & 32)
-						{
-							ubase = 0.0F;
-							vbase = 0.0F;
-						}
-						else
-						{
-							ubase = 0.5F;
-							vbase = 0.0F;
-						}
-
-						if (i == 64)
-						{
-							//
-							// Only one bit of money!
-							//
-
-							ubase = 0.0F;
-							vbase = 0.5F;
-						}
-						else
-						{
-							if (!(i & 32))
+							for (j = 0; j < 3; j++)
 							{
-								if (i & 64)
-								{
-									colour_and = 0xffffff00;
-								}
+
+								temp[j].X  = float(di.x);
+								temp[j].Y  = float(di.y);
+								temp[j].Z  = float(di.z);
+
+								temp[j].Y += float(LEAF_UP);
+							}
+
+
+							temp[0].X += matrix[6] * LEAF_SIZE;
+							temp[0].Y += matrix[7] * LEAF_SIZE;
+							temp[0].Z += matrix[8] * LEAF_SIZE;
+
+							temp[1].X -= matrix[6] * LEAF_SIZE;
+							temp[1].Y -= matrix[7] * LEAF_SIZE;
+							temp[1].Z -= matrix[8] * LEAF_SIZE;
+
+							temp[2].X -= matrix[6] * LEAF_SIZE;
+							temp[2].Y -= matrix[7] * LEAF_SIZE;
+							temp[2].Z -= matrix[8] * LEAF_SIZE;
+
+							temp[1].X += matrix[0] * LEAF_SIZE;
+							temp[1].Y += matrix[1] * LEAF_SIZE;
+							temp[1].Z += matrix[2] * LEAF_SIZE;
+
+							temp[2].X -= matrix[0] * LEAF_SIZE;
+							temp[2].Y -= matrix[1] * LEAF_SIZE;
+							temp[2].Z -= matrix[2] * LEAF_SIZE;
+
+							falling = TRUE;
+						}
+
+						//
+						// Transform the points.
+						//
+
+						for (j = 0; j < 3; j++)
+						{
+							POLY_transform(
+								temp[j].X,
+								temp[j].Y,
+								temp[j].Z,
+							&pp[j]);
+
+							if (!pp[j].IsValid())
+							{
+								//
+								// Tell the DIRT module that the leaf is off-screen.
+								//
+
+								DIRT_mark_as_offscreen(i);
+
+								//
+								// Don't bother transforming the other points.
+								//
+
+								goto do_next_dirt;
 							}
 						}
 
-						//
-						// Set the uvs.
-						//
-
-						for (j = 0; j < 4; j++)
+						if (POLY_valid_triangle(tri))
 						{
-							pp[j].u = ubase;
-							pp[j].v = vbase;
+							//
+							// The colour and texture of the leaf.
+							//
 
-							if (j & 1) {pp[j].u += 0.5F;}
-							if (j & 2) {pp[j].v += 0.5F;}
+							if (POLY_force_additive_alpha)
+							{
+								leaf_colour = leaf_colour_choice_grey[i & 0x3];
+							}
+							else
+							{
+								leaf_colour = leaf_colour_choice_rgb[i & 0x3];
+								leaf_colour = AENG_colour_mult(leaf_colour, NIGHT_amb_d3d_colour);
+							}
 
-#ifdef TARGET_DC
-							pp[j].colour   = ( NIGHT_amb_d3d_colour & colour_and ) | 0xff000000;
-#else
-							pp[j].colour   = NIGHT_amb_d3d_colour & colour_and;
-#endif
-							pp[j].specular = 0xff000000;
+							angle = float(i);
+
+							for (j = 0; j < 3; j++)
+							{
+								pp[j].colour =  leaf_colour * (j + 3);
+								pp[j].colour  &= ~POLY_colour_restrict;
+								pp[j].specular =  0xff000000;
+								pp[j].u        =  LEAF_U(angle);
+								pp[j].v        =  LEAF_V(angle);
+
+								angle += 2.0F * PI / 3.0F;
+							}
+
+							POLY_add_triangle(tri, LEAF_PAGE, FALSE);
 						}
-
-						//
-						// Draw the quad.
-						//
-
-						POLY_add_quad(quad, POLY_PAGE_RUBBISH, FALSE);
-					}
-					else
-					{
-						//
-						// Tell the DIRT module that the leaf is off-screen.
-						//
-
-						DIRT_mark_as_offscreen(i);
-					}
-				}
-				else
-				{
-					if ((di.yaw | di.pitch | di.roll) == 0)
-					{
-						//
-						// This happens often... so we optimise it out.
-						//
-
-						temp[0].X = float(di.x);
-						temp[0].Y = float(di.y + LEAF_UP);
-						temp[0].Z = float(di.z + LEAF_SIZE);
-
-						temp[1].X = float(di.x + LEAF_SIZE);
-						temp[1].Y = float(di.y + LEAF_UP);
-						temp[1].Z = float(di.z - LEAF_SIZE);
-
-						temp[2].X = float(di.x - LEAF_SIZE);
-						temp[2].Y = float(di.y + LEAF_UP);
-						temp[2].Z = float(di.z - LEAF_SIZE);
-					}
-					else
-					{
-						//
-						// The rotation matrix of this bit of dirt.
-						//
-
-						fyaw   = float(di.yaw)   * (PI / 1024.0F);
-						fpitch = float(di.pitch) * (PI / 1024.0F);
-						froll  = float(di.roll)  * (PI / 1024.0F);
-
-						MATRIX_calc(matrix, fyaw, fpitch, froll);
-
-						//
-						// Work out the position of the points.
-						//
-
-						for (j = 0; j < 3; j++)
-						{
-
-							temp[j].X  = float(di.x);
-							temp[j].Y  = float(di.y);
-							temp[j].Z  = float(di.z);
-
-							temp[j].Y += float(LEAF_UP);
-						}
-
-
-						temp[0].X += matrix[6] * LEAF_SIZE;
-						temp[0].Y += matrix[7] * LEAF_SIZE;
-						temp[0].Z += matrix[8] * LEAF_SIZE;
-
-						temp[1].X -= matrix[6] * LEAF_SIZE;
-						temp[1].Y -= matrix[7] * LEAF_SIZE;
-						temp[1].Z -= matrix[8] * LEAF_SIZE;
-
-						temp[2].X -= matrix[6] * LEAF_SIZE;
-						temp[2].Y -= matrix[7] * LEAF_SIZE;
-						temp[2].Z -= matrix[8] * LEAF_SIZE;
-
-						temp[1].X += matrix[0] * LEAF_SIZE;
-						temp[1].Y += matrix[1] * LEAF_SIZE;
-						temp[1].Z += matrix[2] * LEAF_SIZE;
-
-						temp[2].X -= matrix[0] * LEAF_SIZE;
-						temp[2].Y -= matrix[1] * LEAF_SIZE;
-						temp[2].Z -= matrix[2] * LEAF_SIZE;
-
-						falling = TRUE;
-					}
-
-					//
-					// Transform the points.
-					//
-
-					for (j = 0; j < 3; j++)
-					{
-						POLY_transform(
-							temp[j].X,
-							temp[j].Y,
-							temp[j].Z,
-						   &pp[j]);
-
-						if (!pp[j].IsValid())
+						else
 						{
 							//
 							// Tell the DIRT module that the leaf is off-screen.
 							//
 
 							DIRT_mark_as_offscreen(i);
-
-							//
-							// Don't bother transforming the other points.
-							//
-
-							goto do_next_dirt;
 						}
+
 					}
 
-					if (POLY_valid_triangle(tri))
+					break;
+
+				case DIRT_INFO_TYPE_PRIM:
+
+					extern UBYTE kludge_shrink;
+
+					if (di.held||(di.prim==253))
 					{
-						//
-						// The colour and texture of the leaf.
-						//
-
-						if (POLY_force_additive_alpha)
-						{
-							leaf_colour = leaf_colour_choice_grey[i & 0x3];
-						}
-						else
-						{
-							leaf_colour = leaf_colour_choice_rgb[i & 0x3];
-							leaf_colour = AENG_colour_mult(leaf_colour, NIGHT_amb_d3d_colour);
-						}
-
-						angle = float(i);
-
-						for (j = 0; j < 3; j++)
-						{
-						    pp[j].colour =  leaf_colour * (j + 3);
-							pp[j].colour  &= ~POLY_colour_restrict;
-#ifdef TARGET_DC
-							pp[j].colour |= 0xff000000;
-#endif
-							pp[j].specular =  0xff000000;
-							pp[j].u        =  LEAF_U(angle);
-							pp[j].v        =  LEAF_V(angle);
-
-							angle += 2.0F * PI / 3.0F;
-						}
-
-						POLY_add_triangle(tri, LEAF_PAGE, FALSE);
-					}
-					else
-					{
-						//
-						// Tell the DIRT module that the leaf is off-screen.
-						//
-
-						DIRT_mark_as_offscreen(i);
+						kludge_shrink = TRUE;
 					}
 
-				}
+					MESH_draw_poly(
+						di.prim,
+						di.x,
+						di.y,
+						di.z,
+						di.yaw,
+						di.pitch,
+						di.roll,
+						NULL,0,0);
 
-				break;
+					kludge_shrink = FALSE;
 
-			case DIRT_INFO_TYPE_PRIM:
+					break;
 
-				extern UBYTE kludge_shrink;
+				case DIRT_INFO_TYPE_MORPH:
 
-				if (di.held||(di.prim==253))
-				{
-					kludge_shrink = TRUE;
-				}
+					MESH_draw_morph(
+						di.prim,
+						di.morph1,
+						di.morph2,
+						di.tween,
+						di.x,
+						di.y,
+						di.z,
+						di.yaw,
+						di.pitch,
+						di.roll,
+						NULL);
 
-				MESH_draw_poly(
-					di.prim,
-					di.x,
-					di.y,
-					di.z,
-					di.yaw,
-					di.pitch,
-					di.roll,
-#ifdef TARGET_DC
-					NULL,0xff,0);
-#else
-					NULL,0,0);
-#endif
+					break;
 
-				kludge_shrink = FALSE;
+				default:
+					ASSERT(0);
+					break;
+			}
 
-				break;
-
-			case DIRT_INFO_TYPE_MORPH:
-
-				MESH_draw_morph(
-					di.prim,
-					di.morph1,
-					di.morph2,
-					di.tween,
-					di.x,
-					di.y,
-					di.z,
-					di.yaw,
-					di.pitch,
-					di.roll,
-					NULL);
-
-				break;
-
-			default:
-				ASSERT(0);
-				break;
+			do_next_dirt:;
 		}
-*/
-#endif
-
-	  do_next_dirt:;
-
 	}
 
-	//
-	// Draw left-over leaves.
-	//
-
-	if (AENG_dirt_lvert_upto)
-	{
-		// Cope with some wacky internals.
-		POLY_set_local_rotation_none();
-
-		if (world_type == WORLD_TYPE_SNOW)
-		{
-			POLY_Page[POLY_PAGE_SNOWFLAKE].RS.SetChanged();
-		}
-		else
-		{
-			POLY_Page[POLY_PAGE_LEAF].RS.SetChanged();
-		}
-
-		the_display.lp_D3D_Device->DrawIndexedPrimitive(
-										D3DPT_TRIANGLELIST,
-										D3DFVF_LVERTEX,
-										AENG_dirt_lvert,
-										AENG_dirt_lvert_upto,
-										AENG_dirt_index,
-										AENG_dirt_index_upto,
-										0);
-	}
-
-	//TRACE ( "Drew %i bits of dirt\n", iDrawnDirtCount );
+	DrawGrenades();
 }
 
 
