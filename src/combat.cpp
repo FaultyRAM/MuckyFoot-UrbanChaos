@@ -798,7 +798,6 @@ SLONG	find_best_grapple(Thing *p_person)
 
 				if (!is_there_room_in_front_of_me(p_person, 150))
 				{
-/*
 					extern void add_damage_text(SWORD x,SWORD y,SWORD z,CBYTE *text);
 
 					add_damage_text(
@@ -806,7 +805,6 @@ SLONG	find_best_grapple(Thing *p_person)
 						p_person->WorldPos.Y + 0x6000 >> 8,
 						p_person->WorldPos.Z          >> 8,
 						"Better not grapple!");
-*/
 
 					return FALSE;
 				}
@@ -2381,7 +2379,7 @@ extern	void person_enter_fight_mode(Thing *p_person);
 		// make damage value display on screen and drift upwards
 		//
 
-//		add_damage_value_thing(p_thing,damage>>1);
+		add_damage_value_thing(p_thing,damage>>1);
 
 		if(p_thing->Genus.Person->Health<=0)
 		{
@@ -2663,22 +2661,6 @@ SLONG	people_allowed_to_hit_each_other(Thing *p_victim,Thing *p_agressor)
 	if(p_agressor->Genus.Person->PlayerID==0)
 	if(p_agressor->Genus.Person->Target&&p_agressor->Genus.Person->Target==THING_NUMBER(p_victim))
 	{
-
-
-		if(p_agressor->Genus.Person->PersonType==PERSON_COP)
-			ASSERT(p_victim->Genus.Person->PersonType!=PERSON_COP);  //cop deliberatly hitting other cop
-		if(p_agressor->Genus.Person->PersonType==PERSON_ROPER)
-		{
-			if(p_victim->Genus.Person->PersonType==PERSON_TRAMP)
-			{
-extern	 UBYTE	estate;
-				if(estate)
-					return(0);
-
-			}
-
-		}
-
 		//
 		// deliberate aimed blow
 		//
@@ -2756,18 +2738,6 @@ extern	 UBYTE	estate;
 			break;
 
 		case	PERSON_ROPER:
-
-			if(p_agressor->Genus.Person->PlayerID==0)
-			if(p_victim->Genus.Person->PersonType==PERSON_TRAMP)
-			{
-
-extern	 UBYTE	estate;
-				if(estate)
-				{
-					return(0);
-				}
-			}
-
 
 			if(VIOLENCE==0)
 			{
