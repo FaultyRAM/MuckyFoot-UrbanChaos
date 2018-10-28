@@ -14,7 +14,7 @@
 // Doors in the process of opening or closing.
 //
 
-DOOR_Door *DOOR_door;
+DOOR_Door DOOR_door[DOOR_MAX_DOORS];
 
 
 

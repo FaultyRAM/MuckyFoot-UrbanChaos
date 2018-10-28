@@ -19,7 +19,7 @@ typedef struct
 
 #define DOOR_MAX_DOORS 4
 
-extern DOOR_Door *DOOR_door;//[DOOR_MAX_DOORS];
+extern DOOR_Door DOOR_door[DOOR_MAX_DOORS];
 
 
 
