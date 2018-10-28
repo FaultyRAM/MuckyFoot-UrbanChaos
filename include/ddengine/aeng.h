@@ -47,14 +47,7 @@ void TEXTURE_choose_set(SLONG number);
 // Loads only the textures that are used in the prim faces and the current map.
 //
 
-// iStartCompletionBar = where it is now.
-// iEndCompletionBar = where it needs to get to.
-// iNumberTexturesProbablyLoaded = roughly how many textures will be loaded.
-void TEXTURE_load_needed(CBYTE*	fname_level,
-						 int iStartCompletionBar = 0,
-						 int iEndCompletionBar = 0,
-						 int iNumberTexturesProbablyLoaded = 0
-						 );
+void TEXTURE_load_needed(CBYTE*	fname_level);
 
 //
 // Loads the textures needed for the given prim object.

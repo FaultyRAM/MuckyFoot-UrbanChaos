@@ -737,7 +737,7 @@ void D3DPage::EnsureLoaded ( void )
 // Set to 1 to allow null or missing filenames
 #define JUST_TESTING 0
 
-	HRESULT hres = this->pTex->LoadTextureTGA ( this->pcFilename, -1, TRUE );
+	HRESULT hres = this->pTex->LoadTextureTGA ( this->pcFilename, -1);
 	if ( FAILED(hres) )
 	{
 #ifdef TARGET_DC
@@ -890,7 +890,7 @@ HRESULT	D3DTexture::ChangeTextureTGA(CBYTE *tga_file) {
 	return	DDERR_GENERIC;
 }
 
-HRESULT	D3DTexture::LoadTextureTGA(CBYTE *tga_file, ULONG id,BOOL bCanShrink)
+HRESULT	D3DTexture::LoadTextureTGA(CBYTE *tga_file, ULONG id)
 {
 	HRESULT		result;
 

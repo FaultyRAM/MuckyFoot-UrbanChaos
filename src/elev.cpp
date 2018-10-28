@@ -329,12 +329,6 @@ void ELEV_load_level(CBYTE *fname_level)
 
 			}
 			else
-			if (build_dc)
-			{
-				FAKE_CIVS *= 2;
-				FAKE_CIVS /= 3;
-			}
-			else
 			{
 				if(!the_display.CurrDevice->IsHardware())
 				{
@@ -2438,7 +2432,7 @@ extern void MAP_pulse_init();
 
 	if(!quick_load)
 	{
-		TEXTURE_load_needed(fname_level,  0, 256, 400);
+		TEXTURE_load_needed(fname_level);
 
 		extern void PACK_do(void);
 
@@ -2765,38 +2759,6 @@ SLONG ELEV_load_name(CBYTE *fname_level)
 
 	MFFileHandle handle;
 
-
-
-	// Play FMV now, when we have enough memory to do so!
-	if (strstr(ELEV_fname_level, "Finale1.ucm"))
-	{
-		if (GAME_STATE & GS_REPLAY)
-		{
-			//
-			// Don't play cutscenes on replay.
-			//
-
-		}
-		else
-		{
-			stop_all_fx_and_music();
-#ifdef TARGET_DC
-			the_display.RunCutscene( 2, ENV_get_value_number("lang_num", 0, "" ) );
-#else
-			the_display.RunCutscene(2);
-#endif
-
-			// Reshow the "loading" screen.
-			ATTRACT_loadscreen_init();
-
-			// And play the loading music, coz it's all in memory.
-			DCLL_memstream_play();
-
-		}
-	}
-
-
-
 	//
 	// Extract map, sewer and lighting filenames from the level file.
 	//
@@ -2824,8 +2786,6 @@ SLONG ELEV_load_name(CBYTE *fname_level)
 	// Load in the mission file.
 	//
 
-	char junk[1000];
-
 	if (FileRead(handle, junk, sizeof(SLONG))  == FILE_READ_ERROR) goto file_error;	// Version number
 	if (FileRead(handle, junk, sizeof(SLONG))  == FILE_READ_ERROR) goto file_error;	// Used
 	if (FileRead(handle, junk, _MAX_PATH)	  == FILE_READ_ERROR) goto file_error;	// BriefName
@@ -2848,15 +2808,25 @@ SLONG ELEV_load_name(CBYTE *fname_level)
 	//
 	// Do the load.
 	//
-#ifdef PSX
-	printf("Map Name:%s\nLighting:%s\nCitsez:  %s\nLevel:   %s\n",fname_map,fname_lighting,fname_citsez,fname_level);
-#endif
 	ans = ELEV_game_init(
 					fname_map,
 					fname_lighting,
 					fname_citsez,
 					fname_level);
 
+	if (strstr(ELEV_fname_level, "Finale1.ucm"))
+	{
+		if (GAME_STATE & GS_REPLAY)
+		{
+			//
+			// Don't play cutscenes on replay.
+			//
+		}
+		else
+		{
+			the_display.RunCutscene(3);
+		}
+	}
 
 	return ans;
 

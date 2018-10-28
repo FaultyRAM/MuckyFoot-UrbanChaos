@@ -311,7 +311,7 @@ extern void make_all_clumps(void);
 #endif
 
 
-	TEXTURE_load_needed("levels\\frontend.ucm", 160, 256, 65 );
+	TEXTURE_load_needed("levels\\frontend.ucm");
 
 
 #ifdef TARGET_DC

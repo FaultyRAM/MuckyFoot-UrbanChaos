@@ -193,7 +193,7 @@ class	D3DTexture
 #ifndef TARGET_DC
 		HRESULT		LoadTexture8  (CBYTE *tex_file,CBYTE *pal_file);
 #endif
-		HRESULT		LoadTextureTGA(CBYTE *tga_file,ULONG texid,BOOL bCanShrink=TRUE);
+		HRESULT		LoadTextureTGA(CBYTE *tga_file,ULONG texid);
 
 		HRESULT		ChangeTextureTGA(CBYTE *tga_file);
 

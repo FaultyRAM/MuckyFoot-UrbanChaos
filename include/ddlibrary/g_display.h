@@ -265,7 +265,7 @@ class	Display
 		HRESULT					FiniClipper(void);
 
 		void					RunFMV();
-		void					RunCutscene(int which, int language=0, bool bAllowButtonsToExit=TRUE );
+		void					RunCutscene(int which);
 
 		HRESULT					ChangeDriver(GUID *DD_guid,D3DDeviceInfo *device_hint,DDModeInfo *mode_hint);
 		HRESULT					ChangeDevice(GUID *D3D_guid,DDModeInfo *mode_hint);

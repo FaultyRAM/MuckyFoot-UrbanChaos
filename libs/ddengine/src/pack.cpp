@@ -64,12 +64,6 @@ int iNumPackedPages;
 D3DPage pagePacking[MAX_NUM_PACKED_PAGES];
 
 
-//
-// Outputs the current packing texture.
-//
-
-UBYTE save_out_the_vqs;
-
 #if 0
 void PACK_output()
 {
@@ -1455,25 +1449,6 @@ try_the_next_texture_coz_this_is_not_needed:
 		//
 
 		TGA_save(texture_filename, page_size, page_size, (TGA_Pixel *) PACK_tga, FALSE);
-
-
-		//
-		// If you want to run this bit of code then do a search for 'save_out_the_vqs'
-		// in d3dtexture.cpp and re-enable if (save_out_the_vqs)
-		//
-
-		save_out_the_vqs = TRUE;
-
-		{
-			D3DTexture *pTex;
-
-			#define DO_DC_CONVERT(name) pTex = MFnew<D3DTexture>(); pTex->LoadTextureTGA ( (name), -1, TRUE ); MFdelete ( pTex )
-
-			DO_DC_CONVERT(texture_filename);
-		}
-
-		save_out_the_vqs = FALSE;
-
 	}
 
 	fprintf(PACK_fname_array_handle, "\t\"***END\"\n");

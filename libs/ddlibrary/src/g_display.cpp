@@ -2352,7 +2352,7 @@ extern LPDIRECTSOUND g_pds;
 
 
 #else //#ifdef TARGET_DC
-void PlayQuickMovie(SLONG type, SLONG language_ignored, bool bIgnored )
+void PlayQuickMovie(SLONG type)
 {
 	DDSURFACEDESC2 back;
 	DDSURFACEDESC2 mine;
@@ -2412,19 +2412,19 @@ void Display::RunFMV()
 	// should we run it?
 	if (!ENV_get_value_number("play_movie", 1, "Movie"))	return;
 
-	PlayQuickMovie(0,0,TRUE);
+	PlayQuickMovie(0);
 }
 #endif
 
 
-void Display::RunCutscene(int which, int language, bool bAllowButtonsToExit)
+void Display::RunCutscene(int which)
 {
 	//extern void FRONTEND_scr_unload_theme(void);
 	//FRONTEND_scr_unload_theme();
 
 	//Fini();
 
-	PlayQuickMovie(which, language, bAllowButtonsToExit);
+	PlayQuickMovie(which);
 
 	//Init();
 }

@@ -90,9 +90,6 @@ extern UWORD floor_texture_sizes[];
 
 UBYTE TEXTURE_dontexist[TEXTURE_MAX_TEXTURES];
 
-// Texture pages that are "needed", i.e. used by the frontend.
-UBYTE TEXTURE_needed[TEXTURE_MAX_TEXTURES];
-
 //
 // The texture pages.
 // 
@@ -1128,11 +1125,7 @@ extern void SetLastClumpfile(char* file, size_t size);	// in GDisplay.cpp, horri
 
 
 
-void TEXTURE_load_needed(CBYTE*	fname_level,
-						 int iStartCompletionBar,
-						 int iEndCompletionBar,
-						 int iNumberTexturesProbablyLoaded
-						 )
+void TEXTURE_load_needed(CBYTE*	fname_level)
 {
 	SLONG i,j,k;
 	SLONG x;
@@ -1149,44 +1142,16 @@ void TEXTURE_load_needed(CBYTE*	fname_level,
 
 	MapElement *me;
 
-extern UBYTE loading_screen_active;	// !
-
-
-
-#define HOW_MANY_UPDATES 20
-	int iNumTexturesLoaded = 0;
-	int iNumTexturesToDoNextChunk = iNumberTexturesProbablyLoaded / HOW_MANY_UPDATES;
-	int iCurChunkVal = iStartCompletionBar;
-
+extern UBYTE loading_screen_active;
 extern void ATTRACT_loadscreen_draw(SLONG completion);
-
-#define LOADED_THIS_MANY_TEXTURES(numtex)														\
-	iNumTexturesLoaded += numtex;																\
-	while ( iNumTexturesLoaded > iNumTexturesToDoNextChunk )									\
-	{																							\
-		iNumTexturesToDoNextChunk += iNumberTexturesProbablyLoaded / HOW_MANY_UPDATES;			\
-		iCurChunkVal += ( iEndCompletionBar - iStartCompletionBar ) / HOW_MANY_UPDATES;			\
-		ATTRACT_loadscreen_draw ( iCurChunkVal );												\
-	}
-
-
 
 	TEXTURE_free();
 
 	D3DTexture::BeginLoading();
 
-	TEXTURE_initialise_clumping(fname_level);
+	POLY_init();
 
-#ifdef TARGET_DC
-	bool bFrontEnd = FALSE;
-	if ( ( fname_level == NULL ) || ( 0 == strcmp ( fname_level, "levels\\frontend.ucm" ) ) )
-	{
-		// Not actually a level - no level stuff loaded.
-		bFrontEnd = TRUE;
-	}
-	// This should agree in theory.
-	ASSERT ( loading_screen_active == !bFrontEnd );
-#endif
+	TEXTURE_initialise_clumping(fname_level);
 
 	TEXTURE_load_page(1);
 
@@ -1271,29 +1236,8 @@ extern void ATTRACT_loadscreen_draw(SLONG completion);
 	TEXTURE_page_meteor			 = TEXTURE_NUM_STANDARD + 72;
 	TEXTURE_page_splash			 = TEXTURE_NUM_STANDARD + 73;
 	TEXTURE_page_snowflake		 = TEXTURE_NUM_STANDARD + 74;
-	TEXTURE_page_fade_MF         = TEXTURE_NUM_STANDARD + 75;
 
-#ifdef TARGET_DC
-	TEXTURE_page_joypad_a		 = TEXTURE_NUM_STANDARD + 76;
-	TEXTURE_page_joypad_b		 = TEXTURE_NUM_STANDARD + 77;
-	TEXTURE_page_joypad_c		 = TEXTURE_NUM_STANDARD + 78;
-	TEXTURE_page_joypad_x		 = TEXTURE_NUM_STANDARD + 79;
-	TEXTURE_page_joypad_y		 = TEXTURE_NUM_STANDARD + 80;
-	TEXTURE_page_joypad_z		 = TEXTURE_NUM_STANDARD + 81;
-	TEXTURE_page_joypad_l		 = TEXTURE_NUM_STANDARD + 82;
-	TEXTURE_page_joypad_r		 = TEXTURE_NUM_STANDARD + 83;
-	TEXTURE_page_joypad_pad_l	 = TEXTURE_NUM_STANDARD + 84;
-	TEXTURE_page_joypad_pad_r	 = TEXTURE_NUM_STANDARD + 85;
-	TEXTURE_page_joypad_pad_d	 = TEXTURE_NUM_STANDARD + 86;
-	TEXTURE_page_joypad_pad_u	 = TEXTURE_NUM_STANDARD + 87;
-
-	// Special-cased one.
-	TEXTURE_page_background_use_instead = TEXTURE_NUM_STANDARD + 88;
-	TEXTURE_page_background_use_instead2 = TEXTURE_NUM_STANDARD + 89;
-#endif
-	TEXTURE_num_textures         = TEXTURE_NUM_STANDARD + 90 + 20;
-
-	
+	TEXTURE_num_textures         = TEXTURE_NUM_STANDARD + 75 + 20;
 
 	//
 	// Where we load the extra textures from.
@@ -1313,7 +1257,6 @@ extern void ATTRACT_loadscreen_draw(SLONG completion);
 	//
 
 	TEXTURE_texture[TEXTURE_page_font].FontOn();
-	TEXTURE_needed[TEXTURE_page_font] = 1;
 
 
 	//
@@ -1322,195 +1265,92 @@ extern void ATTRACT_loadscreen_draw(SLONG completion);
 	//
 
 	TEXTURE_texture[TEXTURE_page_lcdfont].Font2On();
-	TEXTURE_needed[TEXTURE_page_lcdfont] = 1;
 
 	TEXTURE_texture[TEXTURE_page_fog       ].LoadTextureTGA(TEXTURE_EXTRA_DIR"fog.tga", TEXTURE_page_fog);
 	TEXTURE_texture[TEXTURE_page_moon      ].LoadTextureTGA(TEXTURE_EXTRA_DIR"moon.tga", TEXTURE_page_moon);
 	TEXTURE_texture[TEXTURE_page_clouds    ].LoadTextureTGA(TEXTURE_EXTRA_DIR"clouds.tga", TEXTURE_page_clouds);
 	TEXTURE_texture[TEXTURE_page_water     ].LoadTextureTGA(TEXTURE_EXTRA_DIR"water.tga", TEXTURE_page_water);
 	TEXTURE_texture[TEXTURE_page_puddle    ].LoadTextureTGA(TEXTURE_EXTRA_DIR"puddle01.tga", TEXTURE_page_puddle);
-LOADED_THIS_MANY_TEXTURES(5);
 	TEXTURE_texture[TEXTURE_page_drip      ].LoadTextureTGA(TEXTURE_EXTRA_DIR"drip.tga", TEXTURE_page_drip);
 	TEXTURE_texture[TEXTURE_page_shadow    ].CreateUserPage(TEXTURE_SHADOW_SIZE, the_display.GetDeviceInfo()->DestInvSourceColourSupported() ? FALSE : TRUE);
 	TEXTURE_texture[TEXTURE_page_bang      ].LoadTextureTGA(TEXTURE_EXTRA_DIR"fireball.tga", TEXTURE_page_bang);
-	TEXTURE_texture[TEXTURE_page_font      ].LoadTextureTGA(TEXTURE_EXTRA_DIR"font.tga", TEXTURE_page_font,FALSE);
-	TEXTURE_needed[TEXTURE_page_font] = 1;
-LOADED_THIS_MANY_TEXTURES(5);
-	//TEXTURE_texture[TEXTURE_page_logo      ].LoadTextureTGA(TEXTURE_EXTRA_DIR"logo3.tga", TEXTURE_page_logo);
+	TEXTURE_texture[TEXTURE_page_font      ].LoadTextureTGA(TEXTURE_EXTRA_DIR"font.tga", TEXTURE_page_font);
 	{
 		CBYTE	str[100];
-//		sprintf(str,TEXTURE_EXTRA_DIR"sky%d.tga",Random()&3);
 		sprintf(str, "%ssky.tga",   TEXTURE_world_dir);
-
-		// Until the VQ quality improves, don't VQ the sky - it looks pretty grim.
-		TEXTURE_texture[TEXTURE_page_sky       ].LoadTextureTGA(str,TEXTURE_page_sky,FALSE);
+		TEXTURE_texture[TEXTURE_page_sky       ].LoadTextureTGA(str,TEXTURE_page_sky);
 	}
-//	TEXTURE_texture[TEXTURE_page_sky       ].LoadTextureTGA(TEXTURE_EXTRA_DIR"sky2.tga", TEXTURE_page_sky);
 
 	TEXTURE_texture[TEXTURE_page_flames    ].LoadTextureTGA(TEXTURE_EXTRA_DIR"flame1.tga", TEXTURE_page_flames);
 	TEXTURE_texture[TEXTURE_page_smoke     ].LoadTextureTGA(TEXTURE_EXTRA_DIR"smoke1.tga", TEXTURE_page_smoke);
-//	TEXTURE_texture[TEXTURE_page_flame2    ].LoadTextureTGA(TEXTURE_EXTRA_DIR"flame2.tga", TEXTURE_page_flame2);
 	TEXTURE_texture[TEXTURE_page_flame2    ].LoadTextureTGA(TEXTURE_EXTRA_DIR"explode4.tga", TEXTURE_page_flame2);
 	TEXTURE_texture[TEXTURE_page_steam     ].LoadTextureTGA(TEXTURE_EXTRA_DIR"fog_na.tga", TEXTURE_page_steam);
 	TEXTURE_texture[TEXTURE_page_barbwire  ].LoadTextureTGA(TEXTURE_EXTRA_DIR"barbed.tga", TEXTURE_page_barbwire);
-LOADED_THIS_MANY_TEXTURES(6);
 
-#ifdef TARGET_DC
-	TEXTURE_texture[TEXTURE_page_font2d    ].LoadTextureTGA(TEXTURE_EXTRA_DIR"multifontPC.tga", TEXTURE_page_font2d, FALSE);
-#else
 	if (SOFTWARE)
 	{
 		TEXTURE_texture[TEXTURE_page_font2d    ].LoadTextureTGA(TEXTURE_EXTRA_DIR"multifontPC640.tga", TEXTURE_page_font2d);
 	}
 	else
 	{
-		TEXTURE_texture[TEXTURE_page_font2d    ].LoadTextureTGA(TEXTURE_EXTRA_DIR"multifontPC.tga", TEXTURE_page_font2d, FALSE);
+		TEXTURE_texture[TEXTURE_page_font2d    ].LoadTextureTGA(TEXTURE_EXTRA_DIR"multifontPC.tga", TEXTURE_page_font2d);
 	}
-#endif
-	TEXTURE_needed[TEXTURE_page_font2d] = 1;
-
-	//	TEXTURE_texture[TEXTURE_page_lcdfont   ].LoadTextureTGA(TEXTURE_EXTRA_DIR"font3.tga", TEXTURE_page_
-#ifdef TARGET_DC
-	TEXTURE_texture[TEXTURE_page_lcdfont   ].LoadTextureTGA(TEXTURE_EXTRA_DIR"olyfont2dc.tga", TEXTURE_page_lcdfont, FALSE);
-#else
-	TEXTURE_texture[TEXTURE_page_lcdfont   ].LoadTextureTGA(TEXTURE_EXTRA_DIR"olyfont2.tga", TEXTURE_page_lcdfont, FALSE);
-#endif
-	TEXTURE_needed[TEXTURE_page_lcdfont] = 1;
-
-
-	TEXTURE_texture[TEXTURE_page_lastpanel   ].LoadTextureTGA(TEXTURE_EXTRA_DIR"PCdisplay.tga",    TEXTURE_page_lastpanel, FALSE);
-	TEXTURE_needed[TEXTURE_page_lastpanel] = 1;
-
 	FONT2D_init(TEXTURE_page_font2d);	// do it now so it's still in the CD-ROM cache
+
 	TEXTURE_texture[TEXTURE_page_face1     ].LoadTextureTGA(TEXTURE_EXTRA_DIR"face1.tga", TEXTURE_page_face1);
 	TEXTURE_texture[TEXTURE_page_face2     ].LoadTextureTGA(TEXTURE_EXTRA_DIR"face2.tga", TEXTURE_page_face2);
-LOADED_THIS_MANY_TEXTURES(5);
-	//TEXTURE_texture[TEXTURE_page_face3     ].LoadTextureTGA(TEXTURE_EXTRA_DIR"face3.tga", TEXTURE_page_face3);
-	//TEXTURE_texture[TEXTURE_page_face4     ].LoadTextureTGA(TEXTURE_EXTRA_DIR"face4.tga", TEXTURE_page_face4);
-	//TEXTURE_texture[TEXTURE_page_face5     ].LoadTextureTGA(TEXTURE_EXTRA_DIR"face5.tga", TEXTURE_page_face5);
-	//TEXTURE_texture[TEXTURE_page_face6     ].LoadTextureTGA(TEXTURE_EXTRA_DIR"face6.tga", TEXTURE_page_face6);
 	TEXTURE_texture[TEXTURE_page_bigbang   ].LoadTextureTGA(TEXTURE_EXTRA_DIR"exp_gunk.tga", TEXTURE_page_bigbang);
-//	TEXTURE_texture[TEXTURE_page_dustwave  ].LoadTextureTGA(TEXTURE_EXTRA_DIR"dustwave.tga", TEXTURE_page_dustwave);
 	TEXTURE_texture[TEXTURE_page_dustwave  ].LoadTextureTGA(TEXTURE_EXTRA_DIR"shockwave.tga", TEXTURE_page_dustwave);
 	TEXTURE_texture[TEXTURE_page_flames3   ].LoadTextureTGA(TEXTURE_EXTRA_DIR"flame3.tga", TEXTURE_page_flames3);
 	TEXTURE_texture[TEXTURE_page_bloodsplat].LoadTextureTGA(TEXTURE_EXTRA_DIR"bludsplt.tga", TEXTURE_page_bloodsplat);
-//	TEXTURE_texture[TEXTURE_page_bloom1    ].LoadTextureTGA(TEXTURE_EXTRA_DIR"bloom1.tga", TEXTURE_page_bloom1);
-//	TEXTURE_texture[TEXTURE_page_bloom1    ].LoadTextureTGA(TEXTURE_EXTRA_DIR"bloom3.tga", TEXTURE_page_bloom1);
 	TEXTURE_texture[TEXTURE_page_bloom1    ].LoadTextureTGA(TEXTURE_EXTRA_DIR"bloom4.tga", TEXTURE_page_bloom1);
-LOADED_THIS_MANY_TEXTURES(5);
 	TEXTURE_texture[TEXTURE_page_bloom2    ].LoadTextureTGA(TEXTURE_EXTRA_DIR"bloom2.tga", TEXTURE_page_bloom2);
 	TEXTURE_texture[TEXTURE_page_hitspang  ].LoadTextureTGA(TEXTURE_EXTRA_DIR"hitspang.tga", TEXTURE_page_hitspang);
 	TEXTURE_texture[TEXTURE_page_lensflare ].LoadTextureTGA(TEXTURE_EXTRA_DIR"lensflar.tga", TEXTURE_page_lensflare);
 	TEXTURE_texture[TEXTURE_page_envmap    ].LoadTextureTGA(TEXTURE_EXTRA_DIR"envmap.tga", TEXTURE_page_envmap);
 	TEXTURE_texture[TEXTURE_page_tyretrack ].LoadTextureTGA(TEXTURE_EXTRA_DIR"tyremark.tga", TEXTURE_page_tyretrack);
-LOADED_THIS_MANY_TEXTURES(5);
 	TEXTURE_texture[TEXTURE_page_winmap    ].LoadTextureTGA(TEXTURE_EXTRA_DIR"winmap.tga", TEXTURE_page_winmap);
 	TEXTURE_texture[TEXTURE_page_leaf      ].LoadTextureTGA(TEXTURE_EXTRA_DIR"leaf.tga", TEXTURE_page_leaf);
 	TEXTURE_texture[TEXTURE_page_raindrop  ].LoadTextureTGA(TEXTURE_EXTRA_DIR"raindrop.tga", TEXTURE_page_raindrop);
 	TEXTURE_texture[TEXTURE_page_footprint ].LoadTextureTGA(TEXTURE_EXTRA_DIR"footprint.tga", TEXTURE_page_footprint);
-	//TEXTURE_texture[TEXTURE_page_angel     ].LoadTextureTGA(TEXTURE_EXTRA_DIR"angel.tga", TEXTURE_page_angel);
-	//TEXTURE_texture[TEXTURE_page_devil     ].LoadTextureTGA(TEXTURE_EXTRA_DIR"devil.tga", TEXTURE_page_devil);
 	TEXTURE_texture[TEXTURE_page_smoker	   ].LoadTextureTGA(TEXTURE_EXTRA_DIR"smoker2.tga", TEXTURE_page_smoker);
 	TEXTURE_texture[TEXTURE_page_target	   ].LoadTextureTGA(TEXTURE_EXTRA_DIR"targ1.tga", TEXTURE_page_target);
-	//TEXTURE_texture[TEXTURE_page_newfont   ].LoadTextureTGA(TEXTURE_EXTRA_DIR"multifontPC.tga", TEXTURE_page_newfont);
 	TEXTURE_texture[TEXTURE_page_droplet   ].LoadTextureTGA(TEXTURE_EXTRA_DIR"droplet.tga", TEXTURE_page_droplet);
-LOADED_THIS_MANY_TEXTURES(7);
-	//TEXTURE_texture[TEXTURE_page_press1    ].LoadTextureTGA(TEXTURE_EXTRA_DIR"press1.tga", TEXTURE_page_press1);
-	//TEXTURE_texture[TEXTURE_page_press2    ].LoadTextureTGA(TEXTURE_EXTRA_DIR"press2.tga", TEXTURE_page_press2);
-	//TEXTURE_texture[TEXTURE_page_ic        ].LoadTextureTGA(TEXTURE_EXTRA_DIR"ic5.tga", TEXTURE_page_ic);
-	//TEXTURE_texture[TEXTURE_page_ic2       ].LoadTextureTGA(TEXTURE_EXTRA_DIR"ic2_6.tga", TEXTURE_page_ic2);
 	TEXTURE_texture[TEXTURE_page_explode1  ].LoadTextureTGA(TEXTURE_EXTRA_DIR"explode1.tga", TEXTURE_page_explode1);
 	TEXTURE_texture[TEXTURE_page_explode2  ].LoadTextureTGA(TEXTURE_EXTRA_DIR"explode2.tga", TEXTURE_page_explode2);
 	TEXTURE_texture[TEXTURE_page_smokecloud].LoadTextureTGA(TEXTURE_EXTRA_DIR"explode3.tga", TEXTURE_page_smokecloud);
 	TEXTURE_texture[TEXTURE_page_menulogo  ].LoadTextureTGA(TEXTURE_EXTRA_DIR"menulogo.tga", TEXTURE_page_menulogo);
-	TEXTURE_needed[TEXTURE_page_menulogo] = 1;
-LOADED_THIS_MANY_TEXTURES(4);
-	//TEXTURE_texture[TEXTURE_page_polaroid  ].LoadTextureTGA(TEXTURE_EXTRA_DIR"photos\\police1.tga", TEXTURE_page_polaroid);
 	TEXTURE_texture[TEXTURE_page_sparkle   ].LoadTextureTGA(TEXTURE_EXTRA_DIR"sparkle.tga", TEXTURE_page_sparkle);
 	TEXTURE_texture[TEXTURE_page_pcflamer  ].LoadTextureTGA(TEXTURE_EXTRA_DIR"PCflamer.tga", TEXTURE_page_pcflamer);
 	TEXTURE_texture[TEXTURE_page_litebolt  ].LoadTextureTGA(TEXTURE_EXTRA_DIR"litebolt2.tga", TEXTURE_page_litebolt);
 	TEXTURE_texture[TEXTURE_page_splash	   ].LoadTextureTGA(TEXTURE_EXTRA_DIR"splashALL.tga", TEXTURE_page_splash);
-LOADED_THIS_MANY_TEXTURES(4);
 
 	// frontend stuff...
-	TEXTURE_texture[TEXTURE_page_bigbutton ].LoadTextureTGA(TEXTURE_EXTRA_DIR"bigbutt.tga", TEXTURE_page_bigbutton, FALSE);
-	TEXTURE_needed [TEXTURE_page_bigbutton] = 1;
+	TEXTURE_texture[TEXTURE_page_bigbutton ].LoadTextureTGA(TEXTURE_EXTRA_DIR"bigbutt.tga", TEXTURE_page_bigbutton);
 	TEXTURE_texture[TEXTURE_page_bigleaf   ].LoadTextureTGA(TEXTURE_EXTRA_DIR"bigleaf.tga", TEXTURE_page_bigleaf);
-	TEXTURE_needed [TEXTURE_page_bigleaf] = 1;
 	TEXTURE_texture[TEXTURE_page_bigrain   ].LoadTextureTGA(TEXTURE_EXTRA_DIR"raindrop2.tga", TEXTURE_page_bigrain);
-	TEXTURE_needed [TEXTURE_page_bigrain] = 1;
-	TEXTURE_texture[TEXTURE_page_tinybutt  ].LoadTextureTGA(TEXTURE_EXTRA_DIR"tinybutt.tga", TEXTURE_page_tinybutt, FALSE);
-	TEXTURE_needed [TEXTURE_page_tinybutt] = 1;
+	TEXTURE_texture[TEXTURE_page_tinybutt  ].LoadTextureTGA(TEXTURE_EXTRA_DIR"tinybutt.tga", TEXTURE_page_tinybutt);
 	TEXTURE_texture[TEXTURE_page_snowflake ].LoadTextureTGA(TEXTURE_EXTRA_DIR"snowflake.tga", TEXTURE_page_snowflake);
-	TEXTURE_needed [TEXTURE_page_snowflake] = 1;
 
 	TEXTURE_texture[TEXTURE_page_finalglow ].LoadTextureTGA(TEXTURE_EXTRA_DIR"finalglow.tga", TEXTURE_page_finalglow);
-	TEXTURE_needed [TEXTURE_page_finalglow] = 1;
 
-	// Used for the screensaver. Don't use the MVQ - it doesn't get 100% black.
-	TEXTURE_texture[TEXTURE_page_fade_MF     ].LoadTextureTGA(TEXTURE_EXTRA_DIR"fade_MF.tga",      TEXTURE_page_fade_MF, FALSE);
-	TEXTURE_needed [TEXTURE_page_fade_MF] = 1;
+	TEXTURE_texture[TEXTURE_page_lcdfont   ].LoadTextureTGA(TEXTURE_EXTRA_DIR"olyfont2.tga", TEXTURE_page_lcdfont);
 
-LOADED_THIS_MANY_TEXTURES(7);
-
-
-#ifdef TARGET_DC
-	// The joypad button textures.
-	TEXTURE_texture[TEXTURE_page_joypad_a].LoadTextureTGA(TEXTURE_EXTRA_DIR"DC\\button_A.tga", TEXTURE_page_joypad_a);
-	TEXTURE_needed [TEXTURE_page_joypad_a] = 1;
-	TEXTURE_texture[TEXTURE_page_joypad_b].LoadTextureTGA(TEXTURE_EXTRA_DIR"DC\\button_B.tga", TEXTURE_page_joypad_b);
-	TEXTURE_needed [TEXTURE_page_joypad_b] = 1;
-	TEXTURE_texture[TEXTURE_page_joypad_c].LoadTextureTGA(TEXTURE_EXTRA_DIR"DC\\button_C.tga", TEXTURE_page_joypad_c);
-	TEXTURE_needed [TEXTURE_page_joypad_c] = 1;
-	TEXTURE_texture[TEXTURE_page_joypad_x].LoadTextureTGA(TEXTURE_EXTRA_DIR"DC\\button_X.tga", TEXTURE_page_joypad_x);
-	TEXTURE_needed [TEXTURE_page_joypad_x] = 1;
-	TEXTURE_texture[TEXTURE_page_joypad_y].LoadTextureTGA(TEXTURE_EXTRA_DIR"DC\\button_Y.tga", TEXTURE_page_joypad_y);
-	TEXTURE_needed [TEXTURE_page_joypad_y] = 1;
-	TEXTURE_texture[TEXTURE_page_joypad_z].LoadTextureTGA(TEXTURE_EXTRA_DIR"DC\\button_Z.tga", TEXTURE_page_joypad_z);
-	TEXTURE_needed [TEXTURE_page_joypad_z] = 1;
-LOADED_THIS_MANY_TEXTURES(6);
-	TEXTURE_texture[TEXTURE_page_joypad_l].LoadTextureTGA(TEXTURE_EXTRA_DIR"DC\\button_LEFT.tga",  TEXTURE_page_joypad_l);
-	TEXTURE_needed [TEXTURE_page_joypad_l] = 1;
-	TEXTURE_texture[TEXTURE_page_joypad_r].LoadTextureTGA(TEXTURE_EXTRA_DIR"DC\\button_RIGHT.tga", TEXTURE_page_joypad_r);
-	TEXTURE_needed [TEXTURE_page_joypad_r] = 1;
-	TEXTURE_texture[TEXTURE_page_joypad_pad_l].LoadTextureTGA(TEXTURE_EXTRA_DIR"DC\\button_PADLEFT.tga",  TEXTURE_page_joypad_pad_l);
-	TEXTURE_needed [TEXTURE_page_joypad_pad_l] = 1;
-	TEXTURE_texture[TEXTURE_page_joypad_pad_r].LoadTextureTGA(TEXTURE_EXTRA_DIR"DC\\button_PADRIGHT.tga", TEXTURE_page_joypad_pad_r);
-	TEXTURE_needed [TEXTURE_page_joypad_pad_r] = 1;
-	TEXTURE_texture[TEXTURE_page_joypad_pad_d].LoadTextureTGA(TEXTURE_EXTRA_DIR"DC\\button_PADDOWN.tga",  TEXTURE_page_joypad_pad_d);
-	TEXTURE_needed [TEXTURE_page_joypad_pad_d] = 1;
-	TEXTURE_texture[TEXTURE_page_joypad_pad_u].LoadTextureTGA(TEXTURE_EXTRA_DIR"DC\\button_PADUP.tga",    TEXTURE_page_joypad_pad_u);
-	TEXTURE_needed [TEXTURE_page_joypad_pad_u] = 1;
-LOADED_THIS_MANY_TEXTURES(6);
-#endif
-
-
-#ifdef TARGET_DC
-	// Only loaded during an actual level.
-	if ( !bFrontEnd )
-#endif
 	{
-
-		TEXTURE_texture[TEXTURE_page_fadecat     ].LoadTextureTGA(TEXTURE_EXTRA_DIR"fadecat.tga",      TEXTURE_page_fadecat, FALSE);
-
 		TEXTURE_texture[TEXTURE_page_tyretrack_alpha	].LoadTextureTGA(TEXTURE_EXTRA_DIR"tyremark_alpha.tga", TEXTURE_page_tyretrack_alpha);
 
 		TEXTURE_texture[TEXTURE_page_ladder      ].LoadTextureTGA(TEXTURE_EXTRA_DIR"secret.tga",       TEXTURE_page_ladder);
+		TEXTURE_texture[TEXTURE_page_fadecat     ].LoadTextureTGA(TEXTURE_EXTRA_DIR"fadecat.tga",      TEXTURE_page_fadecat);
 		TEXTURE_texture[TEXTURE_page_shadowoval  ].LoadTextureTGA(TEXTURE_EXTRA_DIR"shadow.tga",       TEXTURE_page_shadowoval);
 		TEXTURE_texture[TEXTURE_page_rubbish     ].LoadTextureTGA(TEXTURE_EXTRA_DIR"rubbish.tga",      TEXTURE_page_rubbish);
 
-LOADED_THIS_MANY_TEXTURES(5);
-
-		// Done above.
-		//TEXTURE_texture[TEXTURE_page_lastpanel   ].LoadTextureTGA(TEXTURE_EXTRA_DIR"PCdisplay.tga",    TEXTURE_page_lastpanel, FALSE);
-		TEXTURE_texture[TEXTURE_page_lastpanel2  ].LoadTextureTGA(TEXTURE_EXTRA_DIR"PCdisplay01.tga",  TEXTURE_page_lastpanel2, FALSE);
+		TEXTURE_texture[TEXTURE_page_lastpanel   ].LoadTextureTGA(TEXTURE_EXTRA_DIR"PCdisplay.tga",    TEXTURE_page_lastpanel);
+		TEXTURE_texture[TEXTURE_page_lastpanel2  ].LoadTextureTGA(TEXTURE_EXTRA_DIR"PCdisplay01.tga",  TEXTURE_page_lastpanel2);
 
 		TEXTURE_texture[TEXTURE_page_sign        ].LoadTextureTGA(TEXTURE_EXTRA_DIR"signs.tga",        TEXTURE_page_sign);
 		TEXTURE_texture[TEXTURE_page_shadowsquare].LoadTextureTGA(TEXTURE_EXTRA_DIR"shadowsquare.tga", TEXTURE_page_shadowsquare);
 		TEXTURE_texture[TEXTURE_page_ladshad     ].LoadTextureTGA(TEXTURE_EXTRA_DIR"ladshad.tga",      TEXTURE_page_ladshad);
 		TEXTURE_texture[TEXTURE_page_meteor		 ].LoadTextureTGA(TEXTURE_EXTRA_DIR"meteorALL.tga", TEXTURE_page_meteor);
-
-LOADED_THIS_MANY_TEXTURES(5);
 
 		//
 		// Male civs
@@ -1521,19 +1361,16 @@ LOADED_THIS_MANY_TEXTURES(5);
 		TEXTURE_texture[TEXTURE_page_people3+2	].LoadTextureTGA(TEXTURE_PEOPLE3_DIR"crotch3.tga", TEXTURE_page_people3+2);
 		TEXTURE_texture[TEXTURE_page_people3+3	].LoadTextureTGA(TEXTURE_PEOPLE3_DIR"front1.tga", TEXTURE_page_people3+3);
 		TEXTURE_texture[TEXTURE_page_people3+4	].LoadTextureTGA(TEXTURE_PEOPLE3_DIR"front2.tga", TEXTURE_page_people3+4);
-LOADED_THIS_MANY_TEXTURES(5);
 		TEXTURE_texture[TEXTURE_page_people3+5	].LoadTextureTGA(TEXTURE_PEOPLE3_DIR"front3.tga", TEXTURE_page_people3+5);
 		TEXTURE_texture[TEXTURE_page_people3+6	].LoadTextureTGA(TEXTURE_PEOPLE3_DIR"hatside1.tga", TEXTURE_page_people3+6);
 		TEXTURE_texture[TEXTURE_page_people3+7	].LoadTextureTGA(TEXTURE_PEOPLE3_DIR"hatside2.tga", TEXTURE_page_people3+7);
 		TEXTURE_texture[TEXTURE_page_people3+8	].LoadTextureTGA(TEXTURE_PEOPLE3_DIR"hatside3.tga", TEXTURE_page_people3+8);
 		TEXTURE_texture[TEXTURE_page_people3+9	].LoadTextureTGA(TEXTURE_PEOPLE3_DIR"hattop1.tga", TEXTURE_page_people3+9);
 		TEXTURE_texture[TEXTURE_page_people3+10	].LoadTextureTGA(TEXTURE_PEOPLE3_DIR"hattop2.tga", TEXTURE_page_people3+10);
-LOADED_THIS_MANY_TEXTURES(5);
 		TEXTURE_texture[TEXTURE_page_people3+11	].LoadTextureTGA(TEXTURE_PEOPLE3_DIR"hattop3.tga", TEXTURE_page_people3+11);
 		TEXTURE_texture[TEXTURE_page_people3+12	].LoadTextureTGA(TEXTURE_PEOPLE3_DIR"leg1.tga", TEXTURE_page_people3+12);
 		TEXTURE_texture[TEXTURE_page_people3+13	].LoadTextureTGA(TEXTURE_PEOPLE3_DIR"leg2.tga", TEXTURE_page_people3+13);
 		TEXTURE_texture[TEXTURE_page_people3+14	].LoadTextureTGA(TEXTURE_PEOPLE3_DIR"leg3.tga", TEXTURE_page_people3+14);
-LOADED_THIS_MANY_TEXTURES(4);
 
 		//
 		// Female Civs
@@ -1545,7 +1382,7 @@ LOADED_THIS_MANY_TEXTURES(4);
 		TEXTURE_texture[TEXTURE_page_people3+18	].LoadTextureTGA(TEXTURE_PEOPLE3_DIR"FEMCHEST1.tga", TEXTURE_page_people3+18);
 		TEXTURE_texture[TEXTURE_page_people3+19	].LoadTextureTGA(TEXTURE_PEOPLE3_DIR"FEMCHEST2.tga", TEXTURE_page_people3+19);
 		TEXTURE_texture[TEXTURE_page_people3+20	].LoadTextureTGA(TEXTURE_PEOPLE3_DIR"FEMCHEST3.tga", TEXTURE_page_people3+20);
-LOADED_THIS_MANY_TEXTURES(6);
+
 		TEXTURE_texture[TEXTURE_page_people3+21	].LoadTextureTGA(TEXTURE_PEOPLE3_DIR"SEAM1.tga", TEXTURE_page_people3+21);
 		TEXTURE_texture[TEXTURE_page_people3+22	].LoadTextureTGA(TEXTURE_PEOPLE3_DIR"SEAM2.tga", TEXTURE_page_people3+22);
 		TEXTURE_texture[TEXTURE_page_people3+23	].LoadTextureTGA(TEXTURE_PEOPLE3_DIR"SEAM3.tga", TEXTURE_page_people3+23);
@@ -1553,318 +1390,256 @@ LOADED_THIS_MANY_TEXTURES(6);
 		TEXTURE_texture[TEXTURE_page_people3+24	].LoadTextureTGA(TEXTURE_PEOPLE3_DIR"FEMSHOO1.tga", TEXTURE_page_people3+24);
 		TEXTURE_texture[TEXTURE_page_people3+25	].LoadTextureTGA(TEXTURE_PEOPLE3_DIR"FEMSHOO2.tga", TEXTURE_page_people3+25);
 		TEXTURE_texture[TEXTURE_page_people3+26	].LoadTextureTGA(TEXTURE_PEOPLE3_DIR"FEMSHOO3.tga", TEXTURE_page_people3+26);
-LOADED_THIS_MANY_TEXTURES(6);
 
 		TEXTURE_texture[TEXTURE_page_people3+27	].LoadTextureTGA(TEXTURE_PEOPLE3_DIR"FEMBAK1.tga", TEXTURE_page_people3+27);
 		TEXTURE_texture[TEXTURE_page_people3+28	].LoadTextureTGA(TEXTURE_PEOPLE3_DIR"FEMBAK2.tga", TEXTURE_page_people3+28);
 		TEXTURE_texture[TEXTURE_page_people3+29	].LoadTextureTGA(TEXTURE_PEOPLE3_DIR"FEMBAK3.tga", TEXTURE_page_people3+29);
-LOADED_THIS_MANY_TEXTURES(3);
 	}
 
-
-
-#ifdef TARGET_DC
-	// Set this up, but don't do anything with it. The actual texture is overridden later.
-	the_display.AddLoadedTexture(&TEXTURE_texture[TEXTURE_page_background_use_instead]);
-	TEXTURE_needed [TEXTURE_page_background_use_instead] = 1;
-	the_display.AddLoadedTexture(&TEXTURE_texture[TEXTURE_page_background_use_instead2]);
-	TEXTURE_needed [TEXTURE_page_background_use_instead2] = 1;
-#endif
-
-
-
-
-
-#ifndef TARGET_DC
-#if 1
-	// Load and bin a load of textures used by the DC, but not the PC.
-	// This makes sure they get converted to MVQ format.
-	D3DTexture *pTex;
-
-#define DO_DC_CONVERT(name) pTex = MFnew<D3DTexture>(); pTex->LoadTextureTGA ( (name), -1, TRUE ); MFdelete ( pTex )
-
-	DO_DC_CONVERT(TEXTURE_EXTRA_DIR"DC\\button A.tga"			);
-	DO_DC_CONVERT(TEXTURE_EXTRA_DIR"DC\\button B.tga"			);
-	DO_DC_CONVERT(TEXTURE_EXTRA_DIR"DC\\button C.tga"			);
-	DO_DC_CONVERT(TEXTURE_EXTRA_DIR"DC\\button X.tga"			);
-	DO_DC_CONVERT(TEXTURE_EXTRA_DIR"DC\\button Y.tga"			);
-	DO_DC_CONVERT(TEXTURE_EXTRA_DIR"DC\\button Z.tga"			);
-	DO_DC_CONVERT(TEXTURE_EXTRA_DIR"DC\\button LEFT.tga"		);
-	DO_DC_CONVERT(TEXTURE_EXTRA_DIR"DC\\button RIGHT.tga"		);
-	DO_DC_CONVERT(TEXTURE_EXTRA_DIR"DC\\button PADLEFT.tga"		);
-	DO_DC_CONVERT(TEXTURE_EXTRA_DIR"DC\\button PADRIGHT.tga"	);
-	DO_DC_CONVERT(TEXTURE_EXTRA_DIR"DC\\button PADDOWN.tga"		);
-	DO_DC_CONVERT(TEXTURE_EXTRA_DIR"DC\\button PADUP.tga"		);
-	DO_DC_CONVERT(TEXTURE_EXTRA_DIR"DC\\page_joybutts.tga"		);
-	
-
-	DO_DC_CONVERT("server\\textures\\shared\\people\\page_darci1.tga");
-	DO_DC_CONVERT("server\\textures\\extras\\page_misc_alpha.tga");
-
-#undef DO_DC_CONVERT
-
-#endif
-#endif
-
-
-
-#if 0
 	if (loading_screen_active)
 	{
 		ATTRACT_loadscreen_draw(70 * 256 / 100);
 	}
-#endif
-
-	//
-	// The video page.
-	// 
-
-//not used anymore?	TEXTURE_texture[86].CreateUserPage(TEXTURE_VIDEO_SIZE, FALSE);
-
-	//
-	// The flames on the main menu
-	//
-
-//not used anymore?    TEXTURE_texture[TEXTURE_page_menuflame].CreateUserPage(256,FALSE);
-
-
-	//
-	// The leaves!
-	//
-	// Fins' glows above the traffic cones...
-	// The water droplets and the sparkles, the sewer water and the raindrops.
-	// The man on the moon!
-	// And the muckyfootprints
-	// Texture 560 is one component of the digital timer.
-	//
 
 	TRACE("Loaded extras\n");
 
 	//
 	// The warehouse textures.
 	//
-#ifdef TARGET_DC
-	// Only loaded during an actual level.
-	if ( !bFrontEnd )
-#endif
+
+	for (i = 0; i < WARE_rooftex_upto; i++)
 	{
+		TEXTURE_get_minitexturebits_uvs(
+			WARE_rooftex[i],
+			&page,
+			u + 0,
+			v + 0,
+			u + 1,
+			v + 1,
+			u + 2,
+			v + 2,
+			u + 3,
+			v + 3);
 
-		for (i = 0; i < WARE_rooftex_upto; i++)
+		if (TEXTURE_texture[page].Type == D3DTEXTURE_TYPE_UNUSED)
 		{
-			TEXTURE_get_minitexturebits_uvs(
-				WARE_rooftex[i],
-			   &page,
-				u + 0,
-				v + 0,
-				u + 1,
-				v + 1,
-				u + 2,
-				v + 2,
-				u + 3,
-				v + 3);
+			//
+			// We must load this texture.
+			//
 
+			TEXTURE_load_page(page);
+		}
+	}
+
+	//
+	// do all the inside styles for now
+	//
+
+	for(c0=0;c0<64;c0++)
+	{
+		for(c1=0;c1<16;c1++)
+		{
+			page=inside_tex[c0][c1]+START_PAGE_FOR_FLOOR*64;
+
+			if(page<8*64)
 			if (TEXTURE_texture[page].Type == D3DTEXTURE_TYPE_UNUSED)
 			{
-				//
-				// We must load this texture.
-				//
-
 				TEXTURE_load_page(page);
-LOADED_THIS_MANY_TEXTURES(1);
+
 			}
 		}
+	}
 
-		/*
+	TRACE("Loaded inside styles\n");
 
-		//
-		// do all the inside styles for now
-		//
+	//
+	// Load the individual pages that we need.
+	//
 
-		for(c0=0;c0<64;c0++)
+	for (x = 0; x < MAP_WIDTH  - 1; x++)
+	for (z = 0; z < MAP_HEIGHT - 1; z++)
+	{
+		TEXTURE_get_minitexturebits_uvs(
+			PAP_2HI(x,z).Texture,
+			&page,
+			u + 0,
+			v + 0,
+			u + 1,
+			v + 1,
+			u + 2,
+			v + 2,
+			u + 3,
+			v + 3);
+
+		ASSERT(WITHIN(page, 0, TEXTURE_page_num_standard - 1));
+
+		if (TEXTURE_texture[page].Type == D3DTEXTURE_TYPE_UNUSED)
 		{
-			for(c1=0;c1<16;c1++)
+			//
+			// We must load this texture.
+			//
+
+			TEXTURE_load_page(page);
+		}
+	}
+
+	TRACE("Loaded floor textures\n");
+
+	if (loading_screen_active)
+	{
+		ATTRACT_loadscreen_draw(75 * 256 / 100);
+	}
+
+	for (i = 1; i < MAX_ANIM_TMAPS; i++)
+	{
+		struct	AnimTmap	*p_a;
+
+		p_a=&anim_tmaps[i];
+
+		for(k=0;k<MAX_TMAP_FRAMES;k++)
+		{
+			page   = p_a->UV[k][0][0] & 0xc0;
+			page <<= 2;
+			page  |= p_a->Page[k];
+		}
+	}
+
+	TRACE("Loaded anim tmaps\n");
+
+	//
+	// force jacket alternatives to be loaded thugs
+	//
+
+
+	TEXTURE_load_page(18*64+2);
+	TEXTURE_load_page(18*64+32);
+
+	TEXTURE_load_page(18*64+3);
+	TEXTURE_load_page(18*64+33);
+
+	TEXTURE_load_page(18*64+4);
+	TEXTURE_load_page(18*64+36);
+
+	TEXTURE_load_page(18*64+5);
+	TEXTURE_load_page(18*64+37);
+
+	for (i = 1; i < next_prim_face3; i++)
+	{
+		f3 = &prim_faces3[i];
+
+		page   = f3->UV[0][0] & 0xc0;
+		page <<= 2;
+		page  |= f3->TexturePage;
+		page+=FACE_PAGE_OFFSET;
+
+		if (TEXTURE_texture[page].Type == D3DTEXTURE_TYPE_UNUSED)
+		{
+			//
+			// We must load this texture.
+			//
+
+			TEXTURE_load_page(page);
+		}
+	}
+
+	if (loading_screen_active)
+	{
+		ATTRACT_loadscreen_draw(80 * 256 / 100);
+	}
+
+	TRACE("Loaded prim 3s\n");
+
+	for (i = 1; i < next_prim_face4; i++)
+	{
+		f4 = &prim_faces4[i];
+
+		page   = f4->UV[0][0] & 0xc0;
+		page <<= 2;
+		page  |= f4->TexturePage;
+		page+=FACE_PAGE_OFFSET;
+
+		if (TEXTURE_texture[page].Type == D3DTEXTURE_TYPE_UNUSED)
+		{
+			//
+			// We must load this texture.
+			//
+
+			TEXTURE_load_page(page);
+		}
+	}
+
+	TRACE("Loaded prim 4s\n");
+
+	if (loading_screen_active)
+	{
+		ATTRACT_loadscreen_draw(85 * 256 / 100);
+	}
+
+	TEXTURE_load_page(156);
+
+	for(i=1;i<next_dfacet;i++)
+	{
+		SLONG	c0,c1,c2;
+		SLONG	style,dstyle;
+
+		if (dfacets[i].FacetType == STOREY_TYPE_NORMAL ||
+			dfacets[i].FacetType == STOREY_TYPE_INSIDE ||
+			dfacets[i].FacetType == STOREY_TYPE_OINSIDE ||
+			dfacets[i].FacetType == STOREY_TYPE_FENCE||
+			dfacets[i].FacetType == STOREY_TYPE_FENCE_FLAT||
+			dfacets[i].FacetType == STOREY_TYPE_LADDER||
+			dfacets[i].FacetType == STOREY_TYPE_DOOR||
+			dfacets[i].FacetType == STOREY_TYPE_OUTSIDE_DOOR||
+			dfacets[i].FacetType == STOREY_TYPE_INSIDE_DOOR||
+			dfacets[i].FacetType == STOREY_TYPE_FENCE_BRICK
+			)
+		{
+			style = dfacets[i].StyleIndex;
+
+			dstyle=dstyles[style];
+
+			for(c0=0;c0<((dfacets[i].Height+3)>>2)*((dfacets[i].FacetFlags&FACET_FLAG_2SIDED)?2:1);c0++)
 			{
-				page=inside_tex[c0][c1]+START_PAGE_FOR_FLOOR*64;
+				SLONG	dstyle;
+				dstyle=dstyles[style+c0];
 
-				if(page<8*64)
-				if (TEXTURE_texture[page].Type == D3DTEXTURE_TYPE_UNUSED)
+				if(dstyle>0)
 				{
-					TEXTURE_load_page(page);
+					for(c1=0;c1<TEXTURE_PIECE_NUMBER;c1++)
+					{
+						page=dx_textures_xy[dstyle][c1].Page;
+						if (TEXTURE_texture[page].Type == D3DTEXTURE_TYPE_UNUSED)
+						{
+							//
+							// We must load this texture.
+							//
 
+							TEXTURE_load_page(page);
+						}
+					}
 				}
-			}
-		}
-
-		*/
-
-		TRACE("Loaded inside styles\n");
-
-
-		//
-		// Load the individual pages that we need.
-		//
-
-		for (x = 0; x < MAP_WIDTH  - 1; x++)
-		for (z = 0; z < MAP_HEIGHT - 1; z++)
-		{
-			TEXTURE_get_minitexturebits_uvs(
-				PAP_2HI(x,z).Texture,
-			   &page,
-				u + 0,
-				v + 0,
-				u + 1,
-				v + 1,
-				u + 2,
-				v + 2,
-				u + 3,
-				v + 3);
-
-			ASSERT(WITHIN(page, 0, TEXTURE_page_num_standard - 1));
-
-			if (TEXTURE_texture[page].Type == D3DTEXTURE_TYPE_UNUSED)
-			{
-				//
-				// We must load this texture.
-				//
-
-				TEXTURE_load_page(page);
-LOADED_THIS_MANY_TEXTURES(1);
-			}
-		}
-	//	TEXTURE_load_page(156);
-	//	TEXTURE_load_page(157);
-
-		TRACE("Loaded floor textures\n");
-
-#if 0
-		if (loading_screen_active)
-		{
-			ATTRACT_loadscreen_draw(75 * 256 / 100);
-		}
-#endif
-
-		for (i = 1; i < MAX_ANIM_TMAPS; i++)
-		{
-			struct	AnimTmap	*p_a;
-
-			p_a=&anim_tmaps[i];
-
-			for(k=0;k<MAX_TMAP_FRAMES;k++)
-			{
-				page   = p_a->UV[k][0][0] & 0xc0;
-				page <<= 2;
-				page  |= p_a->Page[k];
-			}
-		}
-
-		TRACE("Loaded anim tmaps\n");
-
-		//
-		// force jacket alternatives to be loaded thugs
-		//
-
-
-		TEXTURE_load_page(18*64+2);
-		TEXTURE_load_page(18*64+32);
-
-		TEXTURE_load_page(18*64+3);
-		TEXTURE_load_page(18*64+33);
-LOADED_THIS_MANY_TEXTURES(4);
-
-		TEXTURE_load_page(18*64+4);
-		TEXTURE_load_page(18*64+36);
-
-		TEXTURE_load_page(18*64+5);
-		TEXTURE_load_page(18*64+37);
-LOADED_THIS_MANY_TEXTURES(4);
-
-		for (i = 1; i < next_prim_face3; i++)
-		{
-			f3 = &prim_faces3[i];
-
-			page   = f3->UV[0][0] & 0xc0;
-			page <<= 2;
-			page  |= f3->TexturePage;
-			page+=FACE_PAGE_OFFSET;
-
-			if (TEXTURE_texture[page].Type == D3DTEXTURE_TYPE_UNUSED)
-			{
-				//
-				// We must load this texture.
-				//
-
-				TEXTURE_load_page(page);
-LOADED_THIS_MANY_TEXTURES(1);
-			}
-		}
-
-#if 0
-		if (loading_screen_active)
-		{
-			ATTRACT_loadscreen_draw(80 * 256 / 100);
-		}
-#endif
-
-		TRACE("Loaded prim 3s\n");
-
-		for (i = 1; i < next_prim_face4; i++)
-		{
-			f4 = &prim_faces4[i];
-
-			page   = f4->UV[0][0] & 0xc0;
-			page <<= 2;
-			page  |= f4->TexturePage;
-			page+=FACE_PAGE_OFFSET;
-
-			if (TEXTURE_texture[page].Type == D3DTEXTURE_TYPE_UNUSED)
-			{
-				//
-				// We must load this texture.
-				//
-
-				TEXTURE_load_page(page);
-LOADED_THIS_MANY_TEXTURES(1);
-			}
-		}
-
-		TRACE("Loaded prim 4s\n");
-
-#if 0
-		if (loading_screen_active)
-		{
-			ATTRACT_loadscreen_draw(85 * 256 / 100);
-		}
-#endif
-
-		TEXTURE_load_page(156);
-
-		for(i=1;i<next_dfacet;i++)
-		{
-			SLONG	c0,c1,c2;
-			SLONG	style,dstyle;
-
-				//ASSERT(dfacets[i].FacetType != STOREY_TYPE_OUTSIDE_DOOR);
-			if (dfacets[i].FacetType == STOREY_TYPE_NORMAL ||
-				dfacets[i].FacetType == STOREY_TYPE_INSIDE ||
-				dfacets[i].FacetType == STOREY_TYPE_OINSIDE ||
-				dfacets[i].FacetType == STOREY_TYPE_FENCE||
-				dfacets[i].FacetType == STOREY_TYPE_FENCE_FLAT||
-				dfacets[i].FacetType == STOREY_TYPE_LADDER||
-				dfacets[i].FacetType == STOREY_TYPE_DOOR||
-				dfacets[i].FacetType == STOREY_TYPE_OUTSIDE_DOOR||
-				dfacets[i].FacetType == STOREY_TYPE_INSIDE_DOOR||
-				dfacets[i].FacetType == STOREY_TYPE_FENCE_BRICK
-				)
-			{
-				style = dfacets[i].StyleIndex;
-
-				dstyle=dstyles[style];
-
-				for(c0=0;c0<((dfacets[i].Height+3)>>2)*((dfacets[i].FacetFlags&FACET_FLAG_2SIDED)?2:1);c0++)
+				else
 				{
-					SLONG	dstyle;
-					dstyle=dstyles[style+c0];
+					struct	DStorey *p_storey;
+					SLONG	pos;
 
+					p_storey=&dstoreys[-dstyle];
+
+					for(pos=0;pos<p_storey->Count;pos++)
+					{
+						page=paint_mem[p_storey->Index+pos];
+						if(page)
+						if (TEXTURE_texture[page].Type == D3DTEXTURE_TYPE_UNUSED)
+						{
+							//
+							// We must load this texture.
+							//
+
+							TEXTURE_load_page(page);
+						}
+
+					}
+					dstyle=p_storey->Style;
 					if(dstyle>0)
 					{
 						for(c1=0;c1<TEXTURE_PIECE_NUMBER;c1++)
@@ -1877,209 +1652,85 @@ LOADED_THIS_MANY_TEXTURES(1);
 								//
 
 								TEXTURE_load_page(page);
-LOADED_THIS_MANY_TEXTURES(1);
 							}
 						}
-					}
-					else
-					{
-						struct	DStorey *p_storey;
-						SLONG	pos;
-
-						p_storey=&dstoreys[-dstyle];
-
-						for(pos=0;pos<p_storey->Count;pos++)
-						{
-							page=paint_mem[p_storey->Index+pos];
-							if(page)
-							if (TEXTURE_texture[page].Type == D3DTEXTURE_TYPE_UNUSED)
-							{
-								//
-								// We must load this texture.
-								//
-
-								TEXTURE_load_page(page);
-LOADED_THIS_MANY_TEXTURES(1);
-							}
-
-						}
-						dstyle=p_storey->Style;
-						if(dstyle>0)
-						{
-							for(c1=0;c1<TEXTURE_PIECE_NUMBER;c1++)
-							{
-								page=dx_textures_xy[dstyle][c1].Page;
-								if (TEXTURE_texture[page].Type == D3DTEXTURE_TYPE_UNUSED)
-								{
-									//
-									// We must load this texture.
-									//
-
-									TEXTURE_load_page(page);
-LOADED_THIS_MANY_TEXTURES(1);
-								}
-							}
-						}
-
-
-
-
 					}
 				}
-			}
-			if (dfacets[i].FacetType == STOREY_TYPE_LADDER)
-			{
-				SLONG	dstyle;
-				dstyle=dstyles[dfacets[i].StyleIndex];
-				if(dstyle>0)
-				for(c1=0;c1<TEXTURE_PIECE_NUMBER;c1++)
-				{
-					page=dx_textures_xy[dstyle][c1].Page;
-					if (TEXTURE_texture[page].Type == D3DTEXTURE_TYPE_UNUSED)
-					{
-						//
-						// We must load this texture.
-						//
-
-						TEXTURE_load_page(page);
-LOADED_THIS_MANY_TEXTURES(1);
-					}
-				}
-
-
 			}
 		}
-
-		TRACE("Loaded facet pages\n");
-
-#if 0
-		if (loading_screen_active)
+		if (dfacets[i].FacetType == STOREY_TYPE_LADDER)
 		{
-			ATTRACT_loadscreen_draw(90 * 256 / 100);
+			SLONG	dstyle;
+			dstyle=dstyles[dfacets[i].StyleIndex];
+			if(dstyle>0)
+			for(c1=0;c1<TEXTURE_PIECE_NUMBER;c1++)
+			{
+				page=dx_textures_xy[dstyle][c1].Page;
+				if (TEXTURE_texture[page].Type == D3DTEXTURE_TYPE_UNUSED)
+				{
+					//
+					// We must load this texture.
+					//
+
+					TEXTURE_load_page(page);
+				}
+			}
+
+
 		}
-#endif
+	}
 
-		/*
+	TRACE("Loaded facet pages\n");
 
-		//
-		// The sewer pages.
-		//
+	if (loading_screen_active)
+	{
+		ATTRACT_loadscreen_draw(90 * 256 / 100);
+	}
 
-	#if !defined(TARGET_DC)
-		for (i = 0; i < NS_PAGE_NUMBER; i++)
-		{	
-			page = NS_page[i].page;
+	//
+	// The sewer pages.
+	//
+
+	for (i = 0; i < NS_PAGE_NUMBER; i++)
+	{	
+		page = NS_page[i].page;
+
+		if (TEXTURE_texture[page].Type == D3DTEXTURE_TYPE_UNUSED)
+		{
+			TEXTURE_load_page(page);
+		}
+	}
+
+	TRACE("Loaded sewer pages\n");
+
+	for(c0=0;c0<64;c0++)
+	{
+		for(c1=0;c1<16;c1++)
+		{
+			SLONG	page;
+			page=inside_tex[c0][c1]+START_PAGE_FOR_FLOOR*64;
 
 			if (TEXTURE_texture[page].Type == D3DTEXTURE_TYPE_UNUSED)
 			{
 				TEXTURE_load_page(page);
 			}
 		}
-	#endif
-
-		TRACE("Loaded sewer pages\n");
-
-		for(c0=0;c0<64;c0++)
-		{
-			for(c1=0;c1<16;c1++)
-			{
-				SLONG	page;
-				page=inside_tex[c0][c1]+START_PAGE_FOR_FLOOR*64;
-
-				if (TEXTURE_texture[page].Type == D3DTEXTURE_TYPE_UNUSED)
-				{
-					TEXTURE_load_page(page);
-				}
-			}
-		}
-
-		*/
 	}
 
 
 	TRACE("Finished loading everything\n");
 
-#ifndef TARGET_DC
 	CloseTGAClump();
-#endif
-
-
 
 #ifdef TRUETYPE
 	TT_Init();
 #endif
-	
-	#if 0	// Didn't work anyway...
 
-	//
-	// Draw a poly with each texture page to get all the data actually
-	// downloaded to the card.
-	//
-
-	if (loading_screen_active)
-	{
-		BEGIN_SCENE;
-
-		POLY_frame_init(FALSE, FALSE);
-
-		{
-			SLONG i;
-			SLONG x;
-			SLONG y;
-
-			for (i = 0; i < POLY_NUM_PAGES; i++)
-			{
-				extern void PANEL_draw_quad(
-								float left,
-								float top,
-								float right,
-								float bottom,
-								SLONG page,
-								ULONG colour = 0xffffffff,
-								float u1 = 0.0F,
-								float v1 = 0.0F,
-								float u2 = 1.0F,
-								float v2 = 1.0F);
-
-				x = (i & 0x7f) << 2;
-				y = (i >> 6) << 3;
-
-				PANEL_draw_quad(
-					x, y,
-					x + 2, y + 6,
-					i);
-			}
-		}
-
-		POLY_frame_draw(TRUE, TRUE);
-
-		END_SCENE;
-
-		ATTRACT_loadscreen_draw(90 * 256 / 100);
-	}
-
-	#endif
-
-#ifndef TARGET_DC
 	// this is a good point to estimate the
 	// graphics card's capabilities
 extern void AENG_guess_detail_levels();
 
 	AENG_guess_detail_levels();
-#endif
-
-
-	// Guess what this does.
-	NotGoingToLoadTexturesForAWhileNowSoYouCanCleanUpABit();
-
-
-#if USE_TOMS_ENGINE_PLEASE_BOB
-	// Start a new frame, so that the new textures get set up and sorted.
-	// Yes, it is crufty why starting a new frame does this. But it's historical.
-	// Just trust me, OK?
-	POLY_frame_init(FALSE,FALSE);
-#endif
-
 }
 
 void TEXTURE_load_needed_object(SLONG prim)
@@ -2151,11 +1802,6 @@ void TEXTURE_free()
 	the_display.RemoveAllLoadedTextures();
 
 	memset(TEXTURE_dontexist, 0, sizeof(TEXTURE_dontexist));
-	memset ( TEXTURE_needed,	0, sizeof ( TEXTURE_needed ) );
-
-	POLY_reset_render_states();
-
-	TEXTURE_DC_pack_init();
 
 #ifdef TRUETYPE
 	TT_Term();
@@ -2187,7 +1833,6 @@ void TEXTURE_free_unneeded ( void )
 
 	for (i = 0; i < TEXTURE_num_textures; i++)
 	{
-		//if ( !TEXTURE_needed[i] )
 		{
 			TEXTURE_texture[i].Destroy();
 			TEXTURE_texture[i].Type = D3DTEXTURE_TYPE_UNUSED;

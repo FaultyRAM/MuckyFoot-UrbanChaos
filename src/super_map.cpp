@@ -3765,7 +3765,7 @@ void	make_all_clumps(void)
 	TEXTURE_create_clump = 1;
 
 	TRACE("Doing front-end\n");
-	TEXTURE_load_needed("levels\\frontend.ucm", 0, 256, 40);
+	TEXTURE_load_needed("levels\\frontend.ucm");
 
 	Levels*	lptr = levels;//_demo;
 
