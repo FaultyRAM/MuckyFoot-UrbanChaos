@@ -290,8 +290,8 @@ SLONG	playing_combat_tutorial(void)
 #endif
 
  	SLONG	c0=0,c1=0;
-//	if(save_psx)
-//		return(0);
+	if(save_psx)
+		return(0);
 	
 //	ASSERT(0);
 	while(ELEV_fname_level[c0]!='\\' && c0<101)
@@ -452,11 +452,6 @@ extern char *pcSpeechLanguageDir;
 		sprintf(str,"talk\\%s_%02d.wav",level,waypoint); //old method
 	}
 */
-	if (MUSIC_is_playing())
-	{
-		MFX_QUICK_stop();
-	}
-
 	MFX_QUICK_wait();
 
 	MFX_QUICK_play(str, 0, 0, 0);
@@ -514,18 +509,6 @@ extern char *pcSpeechLanguageDir;
 #else
 	sprintf(str,"%stalk2\\%s.ucm%d%c.wav",GetSpeechPath(),level,waypoint,65+conversation);
 #endif
-/*
-	if(!FileExists(str))
-	{
-		sprintf(str,"talk\\%s_%02d_%c.wav",level,waypoint,65+conversation);
-
-	}
-*/
-
-	if (MUSIC_is_playing())
-	{
-		MFX_QUICK_stop();
-	}
 
 	MFX_QUICK_wait();
 
@@ -950,7 +933,6 @@ UWORD EWAY_create_vehicle(
 {
 	Thing      *p_thing = NULL;
 	THING_INDEX p_index = NULL;
-//	ASSERT(0);
 
 ANNOYINGSCRIBBLECHECK;
 
@@ -969,7 +951,6 @@ ANNOYINGSCRIBBLECHECK;
 						key,
 						Random());
 
-//			if(!save_psx)
   			WMOVE_create(TO_THING(p_index));
 
 			break;
@@ -1000,12 +981,10 @@ ANNOYINGSCRIBBLECHECK;
 		case EWAY_SUBTYPE_VEHICLE_BIKE:
 
 #ifdef BIKE
-#ifndef PSX
 			p_index = BIKE_create(
 						world_x,
 						world_z,
 						yaw);
-#endif
 #endif
 			break;
 
@@ -1019,10 +998,10 @@ ANNOYINGSCRIBBLECHECK;
 						VEH_TYPE_CAR,
 						key,
 						Random());
-#ifndef PSX
+
 			if(!save_psx)
 				WMOVE_create(TO_THING(p_index));
-#endif
+
 			break;
 
 		case EWAY_SUBTYPE_VEHICLE_TAXI:
@@ -1035,10 +1014,10 @@ ANNOYINGSCRIBBLECHECK;
 						VEH_TYPE_TAXI,
 						key,
 						Random());
-#ifndef PSX
+
 			if(!save_psx)
 				WMOVE_create(TO_THING(p_index));
-#endif
+
 			break;
 
 		case EWAY_SUBTYPE_VEHICLE_POLICE:
@@ -1051,10 +1030,10 @@ ANNOYINGSCRIBBLECHECK;
 						VEH_TYPE_POLICE,
 						key,
 						Random());
-#ifndef PSX
+
 			if(!save_psx)
 				WMOVE_create(TO_THING(p_index));
-#endif
+
 			break;
 
 		case EWAY_SUBTYPE_VEHICLE_AMBULANCE:
@@ -1068,7 +1047,7 @@ ANNOYINGSCRIBBLECHECK;
 						key,
 						Random());
 
-//			if(!save_psx)
+			if(!save_psx)
 				WMOVE_create(TO_THING(p_index));
 
 			break;
@@ -1083,10 +1062,10 @@ ANNOYINGSCRIBBLECHECK;
 						VEH_TYPE_JEEP,
 						key,
 						Random());
-#ifndef PSX
+
 			if(!save_psx)
 				WMOVE_create(TO_THING(p_index));
-#endif
+
 			break;
 
 		case EWAY_SUBTYPE_VEHICLE_MEATWAGON:
@@ -1099,10 +1078,10 @@ ANNOYINGSCRIBBLECHECK;
 						VEH_TYPE_MEATWAGON,
 						key,
 						Random());
-#ifndef PSX
+
 			if(!save_psx)
 				WMOVE_create(TO_THING(p_index));
-#endif
+
 			break;
 
 		case EWAY_SUBTYPE_VEHICLE_SEDAN:
@@ -1121,10 +1100,9 @@ ANNOYINGSCRIBBLECHECK;
 			ANNOYINGSCRIBBLECHECK;
 
 
-#ifndef PSX
 			if(!save_psx)
 				WMOVE_create(TO_THING(p_index));
-#endif
+
 
 			ANNOYINGSCRIBBLECHECK;
 
@@ -1146,8 +1124,8 @@ ANNOYINGSCRIBBLECHECK;
 
 
 
-//			if(!save_psx)
-  			WMOVE_create(TO_THING(p_index));
+			if(!save_psx)
+  				WMOVE_create(TO_THING(p_index));
 
 			break;
 
@@ -1973,43 +1951,10 @@ void EWAY_load_fake_wander_text(CBYTE *fname)
 	{
 		fname = "text\\citsez_ita.txt";
 	}
-	if (!stricmp(name_buffer,"French"))
-	{
-		fname = "text\\citsez_french.txt";
-	}
-	if (!stricmp(name_buffer,"Deutsch")) // everyone else just put the english word for their lang in
-	{
-		fname = "text\\citsez_german.txt";
-	}
 	if (!stricmp(name_buffer,"Spanish"))
 	{
 		fname = "text\\citsez_spa.txt"; // must change if/when we get citsez for spanish...
 	}
-
-	if(save_psx)
-	{
-		sprintf(str,"%s",ENV_get_value_string("level_dir","Secret"));
-
-		if (!stricmp(str,"glevels"))
-		{
-			fname = "text\\citsez_german.txt";
-		}
-		if (!stricmp(str,"flevels"))
-		{
-			fname = "text\\citsez_french.txt";
-		}
-		if (!stricmp(str,"ilevels"))
-		{
-			fname = "text\\citsez_ita.txt";
-		}
-		if (!stricmp(str,"slevels"))
-		{
-			fname = "text\\citsez_spa.txt";
-		}
-
-
-	}
-
 	if (fname == NULL)
 	{
 		fname = "text\\citsez.txt";
@@ -2020,26 +1965,6 @@ void EWAY_load_fake_wander_text(CBYTE *fname)
 		   &EWAY_fake_wander_text_normal_index,
 		   &EWAY_fake_wander_text_normal_number))
 	{
-		if(save_psx)
-		{
-			if (!stricmp(str,"glevels"))
-			{
-				ASSERT(0);
-			}
-			if (!stricmp(str,"flevels"))
-			{
-				ASSERT(0);
-			}
-			if (!stricmp(str,"ilevels"))
-			{
-				ASSERT(0);
-			}
-			if (!stricmp(str,"slevels"))
-			{
-				ASSERT(0);
-			}
-		}
-
 		EWAY_load_message_file(
 			"text\\citsez.txt",
 		   &EWAY_fake_wander_text_normal_index,
@@ -2051,30 +1976,11 @@ void EWAY_load_fake_wander_text(CBYTE *fname)
 	   &EWAY_fake_wander_text_guilty_index,
 	   &EWAY_fake_wander_text_guilty_number);
 
-	if(save_psx)
-	{
+	EWAY_load_message_file(
+		"text\\annoyed.txt",
+		&EWAY_fake_wander_text_annoyed_index,
+		&EWAY_fake_wander_text_annoyed_number);
 
-		if (!stricmp(str,"levels"))
-		{
-		}
-		else
-		{
-			EWAY_load_message_file(
-				"text\\annoyed.txt",
-			   &EWAY_fake_wander_text_annoyed_index,
-			   &EWAY_fake_wander_text_annoyed_number);
-		}
-
-	}
-	else
-	{
-		EWAY_load_message_file(
-			"text\\annoyed.txt",
-		   &EWAY_fake_wander_text_annoyed_index,
-		   &EWAY_fake_wander_text_annoyed_number);
-	}
-
-//	ASSERT(index+number<EWAY_mess_upto);
 	ASSERT(EWAY_fake_wander_text_annoyed_index+EWAY_fake_wander_text_annoyed_number<=EWAY_mess_upto);
 	ASSERT(EWAY_fake_wander_text_guilty_index+EWAY_fake_wander_text_guilty_number<=EWAY_mess_upto);
 	ASSERT(EWAY_fake_wander_text_normal_index+EWAY_fake_wander_text_normal_number<=EWAY_mess_upto);
@@ -2438,7 +2344,7 @@ SLONG	global_write12=0;
 
 
 
-SLONG EWAY_evaluate_condition(EWAY_Way *ew, EWAY_Cond *ec, SLONG EWAY_sub_condition_of_a_boolean = FALSE)
+SLONG EWAY_evaluate_condition(EWAY_Way *ew, EWAY_Cond *ec)
 {
 	SLONG ans = FALSE;
 
@@ -2531,7 +2437,7 @@ ANNOYINGSCRIBBLECHECK;
 				EWAY_Cond *ec1 = &EWAY_cond[ec->arg1];
 				EWAY_Cond *ec2 = &EWAY_cond[ec->arg2];
 
-				ans = EWAY_evaluate_condition(ew, ec1, TRUE) && EWAY_evaluate_condition(ew, ec2, TRUE);
+				ans = EWAY_evaluate_condition(ew, ec1) && EWAY_evaluate_condition(ew, ec2);
 			}
 
 			break;
@@ -2542,7 +2448,7 @@ ANNOYINGSCRIBBLECHECK;
 				EWAY_Cond *ec1 = &EWAY_cond[ec->arg1];
 				EWAY_Cond *ec2 = &EWAY_cond[ec->arg2];
 
-				ans = EWAY_evaluate_condition(ew, ec1, TRUE) || EWAY_evaluate_condition(ew, ec2, TRUE);
+				ans = EWAY_evaluate_condition(ew, ec1) || EWAY_evaluate_condition(ew, ec2);
 			}
 
 			break;
@@ -2933,8 +2839,7 @@ ANNOYINGSCRIBBLECHECK;
 
 					if (WITHIN(p_person->Genus.Person->Health, 10, 100))
 					{
-						//return TRUE;
-						ans = TRUE;
+						return TRUE;
 					}
 				}
 			}
@@ -3111,17 +3016,7 @@ ANNOYINGSCRIBBLECHECK;
 			break;
 
 		case EWAY_COND_PLAYER_CUBOID:
-#ifdef	PSX
-			if((ew-EWAY_way)==124 && wad_level==25)		 //miked remove wetback part
-				ans=FALSE;
-			else
-#else
-extern	UBYTE	is_semtex;
-			if((ew-EWAY_way)==124 && is_semtex)		 //miked remove wetback part for PC/Dreamcast
-				ans=FALSE;
-			else
 
-#endif
 			{
 				SLONG x1;
 				SLONG z1;
@@ -3569,23 +3464,6 @@ extern	UBYTE	is_semtex;
 			break;
 	}
 
-	if (ec->negate)
-	{
-		ans = !ans;
-	}
-
-	//
-	// Skip all this falsifying code if we don't have
-	// the final answer it.
-	//
-
-	if (EWAY_sub_condition_of_a_boolean)
-	{
-ANNOYINGSCRIBBLECHECK;
-
-		return ans;
-	}
-
 	if (ew->ed.type == EWAY_DO_CONVERSATION ||
 		ew->ed.type == EWAY_DO_AMBIENT_CONV ||
 		ew->ed.type == EWAY_DO_MESSAGE)
@@ -3614,29 +3492,7 @@ ANNOYINGSCRIBBLECHECK;
 			{
 				if (MFX_QUICK_still_playing())
 				{
-					if (MUSIC_is_playing())
-					{
-						//
-						// Just stop the music...
-						//
-
-						MFX_QUICK_stop();
-						MFX_QUICK_wait();
-					}
-					else
-					{
-						ans = FALSE;
-					}
-
-					/*
-
-					if (ew->es.type == EWAY_STAY_ALWAYS ||
-						ew->es.type == EWAY_STAY_DIE)
-					{
-						ew->ec.type = EWAY_COND_TRUE;
-					}
-
-					*/
+					ans = FALSE;
 				}
 			}
 			else
@@ -3668,34 +3524,9 @@ ANNOYINGSCRIBBLECHECK;
 						// Dead people can't talk.
 						//
 					}
-					else
+					else if (MFX_QUICK_still_playing())
 					{
-						if (MFX_QUICK_still_playing())
-						{
-							if (MUSIC_is_playing())
-							{
-								//
-								// Just stop the music...
-								//
-
-								MFX_QUICK_stop();
-								MFX_QUICK_wait();
-							}
-							else
-							{
-								ans = FALSE;
-							}
-
-							/*
-
-							if (ew->es.type == EWAY_STAY_ALWAYS ||
-								ew->es.type == EWAY_STAY_DIE)
-							{
-								ew->ec.type = EWAY_COND_TRUE;
-							}
-
-							*/
-						}
+						ans = FALSE;
 					}
 				}
 			}
@@ -3770,12 +3601,14 @@ ANNOYINGSCRIBBLECHECK;
 		}
 	}
 
+	if (ec->negate)
+	{
+		ans = !ans;
+	}
+
 	if(ans)
 	{
-#ifndef TARGET_DC
-		// Bloody annoying on DC, and slows everything to a crawl.
-//		TRACE("EVAL TRUE type %d way %d \n",ec->type,ew-EWAY_way);
-#endif
+		TRACE("EVAL TRUE type %d way %d \n",ec->type,ew-EWAY_way);
 	}
 
 ANNOYINGSCRIBBLECHECK;
@@ -3893,13 +3726,9 @@ ANNOYINGSCRIBBLECHECK;
 
 	if (EWAY_cam_goinactive)
 	{
-		EWAY_cam_goinactive--;
-		if (EWAY_cam_goinactive==0)
-		{
-			EWAY_cam_jumped=10;
-			EWAY_cam_active     = FALSE;
-			EWAY_cam_goinactive	= FALSE;
-		}
+		EWAY_cam_jumped=2;
+		EWAY_cam_active     = FALSE;
+		EWAY_cam_goinactive	= FALSE;
 ANNOYINGSCRIBBLECHECK;
 		return;
 
@@ -4486,8 +4315,8 @@ ANNOYINGSCRIBBLECHECK;
 		else
 
 		{
-			EWAY_cam_yaw   += dyaw   >> 1;
-			EWAY_cam_pitch += dpitch >> 1;
+			EWAY_cam_yaw   += dyaw   >> 2;
+			EWAY_cam_pitch += dpitch >> 2;
 		}
 	}
 
@@ -4690,7 +4519,7 @@ ANNOYINGSCRIBBLECHECK;
 		//
 
 		SWAP(EWAY_conv_person_a, EWAY_conv_person_b);
-		EWAY_cam_jumped=10;
+		EWAY_cam_jumped=2;
 	}
 
 	//
@@ -5599,18 +5428,6 @@ extern void PCOM_set_person_ai_normal(Thing *p_person);
 								p_vehicle,
 								NULL,
 								1050);
-extern	UBYTE	hit_player;
-							hit_player=1;
-							create_shockwave(
-								p_vehicle->WorldPos.X >> 8,
-								p_vehicle->WorldPos.Y >> 8,
-								p_vehicle->WorldPos.Z >> 8,
-								0x300,
-								350,
-								NULL);
-							hit_player=0;
-
-
 
 							//
 							// As if this vehicle has never been created.
@@ -7915,17 +7732,11 @@ void EWAY_cam_look_at(Thing *p_thing)
 
 void EWAY_cam_relinquish()
 {
-	EWAY_cam_goinactive = 2;
-
-	/*
-
 	EWAY_cam_jumped=1;
 	EWAY_cam_active   = FALSE;
 	EWAY_cam_thing    = NULL;
 	EWAY_cam_waypoint = NULL;
 	EWAY_cam_freeze   = FALSE;
-
-	*/
 }
 
 
