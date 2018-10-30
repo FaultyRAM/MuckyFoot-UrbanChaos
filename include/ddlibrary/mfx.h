@@ -98,9 +98,9 @@ void	MilesTerm();
 
 // Mikes bodge stuff to get conversation in
 
-SLONG	MFX_QUICK_play(CBYTE *str, SLONG loop, SLONG x=0, SLONG y=0, SLONG z=0);	// should be low-res (24.8) coordinates
+SLONG	MFX_QUICK_play(CBYTE *str, SLONG x, SLONG y, SLONG z);	// should be low-res (24.8) coordinates
 void	MFX_QUICK_wait(void);
-void	MFX_QUICK_stop ( bool bAllowMemstream = FALSE );
+void	MFX_QUICK_stop(void);
 SLONG	MFX_QUICK_still_playing(void);
 
 #endif

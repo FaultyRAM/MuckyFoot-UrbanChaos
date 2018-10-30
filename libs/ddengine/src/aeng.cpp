@@ -89,7 +89,6 @@
 
 
 #include <ddengine/poly_page.h>
-#include <ddlibrary/dc_low_level.h>
 
 #ifdef TARGET_DC
 #include <shsgintr.h>
@@ -6575,9 +6574,6 @@ void AENG_draw_city()
 	//TRACE ( "AengIn" );
 
 	ANNOYINGSCRIBBLECHECK;
-
-
-	DumpTracies();
 
 
 	SLONG i;

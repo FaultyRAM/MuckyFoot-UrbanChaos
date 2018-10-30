@@ -22,11 +22,9 @@
 #include	<ddlibrary/dd_manager.h>
 #include	<ddlibrary/debug.h>
 #include	<ddlibrary/di_manager.h>
-#include	<ddlibrary/ds_manager.h>
 #include	<ddlibrary/g_display.h>
 #include	<ddlibrary/g_work_screen.h>
 #include	<ddlibrary/qs_manager.h>
-#include	<ddlibrary/sample_manager.h>
 #include    <ddlibrary/net.h>
 
 #include	<ddlibrary/window_procs.h>

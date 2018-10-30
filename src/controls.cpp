@@ -125,8 +125,6 @@ UBYTE stealth_debug = 0;
 SWORD CONTROLS_inventory_mode = 0;
 
 
-BOOL dodgy_psx_mode=0;
-
 #ifndef EDITOR
 //---------------------------------------------------------------
 

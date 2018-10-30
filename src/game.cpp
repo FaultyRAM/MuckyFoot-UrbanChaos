@@ -95,7 +95,6 @@ extern ControllerPacket	PAD_Input1,PAD_Input2;
 #endif
 
 #include <fallen/xlat_str.h>
-#include <ddlibrary/dc_low_level.h>
 
 #define	TIMEOUT_DEMO	0
 #define	VERIFY_PLAYBACK	0	// !$$! set to 1 to verify demo playback
@@ -180,7 +179,7 @@ extern SLONG go_into_game;	// This is in attract.cpp If it is TRUE when we leave
 
 void stop_all_fx_and_music ( bool bAllowMemstream )
 {
-	MFX_QUICK_stop ( bAllowMemstream );
+	MFX_QUICK_stop ();
 	MUSIC_mode(0);
 	MUSIC_mode_process();
 	MUSIC_reset();
@@ -275,13 +274,6 @@ extern void	UCA_LookupSetup();
 
 	// Get a loading screen up as soon as possible.
 	ATTRACT_loadscreen_init();
-
-
-	// NOW we can load the sounds, coz we have something sensible on-screen
-//#ifdef TARGET_DC
-extern void MFX_DC_init ( void );
-	MFX_DC_init();
-//#endif
 
 
 	ATTRACT_loadscreen_draw(160);
@@ -721,10 +713,6 @@ extern	void	load_whole_game(CBYTE	*gamename);
 	{
 		
 
-		// Play the loading music, coz it's all in memory.
-		DCLL_memstream_play();
-
-
 		//
 		// Load the game.
 		//
@@ -962,10 +950,6 @@ void game_fini(void)
 	// Start the loading bar.
 	ATTRACT_loadscreen_init();
 
-	// but play the loading music, coz it's all in memory.
-	DCLL_memstream_play();
-
-	
 	//
 	// Free up the FASTPRIM memory.
 	//
@@ -1059,8 +1043,6 @@ extern void POLY_ClearAllPages ( void );
 #endif
 
 	NotGoingToLoadTexturesForAWhileNowSoYouCanCleanUpABit();
-
-	DCLL_ProbablyDoneMostOfMySoundLoadingForAWhile();
 
 	TRACE ( "game_fini done\n" );
 
@@ -2170,14 +2152,6 @@ round_again:;
 #ifndef	PSX
 		SLONG exit_game_loop = FALSE;
 	
-		//
-		// Stop the loading music.
-		//
-
-		extern void DCLL_memstream_stop(void);
-
-		DCLL_memstream_stop();
-
 		//
 		// Load and unload sounds so we only have the
 		// sounds we need.

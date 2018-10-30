@@ -152,15 +152,10 @@ void MUSIC_play_the_mode(UBYTE mode)
 	just_asked_for_mode_now    = TRUE;
 	just_asked_for_mode_number = mode;
 
-	extern SLONG MFX_QUICK_play_id;
-	extern void  DCLL_stream_volume(float volume);	// 0.0F <= volume <= 1.0F
 	extern UBYTE EWAY_conv_active;		// Bool. Is there a conversation going on?
 	extern SLONG EWAY_cam_active;
-	extern SLONG MFX_DC_vol_mus;
 	
-	float MFX_DC_float_volume = MFX_DC_vol_mus * (1.0F / 127.0F);
-
-	if (EWAY_conv_active || EWAY_cam_active || (MFX_QUICK_play_id != last_MFX_QUICK_play_id && last_MFX_QUICK_play_id && MFX_QUICK_still_playing()))
+	if (EWAY_conv_active || EWAY_cam_active || (MFX_QUICK_still_playing()))
 	{
 		//
 		// Streaming some other sample...
@@ -233,22 +228,15 @@ void MUSIC_play_the_mode(UBYTE mode)
 
 		SATURATE(music_volume, 0.0F, 1.0F);
 
-		if (MFX_QUICK_play_id == last_MFX_QUICK_play_id)
+		if (MFX_QUICK_still_playing())
 		{
-			if (MFX_QUICK_still_playing())
-			{
-				//
-				// Still streaming our sample...
-				//
+			//
+			// Still streaming our sample...
+			//
 
-				if (music_volume == 0.0F)
-				{
-					MFX_QUICK_stop();
-				}
-				else
-				{
-					DCLL_stream_volume(music_volume * MFX_DC_float_volume);
-				}
+			if (music_volume == 0.0F)
+			{
+				MFX_QUICK_stop();
 			}
 		}
 	}
@@ -258,7 +246,7 @@ void MUSIC_play_the_mode(UBYTE mode)
 		// Should be playing some music!
 		//
 
-		if (MFX_QUICK_play_id == last_MFX_QUICK_play_id && MFX_QUICK_still_playing() && last_MFX_QUICK_mode == mode)
+		if (MFX_QUICK_still_playing() && last_MFX_QUICK_mode == mode)
 		{
 			//
 			// Still playing our music.
@@ -267,11 +255,6 @@ void MUSIC_play_the_mode(UBYTE mode)
 			music_volume += float(16 * TICK_RATIO >> TICK_SHIFT) * (1.0F / 1024.0F);
 
 			SATURATE(music_volume, 0.0F, 1.0F);
-
-			if (music_volume < 1.0F)
-			{
-				DCLL_stream_volume(music_volume * MFX_DC_float_volume);
-			}
 		}
 		else
 		{
@@ -323,13 +306,8 @@ void MUSIC_play_the_mode(UBYTE mode)
 					sprintf(fname, "Data\\Sfx\\1622\\%s", sound_list[index] + offset);
 					#endif
 
-					last_MFX_QUICK_play_id = MFX_QUICK_play(fname, TRUE, 0,0,0);
+					last_MFX_QUICK_play_id = MFX_QUICK_play(fname, 0,0,0);
 					last_MFX_QUICK_mode    = mode;
-
-					if (last_MFX_QUICK_play_id)
-					{
-						DCLL_stream_volume(music_volume * MFX_DC_float_volume);
-					}
 
 					once_every_last = once_every_few + 10;
 				}
@@ -579,9 +557,7 @@ void  MUSIC_gain(UBYTE gain)
 
 SLONG MUSIC_is_playing(void)
 {
-	extern SLONG MFX_QUICK_play_id;
-	
-	if (MFX_QUICK_play_id == last_MFX_QUICK_play_id && MFX_QUICK_still_playing())
+	if (MFX_QUICK_still_playing())
 	{
 		return TRUE;
 	}

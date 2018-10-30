@@ -53,7 +53,6 @@
 #include	<ddengine/poly_page.h>
 #include <fallen/io.h>
 #include <ddengine/truetype.h>
-#include <ddlibrary/dc_low_level.h>
 #include <ddengine/panel.h>
 
 #ifdef TARGET_DC
@@ -3846,7 +3845,7 @@ void	FRONTEND_MissionBrief(CBYTE *script, UBYTE i) {
 #endif
 		strcat(path,brief_wav[mdata->ObjID]);
 
-		MFX_QUICK_play(path, FALSE);
+		MFX_QUICK_play(path, 0, 0, 0);
 
 		// And hang until the thing has actually started playing.
 		// Or five seconds, whichever is shorter.
@@ -3858,11 +3857,6 @@ void	FRONTEND_MissionBrief(CBYTE *script, UBYTE i) {
 		DWORD dwTimeout = timeGetTime() + 5000;
 		while ( TRUE )
 		{
-extern bool DCLL_stream_has_started_streaming ( void );
-			if ( DCLL_stream_has_started_streaming() )
-			{
-				break;
-			}
 			if ( ( ( dwTimeout - timeGetTime() ) & 0x80000000 ) != 0 )
 			{
 				// Timeout!
@@ -3906,9 +3900,6 @@ extern bool DCLL_stream_has_started_streaming ( void );
 
 
 	MFdelete(mdata);
-
-
-	DCLL_memstream_play();
 
 }
 
@@ -4561,14 +4552,12 @@ extern bool g_bDreamcastABXYStartShouldGoToBootRomImmediately;
 		// Moving from the briefing screen... reinitialise the music.
 		//
 
-		DCLL_memstream_stop();
-
 		//MFX_stop(0, S_FRONT_END_LOOP_EDIT);
 
 #ifdef TARGET_DC
 		MFX_QUICK_play("data\\sfx\\1622DC\\GeneralMusic\\FrontLoopMONO.wav",TRUE,0,0,0);
 #else
-		MFX_QUICK_play("data\\sfx\\1622\\GeneralMusic\\FrontLoopMONO.wav",TRUE,0,0,0);
+		MFX_QUICK_play("data\\sfx\\1622\\GeneralMusic\\FrontLoop.wav",0,0,0);
 #endif
 	}
 
@@ -5237,10 +5226,6 @@ void	FRONTEND_display()
 	MenuData *md=menu_data;
 	UBYTE whichmap[]={2,0,1,3};
 	UBYTE arrow=0;
-
-
-	DumpTracies();
-
 
 #if 1
 	LPDIRECT3DDEVICE3 dev = the_display.lp_D3D_Device;
@@ -6392,7 +6377,7 @@ extern BOOL AreAnyDevicesConnected ( void );
 		{
 			// Starting a mission.
 			// Stop any briefing.
-			MFX_QUICK_stop(TRUE);
+			MFX_QUICK_stop();
 			return FE_START;
 		}
 		if ((menu_state.mode==FE_LOADSCREEN)&&(item->Data==FE_SAVE_CONFIRM))
@@ -7192,8 +7177,6 @@ void MENUFONT_MergeLower(void);
 		sprintf(fname, "Data\\Sfx\\1622\\%s", sound_list[S_FRONT_END_LOOP_EDIT]);
 		#endif
 
-		DCLL_memstream_load(fname);
-
 		//
 		// Start playing the music!
 		//
@@ -7201,7 +7184,7 @@ void MENUFONT_MergeLower(void);
 		#ifdef TARGET_DC
 		MFX_QUICK_play("data\\sfx\\1622DC\\GeneralMusic\\FrontLoopMONO.wav",TRUE,0,0,0);
 		#else
-		MFX_QUICK_play("data\\sfx\\1622\\GeneralMusic\\FrontLoopMONO.wav",TRUE,0,0,0);
+		MFX_QUICK_play("data\\sfx\\1622\\GeneralMusic\\FrontLoop.wav",0,0,0);
 		#endif
 	}
 

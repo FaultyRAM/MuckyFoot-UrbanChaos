@@ -53,11 +53,26 @@ Package=<4>
     Begin Project Dependency
     Project_Dep_Name outro
     End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name mss
+    End Project Dependency
 }}}
 
 ###############################################################################
 
 Project: "mfstdlib"=".\libs\mfstdlib\mfstdlib.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "mss"=".\libs\mss\mss.dsp" - Package Owner=<4>
 
 Package=<5>
 {{{

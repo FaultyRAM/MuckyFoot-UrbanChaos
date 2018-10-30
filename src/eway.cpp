@@ -459,11 +459,7 @@ extern char *pcSpeechLanguageDir;
 
 	MFX_QUICK_wait();
 
-	extern void  DCLL_stream_volume(float volume);	// 0.0F <= volume <= 1.0F
-
-	DCLL_stream_volume(1.0F);
-
-	MFX_QUICK_play(str, FALSE);
+	MFX_QUICK_play(str, 0, 0, 0);
 	EWAY_conv_talk=0;
 #else
 	MFX_Conv_wait();
@@ -533,12 +529,8 @@ extern char *pcSpeechLanguageDir;
 
 	MFX_QUICK_wait();
 
-	extern void  DCLL_stream_volume(float volume);	// 0.0F <= volume <= 1.0F
-
-	DCLL_stream_volume(1.0F);
-
 	Thing* speaker = TO_THING(EWAY_conv_person_a);
-	EWAY_conv_talk=MFX_QUICK_play(str, FALSE, speaker->WorldPos.X >> 8, speaker->WorldPos.Y >> 8, speaker->WorldPos.Z >> 8);
+	EWAY_conv_talk=MFX_QUICK_play(str, speaker->WorldPos.X >> 8, speaker->WorldPos.Y >> 8, speaker->WorldPos.Z >> 8);
 #else
 	MFX_Conv_wait();
 	EWAY_conv_talk=MFX_Conv_play(waypoint,1,conversation);

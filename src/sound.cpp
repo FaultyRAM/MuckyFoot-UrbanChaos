@@ -14,7 +14,6 @@
 #include	<fallen/ware.h>
 #include	<fallen/frontend.h>
 #include	<fallen/eway.h>
-#include	<ddlibrary/dc_low_level.h>
 
 // types of world
 
@@ -845,63 +844,6 @@ void SOUND_load_needed_sounds()
 	#endif
 
 	//
-	// Free sounds we don't need.
-	//
-
-	extern void MFX_free_sound(SLONG wave);
-	extern void MFX_load_sound(SLONG wave);
-		
-	//
-	// We never need this sound in-game.
-	//
-
-	MFX_free_sound(S_FRONT_END_LOOP_EDIT);
-
-	if (!has_mib)
-	{
-		MFX_free_sound(S_MIB_EXPLODE  );
-		MFX_free_sound(S_MIB_LEVITATE );
-		MFX_free_sound(S_MIB_GUN      );
-		MFX_free_sound(S_MIB_GUN_WDOWN);
-		MFX_free_sound(S_MIB_WARNING  );
-	}
-
-	if (!has_balrog)
-	{
-		MFX_free_sound(S_BALROG_GROWL_START);
-		MFX_free_sound(S_BALROG_GROWL_END);
-		MFX_free_sound(S_BALROG_STEP_START);
-		MFX_free_sound(S_BALROG_STEP_END);
-		MFX_free_sound(S_BALROG_DEATH);
-		MFX_free_sound(S_BALROG_ROAR);
-		MFX_free_sound(S_BALROG_FIREBALL);
-	}
-
-	//
-	// Load sounds we do need.
-	//
-
-	if (has_mib)
-	{
-		MFX_load_sound(S_MIB_EXPLODE  );
-		MFX_load_sound(S_MIB_LEVITATE );
-		MFX_load_sound(S_MIB_GUN      );
-		MFX_load_sound(S_MIB_GUN_WDOWN);
-		MFX_load_sound(S_MIB_WARNING  );
-	}
-
-	if (has_balrog)
-	{
-		MFX_load_sound(S_BALROG_GROWL_START);
-		MFX_load_sound(S_BALROG_GROWL_END);
-		MFX_load_sound(S_BALROG_STEP_START);
-		MFX_load_sound(S_BALROG_STEP_END);
-		MFX_load_sound(S_BALROG_DEATH);
-		MFX_load_sound(S_BALROG_ROAR);
-		MFX_load_sound(S_BALROG_FIREBALL);
-	}
-
-	//
 	// Now the sounds depending on which wtype we are in...
 	//
 
@@ -962,46 +904,6 @@ void SOUND_load_needed_sounds()
 	//
 
 	if (amb_rain) {amb_ambience_end = FALSE;}
-
-	//
-	// Free sounds we don't need.
-	//
-
-	if (!amb_wolf1       ) {MFX_free_sound(S_AMB_WOLF1    );}
-	if (!amb_crow        ) {MFX_free_sound(S_CROW         );}
-	if (!amb_aircraft    ) {MFX_free_sound(S_AMB_AIRCRAFT1);}
-	if (!amb_ambience_end) {MFX_free_sound(S_AMBIENCE_END );}
-	if (!amb_rain        ) {MFX_free_sound(S_RAIN_START   );}
-
-	if (!amb_snow_wind) {for (i = S_START_SNOW_WIND; i <= S_END_SNOW_WIND; i++) MFX_free_sound(i);}
-	if (!amb_bird     ) {for (i = S_BIRD_START;      i <= S_BIRD_END     ; i++) MFX_free_sound(i);}
-	if (!amb_siren    ) {for (i = S_SIREN_START;     i <= S_SIREN_END    ; i++) MFX_free_sound(i);}
-	if (!amb_dog      ) {for (i = S_DOG_START;       i <= S_DOG_END      ; i++) MFX_free_sound(i);}
-	if (!amb_cat      ) {for (i = S_CAT_START;       i <= S_CAT_END      ; i++) MFX_free_sound(i);}
-	if (!amb_wind     ) {for (i = S_WIND_START;      i <= S_WIND_END     ; i++) MFX_free_sound(i);}
-	if (!amb_thunder  ) {for (i = S_THUNDER_START;   i <= S_THUNDER_END  ; i++) MFX_free_sound(i);}
-
-	//
-	// Load sounds we do need.
-	//
-	
-	if (amb_wolf1       ) {MFX_load_sound(S_AMB_WOLF1    );}
-	if (amb_crow        ) {MFX_load_sound(S_CROW         );}
-	if (amb_aircraft    ) {MFX_load_sound(S_AMB_AIRCRAFT1);}
-	if (amb_ambience_end) {MFX_load_sound(S_AMBIENCE_END );}
-	if (amb_rain        ) {MFX_load_sound(S_RAIN_START   );}
-
-	if (amb_snow_wind) {for (i = S_START_SNOW_WIND; i <= S_END_SNOW_WIND; i++) MFX_load_sound(i);}
-	if (amb_bird     ) {for (i = S_BIRD_START;      i <= S_BIRD_END     ; i++) MFX_load_sound(i);}
-	if (amb_siren    ) {for (i = S_SIREN_START;     i <= S_SIREN_END    ; i++) MFX_load_sound(i);}
-	if (amb_dog      ) {for (i = S_DOG_START;       i <= S_DOG_END      ; i++) MFX_load_sound(i);}
-	if (amb_cat      ) {for (i = S_CAT_START;       i <= S_CAT_END      ; i++) MFX_load_sound(i);}
-	if (amb_wind     ) {for (i = S_WIND_START;      i <= S_WIND_END     ; i++) MFX_load_sound(i);}
-	if (amb_thunder  ) {for (i = S_THUNDER_START;   i <= S_THUNDER_END  ; i++) MFX_load_sound(i);}
-
-
-	// Free up the fast-load memory.
-	DCLL_ProbablyDoneMostOfMySoundLoadingForAWhile();
 
 }
 

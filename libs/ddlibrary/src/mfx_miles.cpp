@@ -1,7 +1,3 @@
-
-
-#if 0
-
 // MFX_Miles.cpp
 //
 // Miles Sound System
@@ -14,26 +10,26 @@
 #define	ASYNC_FILE_IO	1
 #define TALK_3D			0
 
-#include "snd_type.h"
-#include	"c:\fallen\headers\demo.h"
+#include <ddlibrary/snd_type.h>
+#include	<fallen/demo.h>
 
-#include "MFX.h"
-#include "MFX_Miles.h"
+#include <ddlibrary/mfx.h>
+#include <ddlibrary/mfx_miles.h>
 
-#include "c:\fallen\headers\fc.h"
-#include "c:\fallen\headers\env.h"
-#include "c:\fallen\headers\xlat_str.h"
-#include "c:\fallen\headers\demo.h"
-#include "c:\fallen\ddengine\headers\poly.h"
-#include "resource.h"
+#include <fallen/fc.h>
+#include <fallen/env.h>
+#include <fallen/xlat_str.h>
+#include <fallen/demo.h>
+#include <ddengine/poly.h>
+#include <ddlibrary/resource.h>
 #ifndef TARGET_DC
 #include <cmath>
 #endif
 
-#include "drive.h"
+#include <ddlibrary/drive.h>
 
 #if ASYNC_FILE_IO
-#include "asyncfile2.h"
+#include <ddlibrary/async_file.h>
 #endif
 
 #ifdef DODGYPSXIFY
@@ -2086,5 +2082,3 @@ void my_dialogs_over(HWND hWnd)
 
 
 #endif //#ifndef TARGET_DC
-
-#endif

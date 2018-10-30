@@ -103,10 +103,6 @@ SOURCE=.\src\d3d_texture.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\dc_low_level.cpp
-# End Source File
-# Begin Source File
-
 SOURCE=.\src\dd_manager.cpp
 # End Source File
 # Begin Source File
@@ -116,10 +112,6 @@ SOURCE=.\src\di_manager.cpp
 # Begin Source File
 
 SOURCE=.\src\drive.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\src\ds_manager.cpp
 # End Source File
 # Begin Source File
 
@@ -159,10 +151,6 @@ SOURCE=.\src\mfx_a3d.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\mfx_dc.cpp
-# End Source File
-# Begin Source File
-
 SOURCE=.\src\mfx_miles.cpp
 # End Source File
 # Begin Source File
@@ -176,10 +164,6 @@ SOURCE=.\src\net.cpp
 # Begin Source File
 
 SOURCE=.\src\qs_manager.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\src\sample_manager.cpp
 # End Source File
 # Begin Source File
 
@@ -211,10 +195,6 @@ SOURCE=..\..\include\ddlibrary\d3d_texture.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\include\ddlibrary\dc_low_level.h
-# End Source File
-# Begin Source File
-
 SOURCE=..\..\include\ddlibrary\dd_lib.h
 # End Source File
 # Begin Source File
@@ -232,10 +212,6 @@ SOURCE=..\..\include\ddlibrary\di_manager.h
 # Begin Source File
 
 SOURCE=..\..\include\ddlibrary\drive.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\include\ddlibrary\ds_manager.h
 # End Source File
 # Begin Source File
 
@@ -272,10 +248,6 @@ SOURCE=..\..\include\ddlibrary\qs_manager.h
 # Begin Source File
 
 SOURCE=..\..\include\ddlibrary\resource.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\include\ddlibrary\sample_manager.h
 # End Source File
 # Begin Source File
 

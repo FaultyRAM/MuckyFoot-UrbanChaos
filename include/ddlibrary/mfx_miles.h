@@ -8,7 +8,7 @@
 #ifndef _MFX_MILES_H_
 #define _MFX_MILES_H_
 
-#include <mss.h>
+#include <mss/mss.h>
 
 // MFX_Sample
 //

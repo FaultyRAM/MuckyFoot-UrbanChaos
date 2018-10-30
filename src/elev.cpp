@@ -80,8 +80,6 @@ extern SLONG MFX_OnKey,MFX_OffKey;
 #include <fallen/soundenv.h>
 #endif
 
-#include <ddlibrary/dc_low_level.h>
-
 
 
 #ifdef PSX
@@ -2859,7 +2857,7 @@ SLONG ELEV_load_user(SLONG mission)
 	OPENFILENAME ofn;
 #endif
 
-	MFX_QUICK_stop(TRUE);
+	MFX_QUICK_stop();
 	MUSIC_mode(0);
 	MUSIC_mode_process();
 

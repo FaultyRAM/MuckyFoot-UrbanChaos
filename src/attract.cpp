@@ -27,7 +27,6 @@ extern ControllerPacket PAD_Input1,PAD_Input2;
 #include <fallen/xlat_str.h>
 #include <fallen/frontend.h>
 #include <fallen/state_def.h>
-#include <ddlibrary/dc_low_level.h>
 //#include "console.h"
 
 // undef this to get the old menus back...
