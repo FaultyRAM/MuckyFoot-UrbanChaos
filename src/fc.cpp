@@ -1191,10 +1191,6 @@ void FC_process()
 
 		if (used_to_be_in_warehouse != fc->focus_in_warehouse)
 		{
-//#ifdef	PSX
-extern	SLONG	EWAY_cam_jumped;
-				EWAY_cam_jumped=10;
-//#endif
 			if (fc->focus_in_warehouse)
 			{
 
@@ -1432,8 +1428,7 @@ extern	SLONG	EWAY_cam_jumped;
 								{
 									if (!(MAV_get_caps(x >> 8, z >> 8, MAV_DIR_XS) & MAV_CAPS_GOTO))
 									{
-										if(!there_is_a_los((x&0xffffff00)+128,y,z,(x&0xffffff00)-128,ground+200,z,LOS_FLAG_IGNORE_PRIMS|LOS_FLAG_IGNORE_UNDERGROUND_CHECK|LOS_FLAG_IGNORE_SEETHROUGH_FENCE_FLAG))
-											push |= FC_PUSH_XS;
+										push |= FC_PUSH_XS;
 									}
 								}
 							}
@@ -1444,8 +1439,7 @@ extern	SLONG	EWAY_cam_jumped;
 								{
 									if (!(MAV_get_caps(x >> 8, z >> 8, MAV_DIR_XL) & MAV_CAPS_GOTO))
 									{
-										if(!there_is_a_los((x&0xffffff00)+128,y,z,(x&0xffffff00)+256+128,ground+200,z,LOS_FLAG_IGNORE_PRIMS|LOS_FLAG_IGNORE_UNDERGROUND_CHECK|LOS_FLAG_IGNORE_SEETHROUGH_FENCE_FLAG))
-											push |= FC_PUSH_XL;
+										push |= FC_PUSH_XL;
 									}
 								}
 							}
@@ -1456,8 +1450,7 @@ extern	SLONG	EWAY_cam_jumped;
 								{
 									if (!(MAV_get_caps(x >> 8, z >> 8, MAV_DIR_ZS) & MAV_CAPS_GOTO))
 									{
-										if(!there_is_a_los(x,y,(z&0xffffff00)+128,x,ground+200,(z&0xffffff00)-128,LOS_FLAG_IGNORE_PRIMS|LOS_FLAG_IGNORE_UNDERGROUND_CHECK|LOS_FLAG_IGNORE_SEETHROUGH_FENCE_FLAG))
-											push |= FC_PUSH_ZS;
+										push |= FC_PUSH_ZS;
 									}
 								}
 							}
@@ -1468,8 +1461,7 @@ extern	SLONG	EWAY_cam_jumped;
 								{
 									if (!(MAV_get_caps(x >> 8, z >> 8, MAV_DIR_ZL) & MAV_CAPS_GOTO))
 									{
-										if(!there_is_a_los(x,y,(z&0xffffff00)+128,x,ground+200,(z&0xffffff00)+256+128,LOS_FLAG_IGNORE_PRIMS|LOS_FLAG_IGNORE_UNDERGROUND_CHECK|LOS_FLAG_IGNORE_SEETHROUGH_FENCE_FLAG))
-											push |= FC_PUSH_ZL;
+										push |= FC_PUSH_ZL;
 									}
 								}
 							}
